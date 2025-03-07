@@ -1,17 +1,6 @@
-<<<<<<< HEAD
-Options All -Indexes
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^ index.php [QSA,L]
 </IfModule>
-=======
-Options All -Indexes
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [QSA,L]
-</IfModule>
->>>>>>> 8cec0d93ee404fdd98fb2fcd65a60a54c0066b94
