@@ -1,0 +1,18 @@
+{
+    "name": "projetquizz/maximejn",
+    "autoload": {
+        "psr-4": {
+            "Projetquizz\\Maximejn\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "maxime jean",
+            "email": "maxime.jn@eduge.ch"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "slim/slim": "^4.14"
+    }
+}
