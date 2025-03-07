@@ -1,17 +1,15 @@
 {
-    "name": "projetquizz/maximejn",
+    "name": "timoleonhd/projetquizz",
     "autoload": {
         "psr-4": {
-            "Projetquizz\\Maximejn\\": "src/"
+            "Timoleonhd\\Projetquizz\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "maxime jean",
-            "email": "maxime.jn@eduge.ch"
+            "name": "timo"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "slim/slim": "^4.14"
     }
