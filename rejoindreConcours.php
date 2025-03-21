@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête - Rejoindre un concours</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
-        <div class="header-left">BriseTête</div>
-        <button class="disconnect">Déconnexion</button>
+        <div><a href="Accueil.php">
+                <h1>BriseTête</h1>
+            </a></div>
+        <?php
+        session_start();
+        if (isset($_SESSION['user_id'])) {
+            echo '<div><a href="php/GlobalFunction/logout.php">Déconnexion</a></div>';
+        } else {
+            echo '<div><a href="formConnexion.php">Connexion</a></div>';
+        }
+        ?>
     </header>
-    <main>
-        <div class="search-container">
-            <label for="search">Rechercher</label>
-            <input type="text" id="search" name="search" placeholder="Entrez votre recherche">
-        </div>
-        <div class="join-container">
-            <h1>Rejoindre un concours</h1>
-            <form>
-                <label for="name">Nom du concours</label>
-                <input type="text" id="name" name="name" placeholder="Nom du concours">
 
-                <label for="participants">Nb participants</label>
-                <input type="number" id="participants" name="participants" placeholder="Nombre de participants">
+    <main id="rejoindreConcour">
+        <h2>Rejoindre un Concours</h2>
+        <form action="rejoindreConcour.php" method="POST">
+            <label for="name">Nom du concours</label>
+            <input type="text" id="name" name="name" required>
 
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" placeholder="Entrez le mot de passe">
+            <label for="password">Mot de passe (optionnel)</label>
+            <input type="password" id="password" name="password">
 
-                <button type="submit" class="join-button">Rejoindre</button>
-            </form>
-        </div>
+            <button type="submit">Rejoindre</button>
+        </form>
+        <a href="formCreationConcours.php">Créer un concours</a>
     </main>
-    <footer>
-        Footer
-    </footer>
+
+    <footer>BriseTête © 2025</footer>
 </body>
+
 </html>

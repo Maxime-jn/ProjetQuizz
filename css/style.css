@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 html,
 body,
 main {
@@ -11,79 +15,100 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: #00ffea;
+    background: url('../image/fond1.gif') no-repeat center center/cover;
 }
 
+/* Header */
 header {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #1a1a1a;
+    color: #00ffea;
+    border-bottom: 4px solid #00ffea;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+}
+
+header div a {
+    text-decoration: none;
+    color: #00ffea;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+header div a:hover {
+    color: #ff00ff;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+}
+
+/* Footer */
+footer {
     width: 100%;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #333;
-    color: #fff;
-    border: 4px solid #fff;
+    background-color: #1a1a1a;
+    color: #00ffea;
+    border-top: 4px solid #00ffea;
     font-size: 1.2em;
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
 }
 
-header div a {
-    text-decoration: none;
-    color: #fff;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-header div a:hover {
-    background-color: #fff;
-    color: #000;
-}
-
-/* Page accueil  */
-/*-----------------------------------------------------------------------*/
-
+/* Page accueil */
 #accueil {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    background-color: #333;
-    color: #fff;
+    justify-content: space-around;
+    color: #00ffea;
     text-align: center;
+    padding: 2rem;
+    /* Image de fond cyberpunk */
+
 }
 
-#classement-quiz {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
-}
-
+#classement-quiz,
 #classement-casse-tete {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #333;
-    color: #fff;
+    background-color: rgba(61, 1, 141, 0.8);
+    color: #00ffea;
+    border: 2px solid #00ffea;
+    border-radius: 10px;
     text-align: center;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 2rem;
+    box-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
 }
 
-.classement {
-    border: 2px solid #fff;
+#classement {
+    width: 100%;
     padding: 10px;
     list-style: none;
 }
 
-.classement li {
-    border: 2px solid #fff;
+#classement li {
+    border: 2px solid #00ffea;
+    border-radius: 7px;
+    margin: 5px 0;
     padding: 10px;
     list-style: none;
+    transition: background-color 0.1s, transform 0.1s;
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
 }
+
+#classement li:hover {
+    background-color: rgba(111, 0, 255, 0.8);
+    cursor: crosshair;
+    transform: scale(1.05);
+}
+
+
 
 #buttonNavAcceuil {
     display: flex;
@@ -93,11 +118,200 @@ header div a:hover {
 }
 
 #buttonNavAcceuil button {
+    position: relative;
     font-family: 'Press Start 2P', cursive;
     text-align: center;
     display: inline-block;
-    width: 15rem;
+    width: 16rem;
     height: 10rem;
+    margin: 2rem;
+    font-weight: bold;
+    padding: 10px 0 10px 10px;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+}
+
+#buttonNavAcceuil button::before {
+    position: absolute;
+    content: '';
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.4), transparent 70%);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+#buttonNavAcceuil button:hover {
+    background: linear-gradient(45deg, #ffffff6e, #ffffff);
+    transform: scale(1.05);
+    box-shadow: 0 1.2em rgba(255, 254, 254, 0.6);
+}
+
+#buttonNavAcceuil button:active {
+    box-shadow: none;
+    position: relative;
+    top: .2em;
+    background: linear-gradient(45deg, #ffffff, #5900ff);
+}
+
+/* Ajout d'une animation pour l'effet néon */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+/* Page menu mode Seul  */
+/*-----------------------------------------------------------------------*/
+
+
+#mainSeul {
+    display: flex;
+    text-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5), 1px 1px 2px rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 .9em rgba(255, 255, 255, 0.5);
+    border: 2px solid #000000;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+
+
+/* Page menu mode Seul  */
+/*-----------------------------------------------------------------------*/
+
+
+#mainSeul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    ;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    flex-direction: column;
+}
+#btnMenuSeul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#btnMenuSeul button {
+    position: relative;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    width: 16rem;
+    height: 10rem;
+    margin: 2rem;
+    font-weight: bold;
+    padding: 10px 0 10px 10px;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+}
+
+#btnMenuSeul button::before {
+    position: absolute;
+    content: '';
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.4), transparent 70%);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+#btnMenuSeul button:hover {
+    background: linear-gradient(45deg, #ffffff6e, #ffffff);
+    transform: scale(1.05);
+    box-shadow: 0 1.2em rgba(255, 254, 254, 0.6);
+}
+
+#btnMenuSeul button:active {
+    box-shadow: none;
+    position: relative;
+    top: .2em;
+    background: linear-gradient(45deg, #ffffff, #5900ff);
+}
+
+/* Ajout d'une animation pour l'effet néon */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+/* Page Quiz  */
+/*-----------------------------------------------------------------------*/
+
+#mainQuiz {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    ;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    flex-direction: column;
+}
+
+
+
+#buttonQuestionQuiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttonQuestionQuiz button {
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    width: 40rem;
+    height: 5rem;
     margin: 2rem;
     font-weight: bold;
     padding: 10px 0 10px 10px;
@@ -109,8 +323,446 @@ header div a:hover {
     cursor: pointer;
 }
 
-#buttonNavAcceuil button:active {
+#buttonQuestionQuiz button:active {
     box-shadow: none;
     position: relative;
     top: .2em;
+}
+
+
+
+#buttonSoumettreQuiz {
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    width: 15rem;
+    height: 3rem;
+    margin: 2rem;
+    font-weight: bold;
+    padding: 10px 0 10px 10px;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    border-radius: 10px;
+    box-shadow: 0 .9em gray;
+    cursor: pointer;
+}
+
+
+
+
+#buttonSoumettreQuiz:active {
+    box-shadow: none;
+    position: relative;
+    top: .2em;
+}
+
+
+
+
+/* Page Création Concour */
+/*-----------------------------------------------------------------------*/
+/* Main container */
+#creationConcour {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Form styling */
+#creationConcour form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #3b004d, #610080);
+    padding: 50px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.7);
+    border: 4px solid #ff00ff;
+}
+
+/* Labels */
+#creationConcour label {
+    width: 100%;
+    text-align: left;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffb3ff;
+    text-shadow: 1px 1px 2px rgba(255, 182, 255, 0.8);
+}
+
+/* Inputs */
+#creationConcour input {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: 2px solid #ff00ff;
+    background: linear-gradient(145deg, #3a003e, #580064);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 25px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+}
+
+#creationConcour input:focus {
+    transform: scale(1.05);
+    background: linear-gradient(145deg, #580064, #9100b2);
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
+}
+
+/* Radio Buttons Styling */
+#creationConcour .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#creationConcour .radio-group input[type="radio"] {
+    display: none;
+}
+
+#creationConcour .radio-group label {
+    font-size: 1em;
+    color: #ffb3ff;
+    background: linear-gradient(145deg, #3a003e, #580064);
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 2px solid #ff00ff;
+    border-radius: 4px;
+    text-align: center;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+}
+
+#creationConcour .radio-group input[type="radio"]:checked+label {
+    background: linear-gradient(145deg, #580064, #9100b2);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.8), 0 0 20px rgba(128, 0, 255, 1);
+}
+
+#creationConcour .radio-group label:hover {
+    background: linear-gradient(145deg, #580064, #9100b2);
+    transform: scale(1.05);
+}
+
+/* Button */
+#creationConcour button {
+    width: 100%;
+    font-size: 18px;
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: bold;
+    padding: 15px 0;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+    position: relative;
+}
+
+#creationConcour button:hover {
+    background: linear-gradient(145deg, #d89eff, #6b29ff);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.9)) drop-shadow(0 0 25px rgba(128, 0, 255, 1));
+}
+
+#creationConcour button:active {
+    background: linear-gradient(145deg, #a02ae8, #5e009f);
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.6)) drop-shadow(0 0 15px rgba(128, 0, 255, 0.7));
+}
+
+/* Page Rejoindre Concour */
+/*-----------------------------------------------------------------------*/
+
+/* Main container */
+#rejoindreConcour {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Form styling */
+#rejoindreConcour form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #3b004d, #610080);
+    padding: 50px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.7);
+    border: 4px solid #ff00ff;
+}
+
+/* Labels */
+#rejoindreConcour label {
+    width: 100%;
+    text-align: left;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffb3ff;
+    text-shadow: 1px 1px 2px rgba(255, 182, 255, 0.8);
+}
+
+/* Inputs */
+#rejoindreConcour input {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: 2px solid #ff00ff;
+    background: linear-gradient(145deg, #3a003e, #580064);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 25px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+}
+
+#rejoindreConcour input:focus {
+    transform: scale(1.05);
+    background: linear-gradient(145deg, #580064, #9100b2);
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
+}
+
+/* Button */
+#rejoindreConcour button {
+    width: 100%;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    padding: 15px 0;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+    position: relative;
+}
+
+
+
+#rejoindreConcour button:hover {
+    background: linear-gradient(145deg, #d89eff, #6b29ff);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.9)) drop-shadow(0 0 25px rgba(128, 0, 255, 1));
+}
+
+#rejoindreConcour button:active {
+    background: linear-gradient(145deg, #a02ae8, #5e009f);
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.6)) drop-shadow(0 0 15px rgba(128, 0, 255, 0.7));
+}
+
+/* Links */
+#rejoindreConcour a {
+    width: 25rem;
+    font-size: 16px;
+    text-decoration: none;
+    margin-top: 15px;
+    padding: 12px 0;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: white;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+    position: relative;
+}
+
+#rejoindreConcour a:hover {
+    background: linear-gradient(145deg, #d89eff, #6b29ff);
+    transform: scale(1.1);
+}
+
+#rejoindreConcour a:active {
+    background: linear-gradient(145deg, #a02ae8, #5e009f);
+    transform: scale(0.95);
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+
+
+
+
+/* Page Connexion */
+/*-----------------------------------------------------------------------*/
+
+
+#mainFormInscription,
+#mainFormConnexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+
+#mainFormInscription form,
+#mainFormConnexion form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #3b004d, #610080);
+    padding: 50px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.7);
+    border: 4px solid #ff00ff;
+}
+
+
+#mainFormInscription label,
+#mainFormConnexion label {
+    width: 100%;
+    text-align: left;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffb3ff;
+    text-shadow: 1px 1px 2px rgba(255, 182, 255, 0.8);
+}
+
+/* Inputs */
+#mainFormInscription input,
+#mainFormConnexion input {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: 2px solid #ff00ff;
+    background: linear-gradient(145deg, #3a003e, #580064);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 25px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+}
+
+#mainFormInscription input:focus,
+#mainFormConnexion input:focus {
+    transform: scale(1.05);
+    background: linear-gradient(145deg, #580064, #9100b2);
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
+}
+
+/* Button */
+#mainFormInscription button,
+#mainFormConnexion button {
+    width: 100%;
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    padding: 15px 0;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+    position: relative;
+}
+
+#mainFormInscription button:hover,
+#mainFormConnexion button:hover {
+    background: linear-gradient(145deg, #d89eff, #6b29ff);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.9)) drop-shadow(0 0 25px rgba(128, 0, 255, 1));
+}
+
+#mainFormInscription button:active,
+#mainFormConnexion button:active {
+    background: linear-gradient(145deg, #a02ae8, #5e009f);
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.6)) drop-shadow(0 0 15px rgba(128, 0, 255, 0.7));
+}
+
+#mainFormInscription a:hover,
+#mainFormConnexion a:hover {
+    background: linear-gradient(145deg, #d89eff, #6b29ff);
+    transform: scale(1.1);
+}
+
+#mainFormInscription a:active,
+#mainFormConnexion a:active {
+    background: linear-gradient(145deg, #a02ae8, #5e009f);
+    transform: scale(0.95);
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
 }

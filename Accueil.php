@@ -26,45 +26,44 @@
     <main id="accueil">
         <div id="classement-quiz">
             <h2>classement concours quiz</h2>
-            <ul class="classement">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <ul id="classement">
+                <li>Test1</li>
+                <li>Test2</li>
+                <li>Test3</li>
+                <li>Test4</li>
+                <li>Test5</li>
+                <li>Test6</li>
+                <li>Test7</li>
+                <li>Test8</li>
+                <li>Test9</li>
             </ul>
         </div>
         <div id="buttonNavAcceuil">
             <a href="menuSeul.php"><button>
                     <h2>Seul</h2>
                 </button></a>
-            <a href="hubConcours.php"><button>
+            <a href="rejoindreConcours.php"><button>
                     <h2>Mode Concours</h2>
                 </button></a>
         </div>
         <div id="classement-casse-tete">
             <h2>classement concours casse-tête</h2>
-            <ul class="classement">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <ul id="classement">
+                <li>Test1</li>
+                <li>Test2</li>
+                <li>Test3</li>
+                <li>Test4</li>
+                <li>Test5</li>
+                <li>Test6</li>
+                <li>Test7</li>
+                <li>Test8</li>
+                <li>Test9</li>
             </ul>
         </div>
     </main>
 
-    <footer>
-        Footer
-    </footer>
+    <footer>BriseTête © 2025</footer>
+
 </body>
 
 </html>

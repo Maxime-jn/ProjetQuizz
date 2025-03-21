@@ -1,81 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Création du concours</title>
-    <style>
-        .header, .footer {
-            background-color: #ddd;
-            padding: 10px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 80vh;
-        }
-        .form-container {
-            border: 1px solid #000;
-            padding: 20px;
-            display: inline-block;
-        }
-        .form-container input, .form-container select, .form-container button {
-            margin: 5px 0;
-            padding: 5px;
-        }
-        .form-container label {
-            display: block;
-            text-align: left;
-        }
-        .toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <title>BriseTête</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <div class="header">
-        <span>Brise Tête</span>
-        <span>Déconnexion</span>
-    </div>
-    
-    <div class="container">
-        <div class="form-container">
-            <h2>Création du concours</h2>
-            <label for="name">Nom</label>
-            <input type="text" id="name" name="name">
-            
-            <label for="participants">Nb participant</label>
-            <input type="number" id="participants" name="participants">
-            
-            <div class="toggle">
-                <label>Public</label>
-                <select>
-                    <option value="public">public</option>
-                    <option value="prive">privé</option>
-                </select>
+    <header>
+        <div><a href="Accueil.php">
+                <h1>BriseTête</h1>
+            </a></div>
+        <?php
+        session_start();
+        if (isset($_SESSION['user_id'])) {
+            echo '<div><a href="php/GlobalFunction/logout.php">Déconnexion</a></div>';
+        } else {
+            echo '<div><a href="formConnexion.php">Connexion</a></div>';
+        }
+        ?>
+    </header>
+
+    <main id="creationConcour">
+        <h2>Créer un Concours</h2>
+        <form action="creerConcours.php" method="POST">
+            <label for="name">Nom du concours</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="participants">Nombre de participants</label>
+            <input type="number" id="participants" name="participants" required min="1">
+
+            <label>Type</label>
+            <div class="radio-group">
+                <input type="radio" id="public" name="public" value="1" required>
+                <label for="public">Public</label>
+
+                <input type="radio" id="prive" name="public" value="0" required>
+                <label for="prive">Privé</label>
             </div>
-            
-            <label for="password">Mot de passe</label>
+
+            <label for="password">Mot de passe (optionnel)</label>
             <input type="password" id="password" name="password">
-            
-            <button>Créer</button>
-        </div>
-    </div>
-    
-    <div class="footer">Footer</div>
+
+            <button type="submit">Créer</button>
+        </form>
+
+        </main>
+
+        <footer>BriseTête © 2025</footer>
 </body>
+
+
 </html>

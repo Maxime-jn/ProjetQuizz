@@ -9,14 +9,22 @@
 </head>
 
 <body>
-    <header>
-        <div><a href="Accueil.php">BriseTête<a></div>
-        <div><a href="formConnexion.php">Connexion</a></div>
+<header>
+        <div><a href="Accueil.php">
+                <h1>BriseTête</h1>
+            </a></div>
+        <?php
+        session_start();
+        if (isset($_SESSION['user_id'])) {
+            echo '<div><a href="php/GlobalFunction/logout.php">Déconnexion</a></div>';
+        } else {
+            echo '<div><a href="formConnexion.php">Connexion</a></div>';
+        }
+        ?>
     </header>
-    <main>
+    <main id="mainFormConnexion">
         <div>
             <div>
-                <a href="formConnexion.php"><button>Connexion</button></a>
                 <a href="formInscription.php"><button>Inscription</button></a>
             </div>
             <form>
@@ -27,9 +35,8 @@
             </form>
         </div>
     </main>
-    <footer>
-        Footer
-    </footer>
+    <footer>BriseTête © 2025</footer>
+
 </body>
 
 </html>
