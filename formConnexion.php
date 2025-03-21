@@ -22,10 +22,7 @@
             <form>
                 <label for="pseudo">Pseudo</label>
                 <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo">
-
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe">
-
+                
                 <button type="submit" class="login-button">Se connecter</button>
             </form>
         </div>

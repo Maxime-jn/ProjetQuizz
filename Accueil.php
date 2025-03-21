@@ -10,24 +10,23 @@
 
 <body>
     <header>
-        <div><a href="Accueil.php">BriseTête<a></div>
-
-        <nav>
-
-
-        </nav>
-        
-        <div><a href="formConnexion.php">Connexion</a></div>
+        <div><a href="Accueil.php">
+                <h1>BriseTête</h1>
+            </a></div>
+        <?php
+        session_start();
+        if (isset($_SESSION['user_id'])) {
+            echo '<div><a href="php/GlobalFunction/logout.php">Déconnexion</a></div>';
+        } else {
+            echo '<div><a href="formConnexion.php">Connexion</a></div>';
+        }
+        ?>
     </header>
 
-
-
-
-    <main>
-        <div class="classement concours-quiz">
+    <main id="accueil">
+        <div id="classement-quiz">
             <h2>classement concours quiz</h2>
-            <ul>
-                <li></li>
+            <ul class="classement">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -39,13 +38,17 @@
                 <li></li>
             </ul>
         </div>
-        <div class="buttons">
-            <a href="menuSeul.php"><button>Seul</button></a>
-            <a href="hubConcours.php"><button>Mode Concour</button></a>
+        <div id="buttonNavAcceuil">
+            <a href="menuSeul.php"><button>
+                    <h2>Seul</h2>
+                </button></a>
+            <a href="hubConcours.php"><button>
+                    <h2>Mode Concours</h2>
+                </button></a>
         </div>
-        <div class="classement concours-casse-tete">
+        <div id="classement-casse-tete">
             <h2>classement concours casse-tête</h2>
-            <ul>
+            <ul class="classement">
                 <li></li>
                 <li></li>
                 <li></li>
@@ -58,9 +61,6 @@
             </ul>
         </div>
     </main>
-
-
-
 
     <footer>
         Footer

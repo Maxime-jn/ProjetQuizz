@@ -3,44 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BriseTête - Création du Concours</title>
+    <title>Création du concours</title>
+    <style>
+        .header, .footer {
+            background-color: #ddd;
+            padding: 10px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+        .form-container {
+            border: 1px solid #000;
+            padding: 20px;
+            display: inline-block;
+        }
+        .form-container input, .form-container select, .form-container button {
+            margin: 5px 0;
+            padding: 5px;
+        }
+        .form-container label {
+            display: block;
+            text-align: left;
+        }
+        .toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="header-left">BriseTête</div>
-        <button class="disconnect">Déconnexion</button>
-    </header>
-    <main>
-        <div class="contest-creation">
-            <h1>Création du concours</h1>
-            <form>
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="nom" placeholder="Entrez le nom du concours">
-                
-                <label for="participants">Nb participant</label>
-                <input type="number" id="participants" name="participants" placeholder="Nombre de participants">
-
-                <div class="radio-buttons">
-                    <label>
-                        <input type="radio" name="visibility" value="public" checked>
-                        Public
-                    </label>
-                    <label>
-                        <input type="radio" name="visibility" value="private">
-                        Privé
-                    </label>
-                </div>
-
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" placeholder="Entrez le mot de passe">
-
-                <button type="submit" class="create-button">Créer</button>
-            </form>
+    <div class="header">
+        <span>Brise Tête</span>
+        <span>Déconnexion</span>
+    </div>
+    
+    <div class="container">
+        <div class="form-container">
+            <h2>Création du concours</h2>
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name">
+            
+            <label for="participants">Nb participant</label>
+            <input type="number" id="participants" name="participants">
+            
+            <div class="toggle">
+                <label>Public</label>
+                <select>
+                    <option value="public">public</option>
+                    <option value="prive">privé</option>
+                </select>
+            </div>
+            
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password">
+            
+            <button>Créer</button>
         </div>
-    </main>
-    <footer>
-        Footer
-    </footer>
+    </div>
+    
+    <div class="footer">Footer</div>
 </body>
 </html>
