@@ -5,27 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/hub.css">
 </head>
 
 <body>
     <header>
-        <div><a href="Accueil.php">
+        <div><a href="index.php">
                 <h1>BriseTête</h1>
             </a></div>
-        <?php
-        session_start();
-        if (isset($_SESSION['user_id'])) {
-            echo '<div><a href="php/GlobalFunction/logout.php">Déconnexion</a></div>';
-        } else {
-            echo '<div><a href="formConnexion.php">Connexion</a></div>';
-        }
-        ?>
+        <div id="auth-buttons"></div>
     </header>
     <main id="mainSeul">
 
         <div id="btnMenuSeul">
-            <a href="pageCasseTete.php"><button>
+            <a href="listeCasseTeteSeul.php"><button>
                     <h2>Casse-tête</h2>
                 </button></a>
             <a href="pageQuiz.php"><button>
@@ -34,7 +28,7 @@
         </div>
     </main>
     <footer>BriseTête © 2025</footer>
-
+    <script src="js/connexion.js"></script>
 </body>
 
 </html>

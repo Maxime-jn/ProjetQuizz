@@ -1,0 +1,18 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Règles de réécriture pour rediriger les URL vers les fichiers correspondants
+RewriteRule ^Connexion/?$ formConnexion.php [QSA,L]
+RewriteRule ^Creation_Concours/?$ formCreationConcours.php [QSA,L]
+RewriteRule ^Inscription/?$ formInscription.php [QSA,L]
+RewriteRule ^hubConcours/?$ hubConcours.php [QSA,L]
+RewriteRule ^selection_casse_Tete/?$ listeCasseTeteSeul.php [QSA,L]
+RewriteRule ^choix_type_casse_tete/?$ menuSeul.php [QSA,L]
+RewriteRule ^CasseTete/?$ pageCasseTete.php [QSA,L]
+RewriteRule ^Quiz/?$ pageQuiz.php [QSA,L]
+RewriteRule ^selection_difficulte/?$ quizChoixDifficulte.php [QSA,L]
+RewriteRule ^rejoindre_Concours/?$ rejoindreConcours.php [QSA,L]

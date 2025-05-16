@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move the Box - Jeu</title>
+    <style>
+        #game {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(6, 50px);
+            grid-template-rows: repeat(6, 50px);
+            gap: 5px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border: 1px solid #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <div class="grid" id="grid"></div>
+        <button onclick="startGame()">Démarrer le jeu</button>
+    </div>
+
+    <script>
+        let grid = [];
+        let gridElement = document.getElementById("grid");
+        const rows = 6;
+        const cols = 6;
+
+        function startGame() {
+            grid = Array(rows).fill().map(() => Array(cols).fill(null));
+            renderGrid();
+        }
+
+        // Crée la grille visuellement
+        function renderGrid() {
+            gridElement.innerHTML = "";
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const box = document.createElement("div");
+                    box.classList.add("box");
+                    box.dataset.row = row;
+                    box.dataset.col = col;
+
+                    if (grid[row][col]) {
+                        box.style.backgroundColor = grid[row][col];
+                    }
+
+                    box.addEventListener("click", () => moveBox(row, col));
+                    gridElement.appendChild(box);
+                }
+            }
+        }
+
+        // Fonction de déplacement de boîte
+        function moveBox(row, col) {
+            if (grid[row][col]) return; // Si la case est déjà occupée, on ne fait rien.
+
+            // Trouver la case la plus basse vide dans la colonne
+            for (let i = rows - 1; i >= 0; i--) {
+                if (!grid[i][col]) {
+                    grid[i][col] = "blue"; // Exemple de couleur de boîte
+                    break;
+                }
+            }
+
+            // Vérification des lignes et colonnes
+            checkAndRemoveMatches();
+            applyGravity();
+            renderGrid();
+        }
+
+        // Vérifie si des boîtes sont alignées (3 ou plus) et les enlève
+        function checkAndRemoveMatches() {
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    if (grid[row][col]) {
+                        let color = grid[row][col];
+
+                        // Vérification de l'alignement horizontal
+                        let count = 1;
+                        let c = col + 1;
+                        while (c < cols && grid[row][c] === color) {
+                            count++;
+                            c++;
+                        }
+                        if (count >= 3) {
+                            // Supprimer les boîtes alignées
+                            for (let c = col; c < col + count; c++) {
+                                grid[row][c] = null;
+                            }
+                        }
+
+                        // Vérification de l'alignement vertical
+                        count = 1;
+                        let r = row + 1;
+                        while (r < rows && grid[r][col] === color) {
+                            count++;
+                            r++;
+                        }
+                        if (count >= 3) {
+                            // Supprimer les boîtes alignées verticalement
+                            for (let r = row; r < row + count; r++) {
+                                grid[r][col] = null;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Applique la chute des boîtes
+        function applyGravity() {
+            for (let col = 0; col < cols; col++) {
+                let emptySlots = [];
+                for (let row = 0; row < rows; row++) {
+                    if (!grid[row][col]) {
+                        emptySlots.push(row);
+                    } else if (emptySlots.length > 0) {
+                        // Déplacer la boîte vers le bas
+                        let emptyRow = emptySlots.pop();
+                        grid[emptyRow][col] = grid[row][col];
+                        grid[row][col] = null;
+                        emptySlots.push(row);
+                    }
+                }
+            }
+        }
+
+        // Lancer le jeu au démarrage
+        startGame();
+    </script>
+</body>
+</html>

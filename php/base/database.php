@@ -1,23 +1,37 @@
 <?php
 
-require_once 'config.php';
+require_once 'constants.php';
+
+/*
+
+Leart Demiri
+11.12.2024
+
+Classe database
+*/
 
 
 class database
 {
-    private static ?\PDO $db = null;
+    // Propriété
+    private static ?PDO $db = null;
 
-    public static function db(): \PDO
+    // Méthodes
+    public static function db(): PDO
     {
         if (self::$db === null) {
-            $db = new \PDO(
-                "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8",
-                DB_USER,
-                DB_PASS
-            );
+            try {
+                $db = new PDO(
+                    "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8",
+                    DB_USER,
+                    DB_PASS
+                );
 
-            $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            $db->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            } catch (Throwable $th) {
+                die("Cannot connect to database");
+            }
 
             self::$db = $db;
         }
@@ -25,17 +39,25 @@ class database
         return self::$db;
     }
 
-    public static function run(string $sql, array $param = []): \PDOStatement
+    public static function run(string $sql, array $param = []): PDOStatement
     {
         $statement = self::db()->prepare($sql);
 
-        if (empty($param)) {
-            $statement->execute();  
-        } else {
-            $statement->execute($param);  
-        }
+        $result = $statement->execute($param);
 
         return $statement;
+    }
+
+    public static function begin(){
+        return self::db()->beginTransaction();
+    }
+
+    public static function commit(){
+        return self::db()->commit();
+    }
+
+    public static function rollback(){
+        return self::db()->rollBack();
     }
 
 }

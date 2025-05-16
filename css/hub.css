@@ -1,0 +1,324 @@
+/* Page menu mode Seul  */
+/*-----------------------------------------------------------------------*/
+
+
+#mainSeul {
+    display: flex;
+    text-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5), 1px 1px 2px rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 .9em rgba(255, 255, 255, 0.5);
+    border: 2px solid #000000;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+
+
+/* Page menu mode Seul  */
+/*-----------------------------------------------------------------------*/
+
+
+#mainSeul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    ;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    flex-direction: column;
+}
+#btnMenuSeul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#btnMenuSeul button {
+    position: relative;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    width: 16rem;
+    height: 10rem;
+    margin: 2rem;
+    font-weight: bold;
+    padding: 10px 0 10px 10px;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+}
+
+#btnMenuSeul button::before {
+    position: absolute;
+    content: '';
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.4), transparent 70%);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+#btnMenuSeul button:hover {
+    background: linear-gradient(45deg, #ffffff6e, #ffffff);
+    transform: scale(1.05);
+    box-shadow: 0 1.2em rgba(255, 254, 254, 0.6);
+}
+
+#btnMenuSeul button:active {
+    box-shadow: none;
+    position: relative;
+    top: .2em;
+    background: linear-gradient(45deg, #ffffff, #5900ff);
+}
+
+/* Ajout d'une animation pour l'effet néon */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+/* Page accueil */
+/* ----------------------------------------------------------------------------------------------------- */
+#accueil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color: #00ffea;
+    text-align: center;
+    padding: 2rem;
+    /* Image de fond cyberpunk */
+
+}
+
+#classement-quiz,
+#classement-casse-tete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(61, 1, 141, 0.8);
+    color: #00ffea;
+    border: 2px solid #00ffea;
+    border-radius: 10px;
+    text-align: center;
+    padding: 2rem;
+    box-shadow: 0 0 10px #00ffea, 0 0 20px #00ffea;
+}
+
+#classement {
+    width: 100%;
+    padding: 10px;
+    list-style: none;
+}
+
+#classement li {
+    border: 2px solid #00ffea;
+    border-radius: 7px;
+    margin: 5px 0;
+    padding: 10px;
+    list-style: none;
+    transition: background-color 0.1s, transform 0.1s;
+    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+}
+
+#classement li:hover {
+    background-color: rgba(111, 0, 255, 0.8);
+    cursor: crosshair;
+    transform: scale(1.05);
+}
+
+
+
+#buttonNavAcceuil {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#buttonNavAcceuil button {
+    position: relative;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    width: 16rem;
+    height: 10rem;
+    margin: 2rem;
+    font-weight: bold;
+    padding: 10px 0 10px 10px;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+}
+
+#buttonNavAcceuil button::before {
+    position: absolute;
+    content: '';
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.4), transparent 70%);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+#buttonNavAcceuil button:hover {
+    background: linear-gradient(45deg, #ffffff6e, #ffffff);
+    transform: scale(1.05);
+    box-shadow: 0 1.2em rgba(255, 254, 254, 0.6);
+}
+
+#buttonNavAcceuil button:active {
+    box-shadow: none;
+    position: relative;
+    top: .2em;
+    background: linear-gradient(45deg, #ffffff, #5900ff);
+}
+
+/* Ajout d'une animation pour l'effet néon */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+}
+
+/* hubConcours.php */
+/* ----------------------------------------------------------------------------------------------------- */
+.competition-container {
+    width: 100%;
+    height: 100%;   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.player-list,
+.ranking {
+    background: linear-gradient(145deg, #3b004d, #610080);
+    padding: 50px;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.5), 0 0 25px rgba(255, 0, 255, 0.7);
+    border: 4px solid #ff00ff;
+    margin-bottom: 20px;
+}
+
+.player-list h2,
+.ranking h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffb3ff;
+    text-shadow: 1px 1px 2px rgba(255, 182, 255, 0.8);
+}
+
+.player-list ul,
+.ranking ul {
+    list-style: none;
+    padding: 0;
+}
+
+.player-list li,
+.ranking li {
+    margin: 10px 0;
+}
+
+.player-list input,
+.ranking input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ff00ff;
+    background: linear-gradient(145deg, #3a003e, #580064);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 25px;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+}
+
+.player-list input:focus,
+.ranking input:focus {
+    transform: scale(1.05);
+    background: linear-gradient(145deg, #580064, #9100b2);
+    box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
+}
+
+.participate button {
+    width: 100%;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    padding: 15px 0;
+    background: linear-gradient(145deg, #e3b8ff, #7744e8, #9e62f5);
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.8), 1px 1px 2px #ffb3ff;
+    border-radius: 50px;
+    border: 4px solid #ff00ff;
+    transition: transform 0.3s ease, background 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.7)) drop-shadow(0 0 20px rgba(128, 0, 255, 0.8));
+    position: relative;
+}
+
+.participate button:hover {
+    background: linear-gradient(145deg, #d89eff, #6b29ff);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px rgba(255, 0, 255, 0.9)) drop-shadow(0 0 25px rgba(128, 0, 255, 1));
+}
+
+.participate button:active {
+    background: linear-gradient(145deg, #a02ae8, #5e009f);
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.6)) drop-shadow(0 0 15px rgba(128, 0, 255, 0.7));
+}

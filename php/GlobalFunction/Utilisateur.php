@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($username)) {
         $_SESSION['error'] = "Veuillez entrer un pseudo.";
-        header("Location: formInscription.php");
+        header("Location: ../../formInscription.php");
         exit();
     }
 
@@ -15,20 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $checkUser = database::run("SELECT idUser FROM User WHERE username = ?", [$username])->fetch();
     
     if ($checkUser) {
+        // Générer un token unique
+        $token = bin2hex(random_bytes(16));
+        database::run("UPDATE User SET token = ? WHERE idUser = ?", [$token, $checkUser['idUser']]);
+
         $_SESSION['user_id'] = $checkUser['idUser'];
         $_SESSION['username'] = $username;
-        header("Location: ../../Accueil.php");
+        $_SESSION['token'] = $token;
+
+        header("Location: ../../index.php");
         exit();
     } else {
         // Insérer l'utilisateur
-        database::run("INSERT INTO User (username) VALUES (?)", [$username]);
+        database::run("INSERT INTO User (username, token) VALUES (?, ?)", [$username, bin2hex(random_bytes(16))]);
         $_SESSION['user_id'] = database::db()->lastInsertId();
         $_SESSION['username'] = $username;
-        header("Location: ../../Accueil.php");
+        $_SESSION['token'] = database::run("SELECT token FROM User WHERE idUser = ?", [$_SESSION['user_id']])->fetchColumn();
+
+        header("Location: ../../index.php");
         exit();
     }
 } else {
     $_SESSION['error'] = "Méthode non autorisée.";
-    header("Location: formInscription.php");
+    header("Location: ../../formInscription.php");
     exit();
 }

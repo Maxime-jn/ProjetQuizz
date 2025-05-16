@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordonnancement CPU - SJF / SRTF</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; background: #f5f5f5; }
+        h1 { margin-bottom: 10px; }
+        #mode { margin: 20px; font-size: 16px; }
+        .task {
+            background-color: #007acc;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: grab;
+            margin: 10px;
+            min-width: 120px;
+        }
+        #taskList { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        #result { margin-top: 20px; font-weight: bold; }
+        #gantt { display: flex; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+        .gantt-block {
+            background: #4CAF50;
+            margin: 2px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            min-width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ordonnancement CPU</h1>
+    <label for="mode">Choisir un mode :</label>
+    <select id="mode" onchange="initTaches()">
+        <option value="sjf">Facile (SJF Non Préemptif)</option>
+        <option value="srtf">Difficile (SJF Préemptif)</option>
+    </select>
+
+    <p>Réorganise les tâches pour minimiser le <strong>temps d'attente moyen</strong>.</p>
+    <div id="taskList"></div>
+
+    <button onclick="calculerOrdonnancement()">Valider</button>
+    <button onclick="initTaches()">Recommencer</button>
+
+    <div id="result"></div>
+    <h3>Diagramme de Gantt</h3>
+    <div id="gantt"></div>
+
+    <script>
+        let tasks = [];
+
+        function genererTaches(mode) {
+            if (mode === 'sjf') {
+                return [
+                    { id: 'A', duree: 4, arrivee: 0 },
+                    { id: 'B', duree: 3, arrivee: 1 },
+                    { id: 'C', duree: 1, arrivee: 2 },
+                    { id: 'D', duree: 2, arrivee: 4 }
+                ];
+            } else {
+                return [
+                    { id: 'A', duree: 7, arrivee: 0 },
+                    { id: 'B', duree: 4, arrivee: 2 },
+                    { id: 'C', duree: 1, arrivee: 3 },
+                    { id: 'D', duree: 4, arrivee: 5 },
+                    { id: 'E', duree: 2, arrivee: 6 },
+                    { id: 'F', duree: 3, arrivee: 7 }
+                ];
+            }
+        }
+
+        function afficherTaches() {
+            const container = document.getElementById('taskList');
+            container.innerHTML = '';
+            tasks.forEach((task, index) => {
+                const div = document.createElement('div');
+                div.className = 'task';
+                div.draggable = true;
+                div.dataset.index = index;
+                div.innerHTML = `<strong>${task.id}</strong><br>Durée: ${task.duree}<br>Arrivée: ${task.arrivee}`;
+
+                div.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', index);
+                });
+
+                div.addEventListener('dragover', (e) => e.preventDefault());
+
+                div.addEventListener('drop', (e) => {
+                    const from = parseInt(e.dataTransfer.getData('text/plain'));
+                    const to = parseInt(div.dataset.index);
+                    const temp = tasks[from];
+                    tasks.splice(from, 1);
+                    tasks.splice(to, 0, temp);
+                    afficherTaches();
+                });
+
+                container.appendChild(div);
+            });
+        }
+
+        function initTaches() {
+            const mode = document.getElementById('mode').value;
+            tasks = genererTaches(mode);
+            afficherTaches();
+            document.getElementById('result').textContent = '';
+            document.getElementById('gantt').innerHTML = '';
+        }
+
+        function calculerOrdonnancement() {
+            const mode = document.getElementById('mode').value;
+            if (mode === 'sjf') {
+                calculerSJF();
+            } else {
+                calculerSRTF();
+            }
+        }
+
+        function calculerSJF() {
+            let t = 0;
+            let queue = [...tasks];
+            let result = [];
+            let totalAttente = 0;
+
+            while (queue.length > 0) {
+                const dispo = queue.filter(task => task.arrivee <= t);
+                if (dispo.length === 0) {
+                    t++;
+                    continue;
+                }
+                dispo.sort((a, b) => a.duree - b.duree);
+                const task = dispo[0];
+                queue.splice(queue.indexOf(task), 1);
+                totalAttente += t - task.arrivee;
+                result.push({ id: task.id, debut: t, fin: t + task.duree });
+                t += task.duree;
+            }
+
+            afficherGantt(result);
+            document.getElementById('result').textContent =
+                `Temps d'attente moyen : ${(totalAttente / tasks.length).toFixed(2)} unités.`;
+        }
+
+        function calculerSRTF() {
+            let t = 0;
+            let restants = tasks.map(task => ({ ...task, restant: task.duree }));
+            let result = [];
+            let ordre = [];
+            let totalAttente = 0;
+            let actif = null;
+
+            while (restants.some(task => task.restant > 0)) {
+                const dispo = restants.filter(task => task.arrivee <= t && task.restant > 0);
+                if (dispo.length === 0) {
+                    t++;
+                    continue;
+                }
+
+                dispo.sort((a, b) => a.restant - b.restant);
+                if (!actif || actif.id !== dispo[0].id) {
+                    actif = dispo[0];
+                    ordre.push({ id: actif.id, debut: t });
+                }
+
+                actif.restant--;
+                t++;
+                if (actif.restant === 0) {
+                    ordre[ordre.length - 1].fin = t;
+                    totalAttente += (t - actif.arrivee - actif.duree);
+                } else {
+                    ordre[ordre.length - 1].fin = t;
+                }
+            }
+
+            afficherGantt(ordre);
+            document.getElementById('result').textContent =
+                `Temps d'attente moyen : ${(totalAttente / tasks.length).toFixed(2)} unités.`;
+        }
+
+        function afficherGantt(data) {
+            const gantt = document.getElementById('gantt');
+            gantt.innerHTML = '';
+            data.forEach(segment => {
+                const div = document.createElement('div');
+                div.className = 'gantt-block';
+                div.textContent = `${segment.id} [${segment.debut}→${segment.fin}]`;
+                gantt.appendChild(div);
+            });
+        }
+
+        initTaches();
+    </script>
+</body>
+</html>
