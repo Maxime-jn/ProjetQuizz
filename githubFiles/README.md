@@ -8,16 +8,21 @@ ProjetQuizz est une application web de type quiz développée en HTML, CSS, Java
 ```
 ProjetQuizz/
 │
-├── assets/               # Fichiers CSS, JS, images
+├── css/                  # Fichiers CSS
+├── githubFiles/          # Fichier readme + gitignore
+├── image/                #fichier images
+├── jeux/                 # dossier avec la logique des jeux
+├── js/                   # Scripts JS (front-end)
 ├── php/                  # Scripts PHP (back-end)
 ├── sql/                  # Script SQL de création de la base de données
-├── index.html            # Page d'accueil
-├── README.md             # (ce fichier)
+├── index.php             # Page d'accueil
+├── ... les autres pages php/
+
 ```
 
 ## 🛠️ Prérequis
 
-- Serveur local comme **XAMPP**, **WAMP** ou **MAMP**
+- Serveur local comme **XAMPP**, **WAMP** ou **MAMP** ou un WSL/Linux
 - **PHP** ≥ 7.0
 - **MySQL** ≥ 5.7
 - Navigateur moderne (Chrome, Firefox, etc.)
@@ -32,18 +37,13 @@ ProjetQuizz/
 
 2. **Placer le dossier dans le répertoire de votre serveur local** :
 
-   Par exemple avec XAMPP :
-
-   ```bash
-   mv ProjetQuizz/ C:/xampp/htdocs/
-   ```
 
 3. **Importer la base de données** :
 
    - Démarrer Apache et MySQL depuis XAMPP.
    - Accéder à [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
    - Créer une nouvelle base de données appelée `projetquizz`.
-   - Importer le fichier `sql/projetquizz.sql`.
+   - Importer le fichier `sql/QuizGame.sql`.
 
 4. **Configurer la connexion à la base de données** :
 
@@ -69,13 +69,15 @@ ProjetQuizz/
 ## 📷 Fonctionnalités
 
 - Répondre à des quizz
-- Ajouter ou modifier des questions
-- Gestion dynamique en JavaScript
-- Interaction asynchrone avec PHP via `fetch`
+- Résoudres des casse-tête
+- Créer des concours
+- Rejoindres des concours
 
 ## 📌 Auteurs
 
 - [Maxime Jean](https://github.com/Maxime-jn)
+- [Timoleon Hede](https://github.com/Timo74123)
+- [Leart Demiri](https://github.com/Leartdemiri)
 
 ---
 
