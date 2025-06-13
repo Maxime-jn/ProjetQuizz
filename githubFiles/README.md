@@ -39,15 +39,12 @@ ProjetQuizz/
 
 
 3. **Importer la base de données** :
-
-   - Démarrer Apache et MySQL depuis XAMPP.
-   - Accéder à [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
-   - Créer une nouvelle base de données appelée `projetquizz`.
+   
    - Importer le fichier `sql/QuizGame.sql`.
 
-4. **Configurer la connexion à la base de données** :
+5. **Configurer la connexion à la base de données** :
 
-   Dans le fichier `php/config.php` (ou celui utilisé pour la connexion), modifier les informations :
+   Dans le fichier `php/base/constants.php`, modifier les informations :
 
    ```php
    $host = 'localhost';
@@ -56,7 +53,7 @@ ProjetQuizz/
    $pass = ''; // ou votre mot de passe MySQL
    ```
 
-5. **Lancer l'application** :
+6. **Lancer l'application** :
 
    Accéder via le navigateur à :
 
