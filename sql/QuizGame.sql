@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 13 juin 2025 à 10:58
+-- Généré le : ven. 13 juin 2025 à 11:05
 -- Version du serveur : 10.11.11-MariaDB-0ubuntu0.24.04.2
 -- Version de PHP : 8.3.12
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `QuizGame`
 --
+CREATE DATABASE IF NOT EXISTS `QuizGame` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `QuizGame`;
 
 -- --------------------------------------------------------
 
@@ -27,6 +29,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `Answer`
 --
 
+DROP TABLE IF EXISTS `Answer`;
 CREATE TABLE `Answer` (
   `idAnswer` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -41,6 +44,7 @@ CREATE TABLE `Answer` (
 -- Structure de la table `Choice`
 --
 
+DROP TABLE IF EXISTS `Choice`;
 CREATE TABLE `Choice` (
   `idChoice` int(11) NOT NULL,
   `questionId` int(11) NOT NULL,
@@ -110,6 +114,7 @@ INSERT INTO `Choice` (`idChoice`, `questionId`, `choiceText`, `isCorrect`) VALUE
 -- Structure de la table `concours`
 --
 
+DROP TABLE IF EXISTS `concours`;
 CREATE TABLE `concours` (
   `idConcours` int(11) NOT NULL,
   `nom` varchar(50) NOT NULL,
@@ -135,6 +140,7 @@ INSERT INTO `concours` (`idConcours`, `nom`, `nbParticipantMax`, `typeConcour`, 
 -- Structure de la table `concours_user`
 --
 
+DROP TABLE IF EXISTS `concours_user`;
 CREATE TABLE `concours_user` (
   `idConcours` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
@@ -160,6 +166,7 @@ INSERT INTO `concours_user` (`idConcours`, `idUser`, `joined_at`) VALUES
 -- Structure de la table `HeadBreaker`
 --
 
+DROP TABLE IF EXISTS `HeadBreaker`;
 CREATE TABLE `HeadBreaker` (
   `idHeadBreaker` int(11) NOT NULL,
   `questionId` int(11) NOT NULL,
@@ -173,6 +180,7 @@ CREATE TABLE `HeadBreaker` (
 -- Structure de la table `Question`
 --
 
+DROP TABLE IF EXISTS `Question`;
 CREATE TABLE `Question` (
   `idQuestion` int(11) NOT NULL,
   `questionText` text NOT NULL,
@@ -203,6 +211,7 @@ INSERT INTO `Question` (`idQuestion`, `questionText`, `difficulty`, `category`, 
 -- Structure de la table `quizz`
 --
 
+DROP TABLE IF EXISTS `quizz`;
 CREATE TABLE `quizz` (
   `idQuizz` int(11) NOT NULL,
   `questionId` int(11) NOT NULL,
@@ -216,6 +225,7 @@ CREATE TABLE `quizz` (
 -- Structure de la table `Score`
 --
 
+DROP TABLE IF EXISTS `Score`;
 CREATE TABLE `Score` (
   `idScore` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -258,6 +268,7 @@ INSERT INTO `Score` (`idScore`, `userId`, `scoreValue`, `gameMode`, `created_at`
 -- Structure de la table `User`
 --
 
+DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
   `idUser` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
