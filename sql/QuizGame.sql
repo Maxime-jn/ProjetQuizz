@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 06 juin 2025 à 14:05
+-- Généré le : ven. 13 juin 2025 à 10:58
 -- Version du serveur : 10.11.11-MariaDB-0ubuntu0.24.04.2
 -- Version de PHP : 8.3.12
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `QuizGame`
 --
-CREATE DATABASE IF NOT EXISTS `QuizGame` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `QuizGame`;
 
 -- --------------------------------------------------------
 
