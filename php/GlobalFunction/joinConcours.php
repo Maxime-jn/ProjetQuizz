@@ -7,9 +7,8 @@ header('Content-Type: application/json');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nom = htmlspecialchars(trim($_POST['name'] ?? ''));
-    $password = htmlspecialchars(trim($_POST['password'] ?? ''));
-    $idUser = $_SESSION['user_id'] ?? null;
+    $nom = $_POST['name'] ?? '';
+    $idUser = $_POST['userId'] ?? null;
 
     if (!$idUser) {
         echo json_encode(['success' => false, 'message' => 'Utilisateur non connecté.']);
@@ -22,35 +21,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        // Vérifier si le concours existe
-        $sql = "SELECT * FROM concours WHERE nom = :nom";
+        // Récupérer l'id du concours à partir du nom
+        $sql = "SELECT idConcours FROM concours WHERE nom = :nom";
         $stmt = database::run($sql, [':nom' => $nom]);
-        $concours = $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$concours) {
+        if (!$row) {
             echo json_encode(['success' => false, 'message' => 'Concours introuvable.']);
             exit();
         }
+        $idConcours = $row['idConcours'];
 
-        // Vérifier le mot de passe si le concours est privé
-        if ($concours['isPublic'] == 0 && $concours['password'] !== $password) {
-            echo json_encode(['success' => false, 'message' => 'Mot de passe incorrect.']);
+        // Vérifier si l'utilisateur a déjà rejoint le concours
+        $sql = "SELECT 1 FROM concours_user WHERE idConcours = :idConcours AND idUser = :idUser";
+        $param = [
+            ':idConcours' => $idConcours,
+            ':idUser' => $idUser
+        ];
+        $stmt = database::run($sql, $param);
+        if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo json_encode(['success' => false, 'message' => 'Vous avez déjà rejoint ce concours.']);
             exit();
         }
 
-        // Vérifier si l'utilisateur est déjà inscrit
-        $sqlCheck = "SELECT * FROM Answer WHERE userId = :idUser AND questionId = :idConcours";
-        $stmtCheck = database::run($sqlCheck, [':idUser' => $idUser, ':idConcours' => $concours['idConcours']]);
-        if ($stmtCheck->fetch()) {
-            echo json_encode(['success' => false, 'message' => 'Déjà inscrit au concours.']);
-            exit();
-        }
+        $sql = "INSERT INTO concours_user (idConcours, idUser) VALUES (:idConcours, :idUser)";
+        database::run($sql, $param);
 
-        // Inscrire l'utilisateur
-        $sqlJoin = "INSERT INTO Answer (userId, questionId) VALUES (:idUser, :idConcours)";
-        database::run($sqlJoin, [':idUser' => $idUser, ':idConcours' => $concours['idConcours']]);
-
-        echo json_encode(['success' => true, 'message' => 'Vous avez rejoint le concours.']);
+        echo json_encode(['success' => true, 'message' => 'Vous avez rejoint le concours.', 'idConcours' => $idConcours]);
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'message' => 'Erreur lors de la tentative de rejoindre.']);
     }

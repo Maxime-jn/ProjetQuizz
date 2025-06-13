@@ -14,13 +14,15 @@
         <div><a href="index.php">
                 <h1>BriseTête</h1>
             </a></div>
+        <div id="myConcours"></div>
+
         <div id="auth-buttons"></div>
     </header>
     <main>
         <?php
 
         // Récupérer le niveau depuis l'URL
-        $niveau = isset($_GET['niveau']) ? (int)$_GET['niveau'] : null;
+        $niveau = isset($_GET['niveau']) ? (int) $_GET['niveau'] : null;
 
         switch ($niveau) {
             case 1:
@@ -28,6 +30,27 @@
                 break;
             case 2:
                 include("jeux/BoxGame.html");
+                break;
+            case 3:
+                include("jeux/MoveBox.html");
+                break;
+            case 4:
+                include("jeux/MoveBox.html");
+                break;
+            case 5:
+                include("jeux/MoveBox.html");
+                break;
+            case 6:
+                include("jeux/MoveBox.html");
+                break;
+            case 7:
+                include("jeux/MoveBox.html");
+                break;
+            case 8:
+                include("jeux/MoveBox.html");
+                break;
+            case 9:
+                include("jeux/MoveBox.html");
                 break;
             // ...
             default:
@@ -39,6 +62,7 @@
     </main>
     <footer>BriseTête © 2025</footer>
     <script src="js/connexion.js"></script>
+    <script src="js/toMyConcours.js"></script>
 </body>
 
 </html>

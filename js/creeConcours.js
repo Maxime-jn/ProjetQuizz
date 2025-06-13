@@ -13,20 +13,23 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         const name = document.getElementById('name').value.trim();
-        const password = document.getElementById('password')?.value.trim() || '';
         const participants = document.getElementById('participants')?.value || 0;
-        const isPublic = document.querySelector('input[name="public"]:checked')?.value || 0;
 
         if (!name || participants <= 0) {
             alert("Veuillez remplir tous les champs obligatoires.");
             return;
         }
 
+        const typeConcour = document.querySelector('input[name="typeConcour"]:checked')?.value;
+        if (!typeConcour) {
+            alert("Veuillez choisir un type de concours.");
+            return;
+        }
         const params = new URLSearchParams({
             name,
-            password,
             participants,
-            isPublic,
+            userId,
+            typeConcour
         });
 
         try {

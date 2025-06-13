@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Move the Box - Empilement & Gravité</title>
+  <style>
+    body {
+      background: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      background: #111;
+      display: block;
+      margin: 20px auto;
+      border: 3px solid #555;
+      box-shadow: 0 8px 32px #0008, 0 2px 8px #000a;
+      border-radius: 18px;
+      transition: box-shadow 0.4s;
+    }
+
+    #info {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-size: 22px;
+      height: 26px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      min-height: 28px;
+      text-shadow: 0 2px 8px #0007;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 26px;
+      font-size: 17px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(90deg, #333 60%, #555 100%);
+      color: white;
+      box-shadow: 0 2px 8px #0006;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.13s;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #444 50%, #777 100%);
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px #0007;
+    }
+
+    h1 {
+      margin-top: 20px;
+      letter-spacing: 1px;
+      text-shadow: 0 3px 14px #0008;
+      font-size: 2.1em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Move the Box – Empilement & Gravité</h1>
+  <canvas id="game" width="400" height="500"></canvas>
+  <div id="info">Mouvements restants : <span id="moves">20</span></div>
+  <div id="message"></div>
+  <button id="resetBtn">Recommencer</button>
+  <script>
+    // ====== NIVEAUX PRÉDÉFINIS ======
+
+    const COLORS = [
+      '#2ecc40',  // vert
+      '#f3e6c6',  // beige
+      '#8d5524',  // marron
+      '#b5b5b5',  // gris
+      '#e74c3c'   // rouge
+
+    ];
+
+    const COLOR_NAMES = {
+      vert: '#2ecc40',
+      beige: '#f3e6c6',
+      marron: '#8d5524',
+      gris: '#b5b5b5',
+      rouge: '#e74c3c'
+
+    };
+
+
+    const LEVELS = [
+      // Niveau 3 (index 0)
+      {
+        name: "Niveau 3",
+        moves: 4,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, "vert", null, null, null],
+          [null, null, null, null, "beige", null, null, null],
+          [null, null, null, "beige", "marron", null, null, null],
+          [null, null, null, "vert", "vert", "marron", null, null],
+          [null, null, null, "marron", "marron", "gris", "marron", null],
+          [null, null, null, "marron", "beige", "beige", "gris", "gris"]
+        ]
+      },
+      // Niveau 4 (index 1)
+      {
+        name: "Niveau 4",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, "vert", null, null, null, null],
+          [null, null, null, "beige", null, null, null, null],
+          [null, null, null, "rouge", null, null, null, null],
+          [null, null, null, "beige", null, "gris", null, null],
+          [null, null, null, "marron", null, "vert", "gris", null],
+          [null, null, null, "beige", "rouge", "marron", "vert", "vert"],
+          [null, null, null, "vert", "vert", "rouge", "marron", "gris"]
+        ]
+      },
+      // Niveau 5 (index 1)
+      {
+        name: "Niveau 5",
+        moves: 2,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, "beige", null],
+          [null, null, null, null, null, null, "rouge", null],
+          [null, null, null, null, null, null, "beige", "beige"],
+          [null, null, null, null, null, null, "beige", "rouge"],
+          [null, null, null, null, null, null, "rouge", "beige"],
+          [null, null, null, null, "beige", null, "rouge", "beige"],
+        ]
+      },
+      // Niveau 6 (index 1)
+      {
+        name: "Niveau 6",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, "marron", "marron", null, null],
+          [null, null, "marron", "vert", "beige", "vert", "beige", "beige"],
+          [null, null, "marron", "marron", "vert", "marron", "beige", "marron"],
+        ]
+      },
+      // Niveau 7 (index 1)
+      {
+        name: "Niveau 7",
+        moves: 2,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, "vert", null, null, null],
+          [null, null, null, null, "rouge", null, null, null],
+          [null, null, null, null, "rouge", "vert", "vert", null],
+          [null, null, null, null, "marron", "marron", "rouge", "marron"],
+        ]
+      },
+      // Niveau 8 (index 1)
+      {
+        name: "Niveau 8",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, "gris", null, null, null, null, null],
+          [null, null, "beige", null, null, null, null, null],
+          [null, null, "gris", "vert", "rouge", null, null, null],
+          [null, null, "gris", "beige", "beige", null, null, null],
+          [null, null, "beige", "rouge", "vert", null, null, null],
+          [null, null, "vert", "beige", "rouge", null, null, null],
+        ]
+      },
+      // Niveau 9 (index 1)
+      {
+        name: "Niveau 9",
+        moves: 2,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, "gris", null, null, null, null],
+          [null, null, "gris", "rouge", null, null, null, null],
+          [null, null, "rouge", "gris", "rouge", null, null, null],
+          [null, null, "gris", "rouge", "gris", null, null, null],
+          [null, null, "rouge", "gris", "rouge", null, null, null],
+          [null, null, "gris", "rouge", "gris", null, null, null],
+          [null, null, "rouge", "gris", "rouge", null, null, null],
+          [null, null, "gris", "rouge", "gris", null, null, null],
+          [null, null, "rouge", "gris", "rouge", null, null, null],
+        ]
+      }
+
+    ];
+
+    // ========== CONFIG ==========
+    const WIDTH = 8, HEIGHT = 10, ANIM_SPEED = 14;
+
+    // -------- Récupération du niveau depuis l’URL ---------
+    function getParam(name) {
+      let m = location.search.match(new RegExp('[?&]' + name + '=(\\d+)'));
+      return m ? parseInt(m[1], 10) : null;
+    }
+    let niveau = getParam('niveau') || 3;
+    let currentLevel = niveau - 3; // LEVELS[0]=niveau 3, LEVELS[1]=niveau 4, etc.
+
+    let grid = [], movesLeft = 0, selected = null, anims = [], afterAnimCallback = null;
+
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    const movesElem = document.getElementById('moves');
+    const messageElem = document.getElementById('message');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // --- INITIALISATION ---
+    function initGrid() {
+      grid = [];
+      let lvl = LEVELS[currentLevel];
+      for (let y = 0; y < HEIGHT; y++) {
+        grid[y] = [];
+        for (let x = 0; x < WIDTH; x++) {
+          // On inverse ici : la ligne 0 du niveau devient la ligne la PLUS HAUTE
+          let reversedY = HEIGHT - 1 - y;
+          let val = (lvl && lvl.grid[reversedY] && lvl.grid[reversedY][x]) || null;
+          if (val && COLOR_NAMES[val]) grid[y][x] = { color: COLOR_NAMES[val] };
+          else grid[y][x] = null;
+        }
+      }
+
+      movesLeft = lvl ? lvl.moves : 0;
+      movesElem.textContent = movesLeft;
+      selected = null;
+      messageElem.textContent = '';
+    }
+
+    // --- DESSIN ---
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#666';
+      ctx.fillRect(0, canvas.height - 5, canvas.width, 5);
+      for (let y = 0; y < HEIGHT; y++) {
+        for (let x = 0; x < WIDTH; x++) {
+          const box = grid[y][x];
+          if (box) {
+            if (anims.find(a => a.gridX === x && a.gridY === y)) continue;
+            drawBox(x, y, box.color, selected && selected.x === x && selected.y === y);
+          }
+        }
+      }
+      anims.forEach(anim => {
+        const { fromX, fromY, toX, toY, color, progress, total, type } = anim;
+        let dx = fromX, dy = fromY;
+        if (type === "slide") {
+          dx = fromX + (toX - fromX) * (progress / total);
+          dy = fromY + (toY - fromY) * (progress / total);
+        }
+        if (type === "fall") {
+          dx = toX;
+          dy = fromY + (toY - fromY) * (progress / total);
+        }
+        drawBox(dx, dy, color, false, true);
+      });
+    }
+
+    function drawBox(x, y, color, isSelected, isAnim) {
+      const BOX_SIZE = 50;
+      const px = x * BOX_SIZE + 5;
+      const py = canvas.height - (y + 1) * BOX_SIZE + 5;
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,0.45)";
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetX = 2;
+      ctx.shadowOffsetY = 4;
+      ctx.globalAlpha = 1;
+      roundRect(ctx, px, py, BOX_SIZE - 10, BOX_SIZE - 10, 12, color);
+      ctx.globalAlpha = 0.34;
+      roundRect(ctx, px + 7, py + 5, BOX_SIZE - 25, (BOX_SIZE - 20) / 2, 7, "white");
+      ctx.globalAlpha = 1;
+      if (isSelected) {
+        ctx.save();
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 5;
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = "#fff7";
+        ctx.strokeRect(px - 2, py - 2, BOX_SIZE - 6, BOX_SIZE - 6);
+        ctx.restore();
+      }
+      ctx.restore();
+    }
+
+    function roundRect(ctx, x, y, w, h, r, color) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    // --- INTERACTIONS ---
+    canvas.addEventListener('click', function (e) {
+      if (anims.length > 0 || movesLeft <= 0) return;
+      const BOX_SIZE = 50;
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      const x = Math.floor(mx / BOX_SIZE);
+      const y = HEIGHT - 1 - Math.floor(my / BOX_SIZE);
+
+      if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) return;
+
+      if (!selected) {
+        if (grid[y][x]) {
+          selected = { x, y };
+          draw();
+        }
+        return;
+      }
+      if (selected.x === x && selected.y === y) {
+        selected = null;
+        draw();
+        return;
+      }
+      if (isAdjacent(selected, { x, y })) {
+        moveAndFallAnim(selected, { x, y });
+        return;
+      }
+      if (grid[y][x]) {
+        selected = { x, y };
+        draw();
+        return;
+      }
+    });
+
+    function isAdjacent(a, b) {
+      return (Math.abs(a.x - b.x) + Math.abs(a.y - b.y)) === 1;
+    }
+
+    function moveAndFallAnim(a, b) {
+      let srcBox = grid[a.y][a.x];
+      let destBox = grid[b.y][b.x];
+      anims = [];
+      anims.push({
+        fromX: a.x, fromY: a.y,
+        toX: b.x, toY: b.y,
+        color: srcBox.color,
+        gridX: a.x, gridY: a.y,
+        progress: 0,
+        total: Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y)) * 50 / ANIM_SPEED,
+        type: "slide"
+      });
+      if (destBox) {
+        anims.push({
+          fromX: b.x, fromY: b.y,
+          toX: a.x, toY: a.y,
+          color: destBox.color,
+          gridX: b.x, gridY: b.y,
+          progress: 0,
+          total: Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y)) * 50 / ANIM_SPEED,
+          type: "slide"
+        });
+      }
+      afterAnimCallback = function () {
+        [grid[a.y][a.x], grid[b.y][b.x]] = [grid[b.y][b.x], grid[a.y][a.x]];
+        let drops = [];
+        let dropBoxY = b.y;
+        while (dropBoxY > 0 && grid[dropBoxY][b.x] && !grid[dropBoxY - 1][b.x]) {
+          drops.push({
+            fromY: dropBoxY,
+            toY: dropBoxY - 1,
+            x: b.x,
+            color: grid[dropBoxY][b.x].color
+          });
+          grid[dropBoxY - 1][b.x] = grid[dropBoxY][b.x];
+          grid[dropBoxY][b.x] = null;
+          dropBoxY--;
+        }
+        for (let y = a.y + 1; y < HEIGHT; y++) {
+          if (grid[y][a.x]) {
+            let curY = y;
+            while (curY > 0 && !grid[curY - 1][a.x]) {
+              drops.push({
+                fromY: curY,
+                toY: curY - 1,
+                x: a.x,
+                color: grid[curY][a.x].color
+              });
+              grid[curY - 1][a.x] = grid[curY][a.x];
+              grid[curY][a.x] = null;
+              curY--;
+            }
+          }
+        }
+        if (drops.length > 0) {
+          anims = drops.map(d => ({
+            fromX: d.x, fromY: d.fromY,
+            toX: d.x, toY: d.toY,
+            color: d.color,
+            gridX: d.x, gridY: d.toY,
+            progress: 0,
+            total: (d.fromY - d.toY) * 50 / ANIM_SPEED,
+            type: "fall"
+          }));
+          afterAnimCallback = finishMove;
+          requestAnimationFrame(animLoop);
+        } else {
+          finishMove();
+        }
+      };
+      requestAnimationFrame(animLoop);
+    }
+
+    function finishMove() {
+      movesLeft--;
+      movesElem.textContent = movesLeft;
+      selected = null;
+      anims = [];
+      afterAnimCallback = null;
+      processAfterMove();
+    }
+
+    function animLoop() {
+      let still = false;
+      anims.forEach(anim => {
+        anim.progress += 1;
+        if (anim.progress < anim.total) still = true;
+        else anim.progress = anim.total;
+      });
+      draw();
+      if (still) {
+        requestAnimationFrame(animLoop);
+      } else if (afterAnimCallback) {
+        afterAnimCallback();
+      }
+    }
+
+    function processAfterMove() {
+      draw();
+      setTimeout(function () {
+        let found = findAndRemoveGroups();
+        if (found) {
+          setTimeout(applyGravity, 300);
+        } else {
+          checkEnd();
+        }
+      }, 200);
+    }
+
+    function findAndRemoveGroups() {
+      let toRemove = [];
+      for (let y = 0; y < HEIGHT; y++) {
+        let streak = 1, prevColor = null;
+        for (let x = 0; x < WIDTH; x++) {
+          let c = grid[y][x]?.color;
+          if (c && c === prevColor) streak++;
+          else streak = 1;
+          if (c && streak >= 3) {
+            for (let k = 0; k < streak; k++) toRemove.push({ x: x - k, y });
+          }
+          prevColor = c;
+        }
+      }
+      for (let x = 0; x < WIDTH; x++) {
+        let streak = 1, prevColor = null;
+        for (let y = 0; y < HEIGHT; y++) {
+          let c = grid[y][x]?.color;
+          if (c && c === prevColor) streak++;
+          else streak = 1;
+          if (c && streak >= 3) {
+            for (let k = 0; k < streak; k++) toRemove.push({ x, y: y - k });
+          }
+          prevColor = c;
+        }
+      }
+      let unique = [];
+      let map = {};
+      toRemove.forEach(pt => {
+        let key = pt.x + ',' + pt.y;
+        if (!map[key]) { unique.push(pt); map[key] = true; }
+      });
+      if (unique.length > 0) {
+        for (let pt of unique) {
+          if (grid[pt.y][pt.x]) grid[pt.y][pt.x].opacity = 1;
+        }
+        let step = 0;
+        function anim() {
+          step++;
+          for (let pt of unique) {
+            if (grid[pt.y][pt.x]) grid[pt.y][pt.x].opacity = Math.max(0, 1 - step / 10);
+          }
+          draw();
+          if (step < 10) requestAnimationFrame(anim);
+          else {
+            for (let pt of unique) {
+              grid[pt.y][pt.x] = null;
+            }
+            draw();
+          }
+        }
+        anim();
+        return true;
+      }
+      return false;
+    }
+
+    function applyGravity() {
+      let changed = false;
+      for (let x = 0; x < WIDTH; x++) {
+        for (let y = 0; y < HEIGHT - 1; y++) {
+          if (!grid[y][x]) {
+            for (let y2 = y + 1; y2 < HEIGHT; y2++) {
+              if (grid[y2][x]) {
+                grid[y][x] = grid[y2][x];
+                grid[y2][x] = null;
+                changed = true;
+                break;
+              }
+            }
+          }
+        }
+      }
+      draw();
+      setTimeout(function () {
+        let found = findAndRemoveGroups();
+        if (found) {
+          setTimeout(applyGravity, 300);
+        } else {
+          checkEnd();
+        }
+      }, 200);
+    }
+
+    function checkEnd() {
+      if (isWin()) {
+        messageElem.textContent = "Bravo, tu as tout vidé ! 🎉";
+      } else if (movesLeft <= 0) {
+        messageElem.textContent = "Plus de mouvements, perdu 😞";
+      }
+    }
+
+
+    function isWin() {
+      for (let y = 0; y < HEIGHT; y++)
+        for (let x = 0; x < WIDTH; x++)
+          if (grid[y][x]) return false;
+      return true;
+    }
+
+    resetBtn.addEventListener('click', function () {
+      initGrid();
+      draw();
+    });
+
+    // --- INIT ---
+    initGrid();
+    draw();
+
+  </script>
+</body>
+
+</html>

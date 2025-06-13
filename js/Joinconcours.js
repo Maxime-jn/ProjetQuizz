@@ -1,52 +1,41 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('form');
-    const userId = localStorage.getItem('user_id');
-    const token = localStorage.getItem('token');
-
-    if (!userId || !token) {
-        alert("Vous devez être connecté pour accéder à cette fonctionnalité.");
-        window.location.href = 'formConnexion.php';
-        return;
-    }
-
+    const form = document.getElementById('joinConcoursForm');
+    if (!form) return;
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
-
-        const name = document.getElementById('name').value.trim();
-        const password = document.getElementById('password')?.value.trim() || '';
-        const participants = document.getElementById('participants')?.value || 0;
-        const isPublic = document.querySelector('input[name="public"]:checked')?.value || 0;
-
-        if (!name || participants <= 0) {
-            alert("Veuillez remplir tous les champs obligatoires.");
+        const concoursName = document.getElementById('name').value;
+        const userId = localStorage.getItem('user_id');
+        const token = localStorage.getItem('token');
+        const messageDiv = document.getElementById('message-erreur');
+        messageDiv.textContent = '';
+        if (!userId || !token) {
+            alert("Vous devez être connecté.");
+            window.location.href = 'formConnexion.php';
             return;
         }
-
-        const params = new URLSearchParams({
-            name,
-            password,
-            participants,
-            isPublic,
-        });
-
+        if (!concoursName) {
+            messageDiv.textContent = "Veuillez sélectionner un concours.";
+            return;
+        }
         try {
-            const response = await fetch('php/GlobalFunction/creerConcours.php', {
+            const params = new URLSearchParams({
+                userId,
+                token,
+                name: concoursName
+            });
+            const response = await fetch('php/GlobalFunction/joinConcours.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: params.toString(),
+                body: params.toString()
             });
-
             const result = await response.json();
-
-            if (result.success) {
-                alert(result.message);
-                window.location.href = 'index.php';
+            if (result.success && result.idConcours) {
+                window.location.href = 'hubConcours.php?idConcours=' + result.idConcours;
             } else {
-                alert(result.message);
+                messageDiv.textContent = result.message || "Erreur lors de la participation.";
             }
-        } catch (error) {
-            console.error(error);
-            alert('Erreur de communication avec le serveur.');
+        } catch (e) {
+            messageDiv.textContent = "Erreur lors de la connexion au serveur.";
         }
     });
 });

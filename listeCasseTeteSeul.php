@@ -9,60 +9,53 @@
     <link rel="stylesheet" href="css/CasseTete.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .grid-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-        }
-
-        .grid-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
-            background-color: #1a1a1a;
-            border: 5px solid #00ffea;
-            border-radius: 15px;
-            box-shadow: 6px 6px 20px rgba(0, 255, 234, 0.5);
-            max-width: 500px;
-        }
-
-        .tile {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 140px;
-            height: 70px;
-            background: linear-gradient(135deg, #00ffea, #007f8a);
-            color: white;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 4px 4px 10px rgba(0, 255, 234, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .tile:hover {
-            transform: scale(1.1);
-            box-shadow: 6px 6px 15px rgba(0, 255, 234, 0.5);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            color: #00ffea;
-            text-shadow: 2px 2px 8px rgba(0, 255, 234, 0.5);
-        }
-
-
+    body {
+        background-color: #121212;
+        color: #ffffff;
+        text-align: center;
+    }
+    .grid-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+    .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+        background-color: #1a1a1a;
+        border: 5px solid #00ffea;
+        border-radius: 15px;
+        box-shadow: 6px 6px 20px rgba(0, 255, 234, 0.5);
+        max-width: 500px;
+    }
+    .tile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 140px;
+        height: 70px;
+        background: linear-gradient(135deg, #00ffea, #007f8a);
+        color: white;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 4px 4px 10px rgba(0, 255, 234, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .tile:hover {
+        transform: scale(1.1);
+        box-shadow: 6px 6px 15px rgba(0, 255, 234, 0.5);
+    }
+    header h1 {
+        font-size: 2.5rem;
+        color: #00ffea;
+        text-shadow: 2px 2px 8px rgba(0, 255, 234, 0.5);
+    }
     </style>
 </head>
 
@@ -71,20 +64,46 @@
         <div><a href="index.php">
                 <h1>BriseTête</h1>
             </a></div>
+        <div id="myConcours"></div>
         <div id="auth-buttons"></div>
     </header>
     <main>
         <h2>Choisissez un niveau de casse-tête</h2>
         <div class="grid-wrapper">
             <div class="grid-container">
-                <?php for ($i = 1; $i <= 12; $i++): ?>
-                    <a href="pageCasseTete.php?niveau=<?= $i ?>" class="tile">Niveau <?= $i ?></a>
-                <?php endfor; ?>
+                <!-- Niveaux 1 et 2 classiques -->
+                <a href="pageCasseTete.php?niveau=1" class="tile">Niveau 1</a>
+                <a href="pageCasseTete.php?niveau=2" class="tile">Niveau 2</a>
+                <!-- Niveaux Move the Box -->
+                <?php
+                // Mets ici tes niveaux Move the Box
+                $mesNiveauxBox = [
+                    ["num" => 3, "titre" => "Niveau 3"],
+                    ["num" => 4, "titre" => "Niveau 4"],
+                    ["num" => 5, "titre" => "Niveau 5"],
+                    ["num" => 6, "titre" => "Niveau 6"],
+                    ["num" => 7, "titre" => "Niveau 7"],
+                    ["num" => 8, "titre" => "Niveau 8"],
+                    ["num" => 9, "titre" => "Niveau 9"],
+                    // ["num" => 5, "titre" => "Niveau 5 – Ton super niveau"],
+                    // etc...
+                ];
+                foreach ($mesNiveauxBox as $niveau): ?>
+                    <a href="pageCasseTete.php?niveau=<?= $niveau['num'] ?>" class="tile"><?= htmlspecialchars($niveau['titre']) ?></a>
+                <?php endforeach; ?>
             </div>
         </div>
     </main>
     <footer>BriseTête © 2025</footer>
     <script src="js/connexion.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userId = localStorage.getItem('user_id');
+        document.querySelectorAll('a[href="mesConcours.php"]').forEach(link => {
+            if (userId) link.href = 'mesConcours.php?user_id=' + encodeURIComponent(userId);
+        });
+    });
+    </script>
+    <script src="js/toMyConcours.js"></script>
 </body>
-
 </html>

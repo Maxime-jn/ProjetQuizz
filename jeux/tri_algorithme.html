@@ -1,195 +1,164 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Ordonnancement CPU - SJF / SRTF</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; background: #f5f5f5; }
-        h1 { margin-bottom: 10px; }
-        #mode { margin: 20px; font-size: 16px; }
-        .task {
-            background-color: #007acc;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: grab;
-            margin: 10px;
-            min-width: 120px;
-        }
-        #taskList { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
-        #result { margin-top: 20px; font-weight: bold; }
-        #gantt { display: flex; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
-        .gantt-block {
-            background: #4CAF50;
-            margin: 2px;
-            padding: 10px;
-            border-radius: 5px;
-            color: white;
-            min-width: 50px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taquin Puzzle</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    #timer {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    #puzzle {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      grid-template-rows: repeat(4, 80px);
+      gap: 5px;
+    }
+    .tile {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0ff;
+      color: #000;
+      font-size: 1.5em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .tile.empty {
+      background: #111;
+      cursor: default;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0ff;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #message {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+  </style>
 </head>
 <body>
-    <h1>Ordonnancement CPU</h1>
-    <label for="mode">Choisir un mode :</label>
-    <select id="mode" onchange="initTaches()">
-        <option value="sjf">Facile (SJF Non Préemptif)</option>
-        <option value="srtf">Difficile (SJF Préemptif)</option>
-    </select>
+  <h1>Taquin Puzzle</h1>
+  <div id="timer">Time: 0s</div>
+  <div id="puzzle"></div>
+  <button onclick="shuffle()">Shuffle</button>
+  <div id="message"></div>
 
-    <p>Réorganise les tâches pour minimiser le <strong>temps d'attente moyen</strong>.</p>
-    <div id="taskList"></div>
+  <script>
+    const puzzle = document.getElementById('puzzle');
+    const message = document.getElementById('message');
+    const timerDisplay = document.getElementById('timer');
+    let tiles = [];
+    let startTime;
+    let timerInterval;
 
-    <button onclick="calculerOrdonnancement()">Valider</button>
-    <button onclick="initTaches()">Recommencer</button>
+    function init() {
+      tiles = [...Array(15).keys()].map(n => n + 1);
+      tiles.push(null);
+      render();
+      clearInterval(timerInterval);
+      timerDisplay.textContent = 'Time: 0s';
+    }
 
-    <div id="result"></div>
-    <h3>Diagramme de Gantt</h3>
-    <div id="gantt"></div>
-
-    <script>
-        let tasks = [];
-
-        function genererTaches(mode) {
-            if (mode === 'sjf') {
-                return [
-                    { id: 'A', duree: 4, arrivee: 0 },
-                    { id: 'B', duree: 3, arrivee: 1 },
-                    { id: 'C', duree: 1, arrivee: 2 },
-                    { id: 'D', duree: 2, arrivee: 4 }
-                ];
-            } else {
-                return [
-                    { id: 'A', duree: 7, arrivee: 0 },
-                    { id: 'B', duree: 4, arrivee: 2 },
-                    { id: 'C', duree: 1, arrivee: 3 },
-                    { id: 'D', duree: 4, arrivee: 5 },
-                    { id: 'E', duree: 2, arrivee: 6 },
-                    { id: 'F', duree: 3, arrivee: 7 }
-                ];
-            }
+    function shuffle() {
+      do {
+        for (let i = tiles.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
         }
+      } while (!isSolvable());
+      render();
+      message.textContent = '';
+      startTime = Date.now();
+      clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimer, 1000);
+    }
 
-        function afficherTaches() {
-            const container = document.getElementById('taskList');
-            container.innerHTML = '';
-            tasks.forEach((task, index) => {
-                const div = document.createElement('div');
-                div.className = 'task';
-                div.draggable = true;
-                div.dataset.index = index;
-                div.innerHTML = `<strong>${task.id}</strong><br>Durée: ${task.duree}<br>Arrivée: ${task.arrivee}`;
+    function updateTimer() {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      timerDisplay.textContent = `Time: ${elapsed}s`;
+    }
 
-                div.addEventListener('dragstart', (e) => {
-                    e.dataTransfer.setData('text/plain', index);
-                });
-
-                div.addEventListener('dragover', (e) => e.preventDefault());
-
-                div.addEventListener('drop', (e) => {
-                    const from = parseInt(e.dataTransfer.getData('text/plain'));
-                    const to = parseInt(div.dataset.index);
-                    const temp = tasks[from];
-                    tasks.splice(from, 1);
-                    tasks.splice(to, 0, temp);
-                    afficherTaches();
-                });
-
-                container.appendChild(div);
-            });
+    function isSolvable() {
+      const temp = tiles.filter(n => n !== null);
+      let inversions = 0;
+      for (let i = 0; i < temp.length; i++) {
+        for (let j = i + 1; j < temp.length; j++) {
+          if (temp[i] > temp[j]) inversions++;
         }
+      }
+      const emptyRow = Math.floor(tiles.indexOf(null) / 4);
+      return (inversions + emptyRow) % 2 === 0;
+    }
 
-        function initTaches() {
-            const mode = document.getElementById('mode').value;
-            tasks = genererTaches(mode);
-            afficherTaches();
-            document.getElementById('result').textContent = '';
-            document.getElementById('gantt').innerHTML = '';
+    function render() {
+      puzzle.innerHTML = '';
+      tiles.forEach((tile, i) => {
+        const div = document.createElement('div');
+        div.classList.add('tile');
+        if (tile === null) {
+          div.classList.add('empty');
+        } else {
+          div.textContent = tile;
+          div.onclick = () => moveTile(i);
         }
+        puzzle.appendChild(div);
+      });
+    }
 
-        function calculerOrdonnancement() {
-            const mode = document.getElementById('mode').value;
-            if (mode === 'sjf') {
-                calculerSJF();
-            } else {
-                calculerSRTF();
-            }
+    function moveTile(index) {
+      const emptyIndex = tiles.indexOf(null);
+      const validMoves = [
+        emptyIndex - 1, emptyIndex + 1,
+        emptyIndex - 4, emptyIndex + 4
+      ];
+      if (validMoves.includes(index) && isAdjacent(index, emptyIndex)) {
+        [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
+        render();
+        if (isSolved()) {
+          clearInterval(timerInterval);
+          message.textContent = 'You solved it! 🎉';
         }
+      }
+    }
 
-        function calculerSJF() {
-            let t = 0;
-            let queue = [...tasks];
-            let result = [];
-            let totalAttente = 0;
+    function isAdjacent(i, j) {
+      const xi = i % 4, yi = Math.floor(i / 4);
+      const xj = j % 4, yj = Math.floor(j / 4);
+      return Math.abs(xi - xj) + Math.abs(yi - yj) === 1;
+    }
 
-            while (queue.length > 0) {
-                const dispo = queue.filter(task => task.arrivee <= t);
-                if (dispo.length === 0) {
-                    t++;
-                    continue;
-                }
-                dispo.sort((a, b) => a.duree - b.duree);
-                const task = dispo[0];
-                queue.splice(queue.indexOf(task), 1);
-                totalAttente += t - task.arrivee;
-                result.push({ id: task.id, debut: t, fin: t + task.duree });
-                t += task.duree;
-            }
+    function isSolved() {
+      for (let i = 0; i < 15; i++) {
+        if (tiles[i] !== i + 1) return false;
+      }
+      return tiles[15] === null;
+    }
 
-            afficherGantt(result);
-            document.getElementById('result').textContent =
-                `Temps d'attente moyen : ${(totalAttente / tasks.length).toFixed(2)} unités.`;
-        }
-
-        function calculerSRTF() {
-            let t = 0;
-            let restants = tasks.map(task => ({ ...task, restant: task.duree }));
-            let result = [];
-            let ordre = [];
-            let totalAttente = 0;
-            let actif = null;
-
-            while (restants.some(task => task.restant > 0)) {
-                const dispo = restants.filter(task => task.arrivee <= t && task.restant > 0);
-                if (dispo.length === 0) {
-                    t++;
-                    continue;
-                }
-
-                dispo.sort((a, b) => a.restant - b.restant);
-                if (!actif || actif.id !== dispo[0].id) {
-                    actif = dispo[0];
-                    ordre.push({ id: actif.id, debut: t });
-                }
-
-                actif.restant--;
-                t++;
-                if (actif.restant === 0) {
-                    ordre[ordre.length - 1].fin = t;
-                    totalAttente += (t - actif.arrivee - actif.duree);
-                } else {
-                    ordre[ordre.length - 1].fin = t;
-                }
-            }
-
-            afficherGantt(ordre);
-            document.getElementById('result').textContent =
-                `Temps d'attente moyen : ${(totalAttente / tasks.length).toFixed(2)} unités.`;
-        }
-
-        function afficherGantt(data) {
-            const gantt = document.getElementById('gantt');
-            gantt.innerHTML = '';
-            data.forEach(segment => {
-                const div = document.createElement('div');
-                div.className = 'gantt-block';
-                div.textContent = `${segment.id} [${segment.debut}→${segment.fin}]`;
-                gantt.appendChild(div);
-            });
-        }
-
-        initTaches();
-    </script>
+    init();
+  </script>
 </body>
 </html>

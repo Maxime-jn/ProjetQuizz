@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérifier si l'utilisateur existe déjà
     $checkUser = database::run("SELECT idUser FROM User WHERE username = ?", [$username])->fetch();
-    
+
     if ($checkUser) {
         // Générer un token unique
         $token = bin2hex(random_bytes(16));
@@ -26,11 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: ../../index.php");
         exit();
     } else {
-        // Insérer l'utilisateur
-        database::run("INSERT INTO User (username, token) VALUES (?, ?)", [$username, bin2hex(random_bytes(16))]);
-        $_SESSION['user_id'] = database::db()->lastInsertId();
+        // Créer le nouvel utilisateur
+        $token = bin2hex(random_bytes(16));
+        database::run("INSERT INTO User (username, token) VALUES (?, ?)", [$username, $token]);
+
+        $userId = database::db()->lastInsertId();
+
+        // Créer les scores pour les deux modes de jeu
+        database::run("INSERT INTO Score (userId, gameMode, scoreValue) VALUES (?, 'quizz', 0)", [$userId]);
+        database::run("INSERT INTO Score (userId, gameMode, scoreValue) VALUES (?, 'casse-tete', 0)", [$userId]);
+
+        // Stocker dans la session
+        $_SESSION['user_id'] = $userId;
         $_SESSION['username'] = $username;
-        $_SESSION['token'] = database::run("SELECT token FROM User WHERE idUser = ?", [$_SESSION['user_id']])->fetchColumn();
+        $_SESSION['token'] = $token;
 
         header("Location: ../../index.php");
         exit();

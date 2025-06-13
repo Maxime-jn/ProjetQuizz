@@ -8,7 +8,7 @@ function createToken()
 }
 
 // Cette fonction regarde si la méthode est belle et bien ce qui est demandé
-function checkMethod(string $redirection,string $method)
+function checkMethod(string $redirection, string $method)
 {
     $method = $_SERVER['REQUEST_METHOD'];
 
@@ -27,7 +27,7 @@ function getBestQuizzPlayers(): array
             JOIN User u ON s.userId = u.idUser
             WHERE s.gameMode = 'quizz'
             ORDER BY s.scoreValue DESC
-            LIMIT " . TOP_PLAYER_LIMIT ;
+            LIMIT " . TOP_PLAYER_LIMIT;
 
     $stmt = database::run($sql);
 
@@ -86,10 +86,40 @@ function getRandomQuestions(): array
         $questions[$id]['choices'][] = [
             'idChoice' => $row['idChoice'],
             'choiceText' => $row['choiceText'],
-            'isCorrect' => (bool)$row['isCorrect']
+            'isCorrect' => (bool) $row['isCorrect']
         ];
     }
 
     // Re-index array to remove gaps in keys (from associative array to indexed array)
     return array_values($questions);
+}
+
+function listeConcours()
+{
+    $sql = "SELECT c.idConcours, c.nom, c.nbParticipantMax, 
+                   (SELECT COUNT(*) FROM concours_user cu WHERE cu.idConcours = c.idConcours) as nbInscrits
+            FROM concours c";
+    $stmt = database::run($sql);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getConcoursByUser($idUser) {
+    $sql = "SELECT c.idConcours, c.nom, c.typeConcour
+            FROM concours_user cu
+            JOIN concours c ON c.idConcours = cu.idConcours
+            WHERE cu.idUser = :idUser";
+    $stmt = database::run($sql, [':idUser' => $idUser]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getUsersFromConcours($idConcours) {
+    $sql = "SELECT User.username 
+            FROM concours_user 
+            JOIN User ON User.idUser = concours_user.idUser
+            WHERE concours_user.idConcours = :idConcours";
+    $param = [
+        "idConcours" => $idConcours
+    ];
+    $statement = database::run($sql , $param);
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
 }

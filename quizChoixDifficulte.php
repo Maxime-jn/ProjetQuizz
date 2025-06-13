@@ -14,6 +14,7 @@
         <div><a href="index.php">
                 <h1>BriseTête</h1>
             </a></div>
+        <div id="myConcours"></div>
         <div id="auth-buttons"></div>
     </header>
     <main>
@@ -26,6 +27,7 @@
     </main>
     <footer>BriseTête © 2025</footer>
     <script src="js/connexion.js"></script>
+    <script src="js/toMyConcours.js"></script>
 </body>
 
 </html>

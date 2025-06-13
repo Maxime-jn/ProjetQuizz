@@ -17,18 +17,21 @@ $bestCasseTetePlayers = getBestBreakerPlayers();
 
 <body>
     <header>
-        <div><a href="index.php">
+        <div>
+            <a href="index.php">
                 <h1>BriseTête</h1>
-            </a></div>
+            </a>
+        </div>
+        <div id="myConcours"></div>
         <div id="auth-buttons"></div>
     </header>
 
     <main id="accueil">
         <div id="classement-quiz">
-            <h2>classement concours quiz</h2>
+            <h2>classement quiz</h2>
             <ul id="classement">
                 <?php foreach ($bestQuizzPlayers as $player): ?>
-                    <li><?= htmlspecialchars($player['username']) ?></li>
+                <li><?= htmlspecialchars($player['username']) ?> <?= htmlspecialchars($player['scoreValue']) ?></li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -43,10 +46,10 @@ $bestCasseTetePlayers = getBestBreakerPlayers();
         </div>
 
         <div id="classement-casse-tete">
-            <h2>classement concours casse-tête</h2>
+            <h2>classement casse-tête</h2>
             <ul id="classement">
                 <?php foreach ($bestCasseTetePlayers as $player): ?>
-                    <li><?= htmlspecialchars($player['username']) ?></li>
+                <li><?= htmlspecialchars($player['username']) ?> <?= htmlspecialchars($player['scoreValue'])?></li>
                 <?php endforeach; ?>
             </ul>
         </div>
@@ -54,6 +57,7 @@ $bestCasseTetePlayers = getBestBreakerPlayers();
 
     <footer>BriseTête © 2025</footer>
     <script src="js/connexion.js"></script>
+    <script src="js/toMyConcours.js"></script>
 
 </body>
 

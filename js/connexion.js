@@ -2,9 +2,11 @@
 function checkAuth() {
     const token = localStorage.getItem('token');
     const authButtons = document.getElementById('auth-buttons');
+    const myConcours = document.getElementById('myConcours');
 
     if (token) {
         authButtons.innerHTML = '<a href="#" id="logout-button">Déconnexion</a>';
+        myConcours.innerHTML = '<a href="mesConcours.php">Mes concours</a>';
         document.getElementById('logout-button').addEventListener('click', logout);
     } else {
         authButtons.innerHTML = '<a href="formConnexion.php">Connexion</a>';

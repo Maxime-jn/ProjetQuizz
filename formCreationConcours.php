@@ -11,9 +11,12 @@
 
 <body>
     <header>
-        <div><a href="index.php">
+        <div>
+            <a href="index.php">
                 <h1>BriseTête</h1>
-            </a></div>
+            </a>
+        </div>
+       <div id="myConcours"></div>
         <div id="auth-buttons"></div>
     </header>
 
@@ -28,24 +31,22 @@
 
             <label>Type</label>
             <div class="radio-group">
-                <input type="radio" id="public" name="public" value="1" required>
-                <label for="public">Public</label>
+                <input type="radio" id="quizz" name="typeConcour" value="1" required>
+                <label for="quizz">Quizz</label>
 
-                <input type="radio" id="prive" name="public" value="0" required>
-                <label for="prive">Privé</label>
+                <input type="radio" id="headbreaker" name="typeConcour" value="0" required>
+                <label for="headbreaker">Casse tête</label>
             </div>
-
-            <label for="password">Mot de passe (optionnel)</label>
-            <input type="password" id="password" name="password">
 
             <button type="submit">Créer</button>
         </form>
-
+        <a href="rejoindreConcours.php">Rejoindre un concours</a>
     </main>
 
     <footer>BriseTête © 2025</footer>
     <script src="js/CreeConcours.js"></script>
-
+    <script src="js/connexion.js"></script>
+    <script src="js/toMyConcours.js"></script>
 </body>
 
 

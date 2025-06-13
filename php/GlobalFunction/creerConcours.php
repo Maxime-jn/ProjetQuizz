@@ -10,12 +10,11 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = htmlspecialchars(trim($_POST['name'] ?? ''));
     $nbParticipants = (int)($_POST['participants'] ?? 0);
-    $isPublic = (int)($_POST['isPublic'] ?? 0);
-    $password = htmlspecialchars(trim($_POST['password'] ?? ''));
-    $idUser = $_SESSION['user_id'] ?? null;
+    $idUser = $_POST['userId'];
+    $typeConcour = $_POST['typeConcour'] ?? null;
 
-    if (!$idUser) {
-        echo json_encode(['success' => false, 'message' => 'Utilisateur non connecté.']);
+    if (!$idUser || $typeConcour === null) {
+        echo json_encode(['success' => false, 'message' => 'Utilisateur ou type manquant.']);
         exit();
     }
 
@@ -25,13 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $sql = "INSERT INTO concours (nom, nbParticipant, isPublic, password, idUser) 
-                VALUES (:nom, :nbParticipants, :isPublic, :password, :idUser)";
+        $sql = "INSERT INTO concours (nom, nbParticipantMax, typeConcour, idUser) 
+                VALUES (:nom, :nbParticipants, :typeConcour, :idUser)";
         database::run($sql, [
             ':nom' => $nom,
             ':nbParticipants' => $nbParticipants,
-            ':isPublic' => $isPublic,
-            ':password' => $password ?: null,
+            ':typeConcour' => $typeConcour,
             ':idUser' => $idUser,
         ]);
 
