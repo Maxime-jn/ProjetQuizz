@@ -15,18 +15,22 @@ $bestCasseTetePlayers = getBestBreakerPlayers();
     <link rel="stylesheet" href="css/hub.css">
 </head>
 
-<body>
+<body class="containerBackground">
     <header>
         <div>
             <a href="index.php">
                 <h1>BriseTête</h1>
             </a>
         </div>
+
         <div id="myConcours"></div>
         <div id="auth-buttons"></div>
     </header>
 
     <main id="accueil">
+
+
+
         <div id="classement-quiz">
             <h2>classement quiz</h2>
             <ul id="classement">
@@ -37,13 +41,15 @@ $bestCasseTetePlayers = getBestBreakerPlayers();
         </div>
 
         <div id="buttonNavAcceuil">
-            <a href="menuSeul.php"><button>
+            <a href="menuSeul.php"><button class="btn">
                     <h2>Seul</h2>
                 </button></a>
-            <a href="rejoindreConcours.php"><button>
+            <a href="rejoindreConcours.php"><button class="btn">
                     <h2>Mode Concours</h2>
                 </button></a>
+
         </div>
+
 
         <div id="classement-casse-tete">
             <h2>classement casse-tête</h2>

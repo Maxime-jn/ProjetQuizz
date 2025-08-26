@@ -8,7 +8,7 @@ html,
 body,
 main {
     position: relative;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'c', cursive;
     width: 100%;
     height: 100%;
     margin: 0;
@@ -28,8 +28,6 @@ main::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('../image/fond1.gif') no-repeat center center/cover;
-    filter: blur(4px);
     z-index: -1;
 }
 
@@ -66,10 +64,81 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    
     background-color: #1a1a1a;
     color: #00ffea;
     border-top: 4px solid #00ffea;
     font-size: 1.2em;
     text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+    
 }
 
+/*  BackgroundBefore */
+
+/* Fond animé avec traits bleu ciel et violets */
+.containerBackground {
+    position: absolute;
+    inset: 0;
+
+  }
+  
+  body.containerBackground::before {
+    content: "";
+    position: absolute;
+    top: -200%;
+    left: -200%;
+    width: 400%;
+    height: 500%;
+    background: #000000;
+    background-image:
+      /* Traits bleu ciel */
+      radial-gradient(4px 100px at 0px 235px, rgb(135, 206, 250), transparent),
+      radial-gradient(4px 100px at 300px 235px, rgb(100, 149, 237), transparent),
+      radial-gradient(4px 100px at 0px 252px, rgb(70, 130, 180), transparent),
+      /* Traits violets */
+      radial-gradient(4px 100px at 0px 150px, rgb(138, 43, 226), transparent),
+      radial-gradient(4px 100px at 300px 150px, rgb(186, 85, 211), transparent),
+      radial-gradient(4px 100px at 0px 281px, rgb(148, 0, 211), transparent),
+      /* petits éclats lumineux */
+      radial-gradient(1.5px 1.5px at 150px 75px, rgb(173, 216, 230) 100%, transparent 150%),
+      radial-gradient(1.5px 1.5px at 150px 117px, rgb(216, 191, 255) 100%, transparent 150%);
+    background-size:
+      300px 235px,
+      300px 235px,
+      300px 252px,
+      300px 150px,
+      300px 150px,
+      300px 281px,
+      300px 75px,
+      300px 117px;
+    animation: hi 150s linear infinite;
+    transform: rotate(-45deg); 
+    z-index: -1;
+}
+
+
+  @keyframes hi {
+    0% {
+      background-position:
+        0px 220px,
+        3px 220px,
+        25px 24px,
+        50px 16px,
+        75px 224px,
+        125px 120px,
+        150px 31px,
+        175px 235px;
+    }
+    100% {
+      background-position:
+        0px 6800px,
+        3px 6800px,
+        25px 13632px,
+        50px 5416px,
+        75px 17175px,
+        125px 8428px,
+        150px 9876px,
+        175px 13391px;
+    }
+  }
+  
