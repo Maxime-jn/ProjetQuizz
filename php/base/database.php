@@ -60,4 +60,7 @@ class database
         return self::db()->rollBack();
     }
 
+    public static function lastInsertId(){
+        return self::db()->lastInsertId();
+    }
 }

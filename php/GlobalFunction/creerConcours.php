@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
+        
         $sql = "INSERT INTO concours (nom, nbParticipantMax, typeConcour, idUser) 
                 VALUES (:nom, :nbParticipants, :typeConcour, :idUser)";
         database::run($sql, [
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':idUser' => $idUser,
         ]);
 
-        echo json_encode(['success' => true, 'message' => 'Concours créé avec succès.']);
+        echo json_encode(['success' => true, 'message' => "Concours créé avec succès", "idConcours" => database::lastInsertId()]);
     } catch (Exception $e) {
         echo json_encode(['success' => false, 'message' => 'Erreur lors de la création du concours.']);
     }

@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+main {
+  
+  position: relative;
+  font-family: "Courier New";
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  z-index: 0;
+}
+
+
+/* ================== ================== ================== */
+/* ================== Header ================== */
+/* ================== ================== ================== */
+
+.barreDeHeader {
+  width: 100%;
+  min-height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  color: #0f0;
+  border-bottom: 4px solid #0f0;
+  font-size: 1.2em;
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+}
+
+.insideHeaderContainer {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo h1 {
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.barreDeHeader a {
+  text-decoration: none;
+  color: #0f0;
+  transition: color 0.3s, text-shadow 0.3s;
+  white-space: nowrap;
+}
+
+.barreDeHeader a:hover {
+  color: rgb(0, 179, 0);
+  text-shadow: 0 0 5px rgb(0, 117, 0), 0 0 10px rgb(0, 117, 0);
+}
+
+/* ================== ================== ================== */
+/* ================== Footer ================== */
+/* ================== ================== ================== */
+.pageFooter {
+
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  margin-top: 5em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #000000;
+  color: #0f0;
+  border-top: 4px solid #0f0;
+  font-size: 1.2em;
+  text-align: center;
+  text-shadow: 0 0 5px #0f0, 0 0 10px #0f0;
+  gap: 1rem;
+}
+
+.pageFooter a {
+  color: #0f0;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.pageFooter a:hover {
+  color: rgb(0, 179, 0);
+  text-shadow: 0 0 5px rgb(0, 117, 0), 0 0 10px rgb(0, 117, 0);
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footerLinks ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+
+/* ================== ================== ================== */
+/* ================== Arrière Plan ================== */
+/* ================== ================== ================== */
+
+
+
+body::before {
+  content: "";
+  position: absolute;
+  top: -200%;
+  left: -200%;
+  width: 400%;
+  height: 500%;
+  background: #000;
+  background-image: 
+    /* vertical glowing lines */
+    repeating-linear-gradient(90deg, 
+      rgba(0, 255, 0, 0.6) 0px, 
+      rgba(0, 255, 0, 0.6) 2px, 
+      transparent 2px, 
+      transparent 150px),
+    /* horizontal glowing lines */
+    repeating-linear-gradient(0deg, 
+      rgba(0, 255, 0, 0.6) 0px, 
+      rgba(0, 255, 0, 0.6) 2px, 
+      transparent 2px, 
+      transparent 150px);
+  background-size: 150px 150px;
+  animation: hi 50s linear infinite;
+  transform: rotate(-45deg);
+  z-index: -1;
+}
+
+@keyframes hi {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 5000px;
+  }
+} 

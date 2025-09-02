@@ -71,13 +71,11 @@
         <h2>Choisissez un niveau de casse-tête</h2>
         <div class="grid-wrapper">
             <div class="grid-container">
-                <!-- Niveaux 1 et 2 classiques -->
-                <a href="pageCasseTete.php?niveau=1" class="tile">Niveau 1</a>
-                <a href="pageCasseTete.php?niveau=2" class="tile">Niveau 2</a>
-                <!-- Niveaux Move the Box -->
                 <?php
                 // Mets ici tes niveaux Move the Box
                 $mesNiveauxBox = [
+                    ["num" => 1, "titre" => "Niveau 1"],
+                    ["num" => 2, "titre" => "Niveau 2"],
                     ["num" => 3, "titre" => "Niveau 3"],
                     ["num" => 4, "titre" => "Niveau 4"],
                     ["num" => 5, "titre" => "Niveau 5"],
@@ -85,6 +83,18 @@
                     ["num" => 7, "titre" => "Niveau 7"],
                     ["num" => 8, "titre" => "Niveau 8"],
                     ["num" => 9, "titre" => "Niveau 9"],
+                    ["num" => 10, "titre" => "Niveau 10"],
+                    ["num" => 11, "titre" => "Niveau 11"],
+                    ["num" => 12, "titre" => "Niveau 12"],
+                    ["num" => 13, "titre" => "Niveau 13"],
+                    ["num" => 14, "titre" => "Niveau 14"],
+                    ["num" => 15, "titre" => "Niveau 15"],
+                    ["num" => 16, "titre" => "Niveau 16"],
+                    ["num" => 17, "titre" => "Niveau 17"],
+                    ["num" => 18, "titre" => "Niveau 18"],
+                    ["num" => 19, "titre" => "Niveau 19"],
+                    ["num" => 20, "titre" => "Niveau 20"],
+                    ["num" => 21, "titre" => "Niveau 21"],
                     // ["num" => 5, "titre" => "Niveau 5 – Ton super niveau"],
                     // etc...
                 ];

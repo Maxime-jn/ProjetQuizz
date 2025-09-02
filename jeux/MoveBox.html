@@ -82,14 +82,15 @@
       '#f3e6c6',  // beige
       '#8d5524',  // marron
       '#b5b5b5',  // gris
-      '#e74c3c'   // rouge
-
+      '#e74c3c',  // rouge
+      '#3d2424'   // marron foncé
     ];
 
     const COLOR_NAMES = {
       vert: '#2ecc40',
       beige: '#f3e6c6',
       marron: '#8d5524',
+      marronF: '#3d2424',
       gris: '#b5b5b5',
       rouge: '#e74c3c'
 
@@ -97,6 +98,40 @@
 
 
     const LEVELS = [
+      // Niveau 1 (index 0)
+      {
+        name: "Niveau 1",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, "marron", null, null, null],
+          [null, null, null, "marron", "marronF", "marron", null, null],
+          [null, null, "marronF", "marronF", "marron", "marronF", "marronF", null],
+        ]
+      },
+      // Niveau 2 (index 0)
+      {
+        name: "Niveau 2",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, "beige", "marron", "beige", null, "beige", "marron", "beige"],
+          [null, "marron", "beige", "marron", "beige", "marron", "beige", "marron"],
+        ]
+      },
       // Niveau 3 (index 0)
       {
         name: "Niveau 3",
@@ -215,7 +250,211 @@
           [null, null, "gris", "rouge", "gris", null, null, null],
           [null, null, "rouge", "gris", "rouge", null, null, null],
         ]
-      }
+      },
+      // Niveau 10 (index 1)
+      {
+        name: "Niveau 10",
+        moves: 4,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, "beige", null, null],
+          [null, null, "beige", null, null, "rouge", null, null],
+          [null, null, "rouge", null, null, "beige", null, null],
+          [null, null, "beige", null, null, "rouge", null, null],
+          [null, null, "rouge", null, null, "beige", null, null],
+          [null, null, "beige", null, null, "rouge", null, null],
+        ]
+      },
+      // Niveau 11 (index 1)
+      {
+        name: "Niveau 11",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, "marronF", "marronF", null, null],
+          [null, null, null, "beige", "vert", "beige", null, null],
+          [null, null, null, "vert", "vert", "marronF", null, null],
+          [null, null,null, "marronF", "marronF", "beige", null, null],
+          [null, null,null, "vert", "vert", "marronF", "vert", null],
+        ]
+      },
+      // Niveau 12 (index 1)
+      {
+        name: "Niveau 12",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, "beige", null, null, null, null],
+          [null, null, null, "vert", "vert", "beige", null, null],
+          [null, "marronF", "marronF", "vert", "beige", "marronF", null, null],
+        ]
+      },
+      // Niveau 13 (index 1)
+      {
+        name: "Niveau 13",
+        moves: 2,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, "gris", null, null, null, null],
+          [null, null, "vert", "rouge", null, null, null, null],
+          [null, null, "vert", "rouge", null, "gris", null, null],
+          [null, null, "marron", "marron", null, "marron", null, null],
+          [null, null, "vert", "rouge", null, "gris", null, null],
+        ]
+      },
+      // Niveau 14 (index 1)
+      {
+        name: "Niveau 14",
+        moves: 2,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, "gris", "beige", "gris", null, null, null],
+          [null, null, "gris", "gris", "vert", null, null, null],
+          [null, null, "beige", "vert", "beige", null, null, null],
+          [null, null, "gris", "gris", "vert", null, null, null],
+        ]
+      },
+      // Niveau 15 (index 1)
+      {
+        name: "Niveau 15",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, "beige", null, null, null],
+          [null, null, null, null, "beige", null, null, null],
+          [null, null, "vert", "beige", "vert", "vert", null, null],
+          [null, null, "beige", "rouge", "rouge", "beige", null, null],
+          [null, null, "rouge", "vert", "beige", "rouge", null, null],
+        ]
+      },
+      // Niveau 16 (index 1)
+      {
+        name: "Niveau 16",
+        moves: 4,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, "vert", "marron", null, null, null],
+          [null, null, null, "marron", "vert", null, null, null],
+          [null, null, null, "rouge", "beige", null, null, null],
+          [null, null, "vert", "beige", "rouge", "marron", null, null],
+          [null, null, "vert", "beige", "rouge", "marron", null, null],
+        ]
+      },
+      // Niveau 17 (index 1)
+      {
+        name: "Niveau 17",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, "rouge", null, null, null],
+          [null, null, null, null, "vert", null, "beige", null],
+          [null, null, "vert", "vert", "rouge", null, "rouge", null],
+          [null, null, "gris", "gris", "beige", "gris", "beige", null],
+        ]
+      },
+      // Niveau 18 (index 1)
+      {
+        name: "Niveau 18",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, "marron", null, null],
+          [null, null, null, null, "marron", "beige", null, null],
+          [null, null, null, null, "rouge", "rouge", null, null],
+          [null, null, null, null, "beige", "vert", "marron", null],
+          [null, null, "vert", null, "rouge", "vert", "beige", null],
+        ]
+      },
+      // Niveau 19 (index 1)
+      {
+        name: "Niveau 19",
+        moves: 4,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, "beige", "rouge", null, null, null, null],
+          [null, null, "rouge", "beige", null, null, null, null],
+          [null, null, "beige", "rouge", null, null, null, null],
+          [null, null, "rouge", "beige", null, null, null, null],
+          [null, null, "beige", "rouge", null, "rouge", null, null],
+        ]
+      },
+      // Niveau 20 (index 1)
+      {
+        name: "Niveau 20",
+        moves: 2,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, "rouge", null, null, null, null, null],
+          [null, null, "vert", "vert", null, null, null, null],
+          [null, null, "beige", "rouge", null, null, null, null],
+          [null, "rouge", "vert", "beige", null, "beige", null, null],
+        ]
+      },
+      // Niveau 21 (index 1)
+      {
+        name: "Niveau 21",
+        moves: 3,
+        grid: [
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, null, null, null, null, null],
+          [null, null, null, "rouge", null, null, null, null],
+          [null, null, null, "rouge", null, null, null, null],
+          [null, null, null, "vert", null, null, null, null],
+          [null, null, null, "rouge", null, null, null, null],
+          [null, null, null, "rouge", null, null, null, null],
+          [null, null, null, "vert", null, null, null, null],
+          [null, null, "vert", "vert", null, null, null, null],
+        ]
+      },
 
     ];
 
@@ -228,7 +467,7 @@
       return m ? parseInt(m[1], 10) : null;
     }
     let niveau = getParam('niveau') || 3;
-    let currentLevel = niveau - 3; // LEVELS[0]=niveau 3, LEVELS[1]=niveau 4, etc.
+    let currentLevel = niveau - 1; // LEVELS[0]=niveau 3, LEVELS[1]=niveau 4, etc.
 
     let grid = [], movesLeft = 0, selected = null, anims = [], afterAnimCallback = null;
 

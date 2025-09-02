@@ -16,7 +16,7 @@
                 <h1>BriseTête</h1>
             </a>
         </div>
-       <div id="myConcours"></div>
+        <div id="myConcours"></div>
         <div id="auth-buttons"></div>
     </header>
 
@@ -27,7 +27,7 @@
             <input type="text" id="name" name="name" required>
 
             <label for="participants">Nombre de participants</label>
-            <input type="number" id="participants" name="participants" required min="1">
+            <input type="number" id="participants" name="participants" required min="1" max="1000">
 
             <label>Type</label>
             <div class="radio-group">
@@ -40,11 +40,12 @@
 
             <button type="submit">Créer</button>
         </form>
-        <a href="rejoindreConcours.php">Rejoindre un concours</a>
+        <a href="creerConcours.php">Rejoindre un concours</a>
     </main>
 
     <footer>BriseTête © 2025</footer>
     <script src="js/CreeConcours.js"></script>
+    <script src="js/JoinConcours.js"></script>
     <script src="js/connexion.js"></script>
     <script src="js/toMyConcours.js"></script>
 </body>

@@ -42,11 +42,22 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await response.json();
 
             if (result.success) {
-                alert(result.message);
-                window.location.href = 'index.php';
+
+                const responsesJoin = await fetch('php/GlobalFunction/joinConcours.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params.toString()
+                });
+                const resultJoin = await responsesJoin.json();
+                if (resultJoin.success && resultJoin.idConcours) {
+                    alert(result.message);
+                    window.location.href = 'hubConcours.php?idConcours=' + resultJoin.idConcours;
+                }
+
             } else {
                 alert(result.message);
             }
+            
         } catch (error) {
             console.error(error);
             alert('Erreur de communication avec le serveur.');

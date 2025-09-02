@@ -26,10 +26,10 @@
 
         switch ($niveau) {
             case 1:
-                include("jeux/tri_algorithme.html");
+                include("jeux/MoveBox.html");
                 break;
             case 2:
-                include("jeux/BoxGame.html");
+                include("jeux/MoveBox.html");
                 break;
             case 3:
                 include("jeux/MoveBox.html");
@@ -50,6 +50,42 @@
                 include("jeux/MoveBox.html");
                 break;
             case 9:
+                include("jeux/MoveBox.html");
+                break;
+            case 10:
+                include("jeux/MoveBox.html");
+                break;
+            case 11:
+                include("jeux/MoveBox.html");
+                break;
+            case 12:
+                include("jeux/MoveBox.html");
+                break;
+            case 13:
+                include("jeux/MoveBox.html");
+                break;
+            case 14:
+                include("jeux/MoveBox.html");
+                break;
+            case 15:
+                include("jeux/MoveBox.html");
+                break;
+            case 16:
+                include("jeux/MoveBox.html");
+                break;
+            case 17:
+                include("jeux/MoveBox.html");
+                break;
+            case 18:
+                include("jeux/MoveBox.html");
+                break;
+            case 19:
+                include("jeux/MoveBox.html");
+                break;
+            case 20:
+                include("jeux/MoveBox.html");
+                break;
+            case 21:
                 include("jeux/MoveBox.html");
                 break;
             // ...
