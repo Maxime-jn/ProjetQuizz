@@ -15,27 +15,45 @@ if ($idConcours > 0) {
     $typeConcour = $row ? $row['typeConcour'] : null;
 }
 ?>
+<!-- 
+
+Auteurs :
+Jean Maxime Robin
+Leart Demiri
+Timoléon Hede
+
+Projet : 
+BriseTete
+
+Version : 
+0.7 BETA
+
+-->
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
-    <title>BriseTête - Hub de Compétition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/hub.css">
 </head>
-<style>
 
-</style>
-<body>
-    <header>
-        <div><a href="index.php">
-                <h1>BriseTête</h1>
-            </a></div>
-        <div id="myConcours"></div>
-        <div id="auth-buttons"></div>
+<body class="conteneurBackground">
 
+    <header class="barreDeHeader">
+        <div class="insideHeaderContainer">
+            <div>
+                <a href="index.php">
+                    <h1>BriseTête</h1>
+                </a>
+            </div>
+
+            <div id="myConcours"></div>
+            <div id="auth-buttons"></div>
+        </div>
     </header>
+
     <main>
         <div class="competition-container">
             <div class="player-list">
@@ -59,16 +77,30 @@ if ($idConcours > 0) {
             </div>
             <div class="game-launch">
                 <?php if ($typeConcour == 1): ?>
-                    <button onclick="lancerJeu('quiz')">Lancer un Quiz</button>
+                <button onclick="lancerJeu('quiz')">Lancer un Quiz</button>
                 <?php elseif ($typeConcour == 0): ?>
-                    <button onclick="lancerJeu('casse_tete')">Lancer un Casse-tête</button>
+                <button onclick="lancerJeu('casse_tete')">Lancer un Casse-tête</button>
                 <?php else: ?>
-                    <span>Type de concours inconnu.</span>
+                <span>Type de concours inconnu.</span>
                 <?php endif; ?>
             </div>
         </div>
     </main>
-    <footer>BriseTête © 2025</footer>
+
+
+    <footer class="pageFooter">
+        <div class="footerTitre">BriseTête © 2025</div>
+
+        <div class="footerLinks">
+            <span>Réalisé par : I.DA.P4A</span>
+            <ul>
+                <li><a href="https://edu.ge.ch/site/cfpt">CFPT</a></li>
+                <li><a href="https://www.ge.ch/conditions-generales">Conditions générales</a></li>
+                <li><a href="https://edu.ge.ch/site/cfpt/secretariats-2">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
     <script>
     function lancerJeu(type) {
         const params = new URLSearchParams(window.location.search);
@@ -80,7 +112,8 @@ if ($idConcours > 0) {
         if (type === 'quiz') {
             window.location.href = 'pageQuiz.php?idConcours=' + concoursId;
         } else if (type === 'casse_tete') {
-            window.location.href = 'pageCasseTete.php?idConcours=' + concoursId;
+            const niveau = Math.floor(Math.random() * 21) + 1;
+            window.location.href = "pageCasseTete.php?niveau=" + niveau + "?idConcours=" + concoursId;
         }
     }
     </script>

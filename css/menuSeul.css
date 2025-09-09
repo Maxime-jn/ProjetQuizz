@@ -1,0 +1,93 @@
+.btnMenuSeul {
+  --color: rgba(88, 101, 242, 1);
+  padding: 0.8em 1.7em;
+  background-color: transparent;
+  border-radius: .3em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .5s;
+  font-weight: 400;
+  width: 50%;
+  font-size: 30px;
+  border: 4px solid;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: var(--color);
+  z-index: 1;
+}
+
+.btnMenuSeul::before, .btnMenuSeul::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: var(--color);
+  transition: 1s ease;
+}
+
+.btnMenuSeul::before {
+  top: -1em;
+  left: -1em;
+}
+
+.btnMenuSeul::after {
+  left: calc(100% + 1em);
+  top: calc(100% + 1em);
+}
+
+.btnMenuSeul:hover::before, .btnMenuSeul:hover::after {
+  height: 550px;
+  width: 550px;
+}
+
+.btnMenuSeul:hover {
+  color: rgb(10, 25, 30);
+  color: #fff;
+}
+
+.btnMenuSeul:active {
+  filter: brightness(.8);
+}
+
+
+#btnMenuSeul {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Permet de passer à la ligne sur petits écrans */
+}
+
+#btnMenuSeul a {
+  flex: 1 1 45%; /* Grand écran : les boutons prennent chacun ~45%, flex-grow et flex-shrink activés */
+  display: flex;
+  text-decoration: none;
+  min-width: 150px; /* Minimum pour garder un bouton lisible */
+}
+
+#btnMenuSeul button.btnMenuSeul {
+  width: 100%;
+  box-sizing: border-box;
+  white-space: normal; /* Autorise le retour à la ligne */
+  overflow: hidden; /* Affiche tout le texte */
+  text-overflow: clip; /* Pas de "..." */
+  font-size: clamp(18px, 4vw, 30px);
+}
+
+
+/* Media query pour téléphones (moins de 480px) */
+@media (max-width: 480px) {
+  #btnMenuSeul a {
+    flex: 1 1 100%; /* Prend toute la largeur et s’empile */
+  }
+  
+  #btnMenuSeul button.btnMenuSeul {
+    font-size: 20px; /* Ajuste la taille du texte pour mobile */
+  }
+}

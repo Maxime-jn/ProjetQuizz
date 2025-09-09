@@ -1,3 +1,17 @@
+<!-- 
+
+Auteurs :
+Jean Maxime Robin
+Leart Demiri
+Timoléon Hede
+
+Projet : 
+BriseTete
+
+Version : 
+0.7 BETA
+
+-->
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -6,30 +20,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/hub.css">
+    <link rel="stylesheet" href="css/menuSeul.css">
 </head>
 
-<body>
-    <header>
-        <div><a href="index.php">
-                <h1>BriseTête</h1>
-            </a></div>
-        <div id="myConcours"></div>
+<body class="conteneurBackground">
 
-        <div id="auth-buttons"></div>
+    <header class="barreDeHeader">
+        <div class="insideHeaderContainer">
+            <div>
+                <a href="index.php">
+                    <h1>BriseTête</h1>
+                </a>
+            </div>
+
+            <div id="myConcours"></div>
+            <div id="auth-buttons"></div>
+        </div>
     </header>
-    <main id="mainSeul">
 
+    <main id="mainSeul">
         <div id="btnMenuSeul">
-            <a href="listeCasseTeteSeul.php"><button>
+            <a href="listeCasseTeteSeul.php"><button class="btnMenuSeul">
                     <h2>Casse-tête</h2>
                 </button></a>
-            <a href="pageQuiz.php"><button>
+            <a href="pageQuiz.php"><button class="btnMenuSeul">
                     <h2>QUIZ</h2>
                 </button></a>
         </div>
     </main>
-    <footer>BriseTête © 2025</footer>
+
+
+    <footer class="pageFooter">
+        <div class="footerTitre">BriseTête © 2025</div>
+
+        <div class="footerLinks">
+            <span>Réalisé par : I.DA.P4A</span>
+            <ul>
+                <li><a href="https://edu.ge.ch/site/cfpt">CFPT</a></li>
+                <li><a href="https://www.ge.ch/conditions-generales">Conditions générales</a></li>
+                <li><a href="https://edu.ge.ch/site/cfpt/secretariats-2">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+
     <script src="js/connexion.js"></script>
     <script src="js/toMyConcours.js"></script>
 </body>

@@ -1,88 +1,134 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
 body,
 main {
-    position: relative;
-    font-family: 'c', cursive;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #00ffea;
-    overflow: hidden;
-    z-index: 0;
-}
-
-main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  
+  position: relative;
+  font-family: "Courier New";
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  z-index: 0;
 }
 
 
-/* Header */
-header {
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #1a1a1a;
-    color: #00ffea;
-    border-bottom: 4px solid #00ffea;
-    font-size: 1.2em;
-    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+/* ================== ================== ================== */
+/* ================== Header ================== */
+/* ================== ================== ================== */
+
+.barreDeHeader {
+  width: 100%;
+  min-height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  color: #00ffea;
+  border-bottom: 4px solid #00ffea;
+  font-size: 1.2em;
+  text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
 }
 
-header div a {
-    text-decoration: none;
-    color: #00ffea;
-    transition: color 0.3s, text-shadow 0.3s;
+.insideHeaderContainer {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-header div a:hover {
-    color: #ff00ff;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+.logo h1 {
+  margin: 0;
 }
 
-/* Footer */
-footer {
-    width: 100%;
-    height: 100px;
-    margin: 5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #1a1a1a;
-    color: #00ffea;
-    border-top: 4px solid #00ffea;
-    font-size: 1.5em;
-    text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
-    
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-/*  BackgroundBefore */
+.barreDeHeader a {
+  text-decoration: none;
+  color: #00ffea;
+  transition: color 0.3s, text-shadow 0.3s;
+  white-space: nowrap;
+}
 
-/* Fond animé avec traits bleu ciel et violets */
-.containerBackground {
+.barreDeHeader a:hover {
+  color: rgb(0, 174, 255);
+  text-shadow: 0 0 5px rgb(31, 0, 117), 0 0 10px rgb(31, 0, 117);
+}
+
+/* ================== ================== ================== */
+/* ================== Footer ================== */
+/* ================== ================== ================== */
+.pageFooter {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 5em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #000000;
+  color: #00ffea;
+  border-top: 4px solid #00ffea;
+  font-size: 1.2em;
+  text-align: center;
+  text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+  gap: 1rem;
+}
+
+.pageFooter a {
+  color: #00ffea;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.pageFooter a:hover {
+  color: rgb(0, 174, 255);
+  text-shadow: 0 0 5px rgb(31, 0, 117), 0 0 10px rgb(31, 0, 117);
+}
+
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footerLinks ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+
+/* ================== ================== ================== */
+/* ================== Arrière Plan ================== */
+/* ================== ================== ================== */
+.conteneurBackground {
     position: absolute;
     inset: 0;
 
   }
   
-  body.containerBackground::before {
+  body.conteneurBackground::before {
     content: "";
     position: absolute;
     top: -200%;

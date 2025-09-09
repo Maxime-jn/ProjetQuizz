@@ -7,8 +7,6 @@
   <style>
     body {
       background: #222;
-      color: white;
-      font-family: Arial, sans-serif;
       text-align: center;
       margin: 0;
       padding: 0;
@@ -59,7 +57,9 @@
       box-shadow: 0 4px 16px #0007;
     }
 
-    h1 {
+    h2,
+    p {
+      color: white;
       margin-top: 20px;
       letter-spacing: 1px;
       text-shadow: 0 3px 14px #0008;
@@ -69,9 +69,9 @@
 </head>
 
 <body>
-  <h1>Move the Box – Empilement & Gravité</h1>
+  <h2>Move the Box – Empilement & Gravité</h2>
   <canvas id="game" width="400" height="500"></canvas>
-  <div id="info">Mouvements restants : <span id="moves">20</span></div>
+  <p id="info">Mouvements restants : <span id="moves">20</span></p>
   <div id="message"></div>
   <button id="resetBtn">Recommencer</button>
   <script>
@@ -281,8 +281,8 @@
           [null, null, null, null, "marronF", "marronF", null, null],
           [null, null, null, "beige", "vert", "beige", null, null],
           [null, null, null, "vert", "vert", "marronF", null, null],
-          [null, null,null, "marronF", "marronF", "beige", null, null],
-          [null, null,null, "vert", "vert", "marronF", "vert", null],
+          [null, null, null, "marronF", "marronF", "beige", null, null],
+          [null, null, null, "vert", "vert", "marronF", "vert", null],
         ]
       },
       // Niveau 12 (index 1)

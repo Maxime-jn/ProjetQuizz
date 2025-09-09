@@ -1,0 +1,103 @@
+
+.mainSeul{
+flex-direction: center;
+align-items: center;
+
+
+
+}
+
+
+.btn {
+  --color: rgba(88, 101, 242, 1);
+  padding: 0.8em 1.7em;
+  background-color: transparent;
+  border-radius: .3em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .5s;
+  font-weight: 400;
+  width: 80%;
+  font-size: 30px;
+  border: 4px solid;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: var(--color);
+  z-index: 1;
+}
+
+.btn::before, .btn::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 60px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: var(--color);
+  transition: 1s ease;
+}
+
+.btn::before {
+  top: -1em;
+  left: -1em;
+}
+
+.btn::after {
+  left: calc(100% + 1em);
+  top: calc(100% + 1em);
+}
+
+.btn:hover::before, .btn:hover::after {
+  height: 550px;
+  width: 550px;
+}
+
+.btn:hover {
+  color: rgb(10, 25, 30);
+  color: #fff;
+}
+
+.btn:active {
+  filter: brightness(.8);
+}
+
+
+#buttonNavAcceuil {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Permet de passer à la ligne sur petits écrans */
+}
+
+#buttonNavAcceuil a {
+  flex: 1 1 45%; /* Grand écran : les boutons prennent chacun ~45%, flex-grow et flex-shrink activés */
+  display: flex;
+  text-decoration: none;
+  min-width: 150px; /* Minimum pour garder un bouton lisible */
+}
+
+#buttonNavAcceuil button.btn {
+  width: 100%;
+  box-sizing: border-box;
+  white-space: normal; /* Autorise le retour à la ligne */
+  overflow: hidden; /* Affiche tout le texte */
+  text-overflow: clip; /* Pas de "..." */
+  font-size: clamp(18px, 4vw, 30px);
+}
+
+
+/* Media query pour téléphones (moins de 480px) */
+@media (max-width: 480px) {
+  #buttonNavAcceuil a {
+    flex: 1 1 100%; /* Prend toute la largeur et s’empile */
+  }
+  
+  #buttonNavAcceuil button.btn {
+    font-size: 20px; /* Ajuste la taille du texte pour mobile */
+  }
+}

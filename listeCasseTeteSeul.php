@@ -1,72 +1,43 @@
+<!-- 
+
+Auteurs :
+Jean Maxime Robin
+Leart Demiri
+Timoléon Hede
+
+Projet : 
+BriseTete
+
+Version : 
+0.7 BETA
+
+-->
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BriseTête - Liste des Casse-têtes</title>
+    <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/CasseTete.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
-    <style>
-    body {
-        background-color: #121212;
-        color: #ffffff;
-        text-align: center;
-    }
-    .grid-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-    }
-    .grid-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        padding: 20px;
-        background-color: #1a1a1a;
-        border: 5px solid #00ffea;
-        border-radius: 15px;
-        box-shadow: 6px 6px 20px rgba(0, 255, 234, 0.5);
-        max-width: 500px;
-    }
-    .tile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 140px;
-        height: 70px;
-        background: linear-gradient(135deg, #00ffea, #007f8a);
-        color: white;
-        border-radius: 10px;
-        font-size: 1.2rem;
-        text-decoration: none;
-        font-weight: bold;
-        box-shadow: 4px 4px 10px rgba(0, 255, 234, 0.3);
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .tile:hover {
-        transform: scale(1.1);
-        box-shadow: 6px 6px 15px rgba(0, 255, 234, 0.5);
-    }
-    header h1 {
-        font-size: 2.5rem;
-        color: #00ffea;
-        text-shadow: 2px 2px 8px rgba(0, 255, 234, 0.5);
-    }
-    </style>
+    <link rel="stylesheet" href="css/casseTetes.css">
 </head>
 
-<body>
-    <header>
-        <div><a href="index.php">
-                <h1>BriseTête</h1>
-            </a></div>
-        <div id="myConcours"></div>
-        <div id="auth-buttons"></div>
+<body class="conteneurBackground">
+
+    <header class="barreDeHeader">
+        <div class="insideHeaderContainer">
+            <div>
+                <a href="index.php">
+                    <h1>BriseTête</h1>
+                </a>
+            </div>
+
+            <div id="myConcours"></div>
+            <div id="auth-buttons"></div>
+        </div>
     </header>
+
     <main>
         <h2>Choisissez un niveau de casse-tête</h2>
         <div class="grid-wrapper">
@@ -99,13 +70,28 @@
                     // etc...
                 ];
                 foreach ($mesNiveauxBox as $niveau): ?>
-                    <a href="pageCasseTete.php?niveau=<?= $niveau['num'] ?>" class="tile"><?= htmlspecialchars($niveau['titre']) ?></a>
+                <a href="pageCasseTete.php?niveau=<?= $niveau['num'] ?>"
+                    class="tile"><?= htmlspecialchars($niveau['titre']) ?></a>
                 <?php endforeach; ?>
             </div>
         </div>
     </main>
-    <footer>BriseTête © 2025</footer>
-    <script src="js/connexion.js"></script>
+
+
+    <footer class="pageFooter">
+        <div class="footerTitre">BriseTête © 2025</div>
+
+        <div class="footerLinks">
+            <span>Réalisé par : I.DA.P4A</span>
+            <ul>
+                <li><a href="https://edu.ge.ch/site/cfpt">CFPT</a></li>
+                <li><a href="https://www.ge.ch/conditions-generales">Conditions générales</a></li>
+                <li><a href="https://edu.ge.ch/site/cfpt/secretariats-2">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const userId = localStorage.getItem('user_id');
@@ -114,6 +100,8 @@
         });
     });
     </script>
+    <script src="js/connexion.js"></script>
     <script src="js/toMyConcours.js"></script>
 </body>
+
 </html>
