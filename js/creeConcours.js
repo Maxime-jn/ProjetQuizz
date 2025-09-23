@@ -14,17 +14,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = document.getElementById('name').value.trim();
         const participants = document.getElementById('participants')?.value || 0;
+        const typeConcour = document.querySelector('input[name="typeConcour"]:checked')?.value;
 
         if (!name || participants <= 0) {
             alert("Veuillez remplir tous les champs obligatoires.");
             return;
         }
 
-        const typeConcour = document.querySelector('input[name="typeConcour"]:checked')?.value;
         if (!typeConcour) {
             alert("Veuillez choisir un type de concours.");
             return;
         }
+
         const params = new URLSearchParams({
             name,
             participants,
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         try {
-            const response = await fetch('php/GlobalFunction/creerConcours.php', {
+            const response = await fetch('php/GlobalFunction/creeConcours.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params.toString(),
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 alert(result.message);
             }
-            
+
         } catch (error) {
             console.error(error);
             alert('Erreur de communication avec le serveur.');

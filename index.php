@@ -29,8 +29,8 @@ Version :
     <link rel="stylesheet" href="css/index.css">
 </head>
 
-<body class="conteneurBackground">
-
+<body>
+    <div class="conteneurBackground"></div>
     <header class="barreDeHeader">
         <div class="insideHeaderContainer">
             <div>
@@ -55,14 +55,21 @@ Version :
         </div>
 
         <div id="buttonNavAcceuil">
-            <a href="menuSeul.php"><button class="btn">
-                    <span>Seul</span>
-                </button></a>
-            <a href="rejoindreConcours.php"><button class="btn">
-                    <span>Mode Concours</span>
-                </button></a>
+            <a href="menuSeul.php" class="btnIndexSeul">
+                <span class="btnIndexSeul_lg">
+                    <span class="btnIndexSeul_sl"></span>
+                    <span class="btnIndexSeul_text">Seul</span>
+                </span>
+            </a>
 
+            <a href="rejoindreConcours.php" class="btnIndexConcours">
+                <span class="btnIndexConcours_lg">
+                    <span class="btnIndexConcours_sl"></span>
+                    <span class="btnIndexConcours_text">Mode Concours</span>
+                </span>
+            </a>
         </div>
+
 
 
         <div id="classement-casse-tete">
@@ -71,7 +78,7 @@ Version :
                 <?php foreach ($bestCasseTetePlayers as $player): ?>
                 <li><?= htmlspecialchars($player['username']) ?> <?= htmlspecialchars($player['scoreValue'])?></li>
                 <?php endforeach; ?>
-            </ul>
+            </ul>   
         </div>
     </main>
 

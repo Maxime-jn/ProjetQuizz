@@ -5,10 +5,10 @@ require_once '../base/constants.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = htmlspecialchars(trim($_POST['pseudo'] ?? ''));
+    $username = htmlspecialchars(trim($_POST[POST_USERNAME_KEY] ?? ''));
 
     if (empty($username)) {
-        echo json_encode(['success' => false, 'message' => 'Veuillez entrer un pseudo.']);
+        echo json_encode([SUCCESSFULL_REQUEST_JSON => false, ERROR_RETURN_DATA_VARIABLE => 'Veuillez entrer un pseudo.']);
         exit();
     }
 
@@ -21,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         database::run("UPDATE User SET token = ? WHERE idUser = ?", [$token, $checkUser['idUser']]);
 
         // Retourner le token et l'ID utilisateur
-        echo json_encode(['success' => true, 'token' => $token, 'user_id' => $checkUser['idUser']]);
+        echo json_encode([SUCCESSFULL_REQUEST_JSON => true, 'token' => $token, 'user_id' => $checkUser['idUser']]);
         exit();
     } else {
-        echo json_encode(['success' => false, 'message' => 'Utilisateur non trouvé.']);
+        echo json_encode([SUCCESSFULL_REQUEST_JSON => false, ERROR_RETURN_DATA_VARIABLE => 'Utilisateur non trouvé.']);
         exit();
     }
 } else {
-    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée.']);
+    echo json_encode([SUCCESSFULL_REQUEST_JSON => false, ERROR_RETURN_DATA_VARIABLE => 'Méthode non autorisée.']);
     exit();
 }

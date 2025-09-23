@@ -82,7 +82,7 @@ Version :
 
 
     <script src="js/connexion.js"></script>
-    <script src="js/Joinconcours.js"></script>
+    <script src="js/joinConcours.js"></script>
     <script src="js/toMyConcours.js"></script>
 </body>
 

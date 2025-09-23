@@ -41,7 +41,7 @@ Version :
         <div>
             <a href="formConnexion.php"><button>Connexion</button></a>
         </div>
-        <form action="php/GlobalFunction/Utilisateur.php" method="post">
+        <form id="login-form" method="post">
             <label for="pseudo">Pseudo</label>
             <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo">
 

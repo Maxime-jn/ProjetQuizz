@@ -18,9 +18,9 @@ async function handleLogin(event) {
     event.preventDefault();
     const pseudo = document.getElementById('pseudo').value;
 
-    const response = await fetch('php/GlobalFunction/connexion.php', {
+    const response = await fetch('php/GlobalFunction/Utilisateur.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json' },
         body: new URLSearchParams({ pseudo })
     });
 
@@ -29,10 +29,10 @@ async function handleLogin(event) {
     if (result.success) {
         localStorage.setItem('token', result.token);
         localStorage.setItem('user_id', result.user_id);
-        alert('Connexion réussie !');
+        alert('Inscription/connexion réussie !');
         window.location.href = 'index.php';
     } else {
-        alert(result.message);
+        alert(result.message || 'Erreur');
     }
 }
 

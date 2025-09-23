@@ -21,6 +21,9 @@ Version :
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
 </head>
+<style>
+
+</style>
 
 <body class="conteneurBackground">
 
@@ -39,7 +42,7 @@ Version :
 
     <main id="creationConcour">
         <h2>Créer un Concours</h2>
-        <form action="creerConcours.php" method="POST">
+        <form action="creeConcours.php" method="POST">
             <label for="name">Nom du concours</label>
             <input type="text" id="name" name="name" required>
 
@@ -57,7 +60,7 @@ Version :
 
             <button type="submit">Créer</button>
         </form>
-        <a href="creerConcours.php">Rejoindre un concours</a>
+        <a href="rejoindreConcours.php">Rejoindre un concours</a>
     </main>
 
 
@@ -75,8 +78,8 @@ Version :
     </footer>
 
 
-    <script src="js/CreeConcours.js"></script>
-    <script src="js/JoinConcours.js"></script>
+    <script src="js/creeConcours.js"></script>
+    <!-- <script src="js/joinConcours.js"></script> -->
     <script src="js/connexion.js"></script>
     <script src="js/toMyConcours.js"></script>
 </body>

@@ -8,6 +8,10 @@ const DB_PASS = "SuperQuiz";
 const TOP_PLAYER_LIMIT = 5;
 const TOKEN_BYTE_LENGTH = 16;
 
+const SUCCESSFULL_REQUEST_JSON = "success";
+const ERROR_RETURN_DATA_VARIABLE = "message";
+const POST_USERNAME_KEY = "pseudo";
+
 
 // http error codes
 const HTTP_STATUS_OK = 200;

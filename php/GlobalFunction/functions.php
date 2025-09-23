@@ -22,11 +22,11 @@ function checkMethod(string $redirection, string $method)
 // Cette fonction retourne les 10 joueurs avec le plus de elo dans la categorie quizz sous forme de ARRAY
 function getBestQuizzPlayers(): array
 {
-    $sql = "SELECT u.username, s.scoreValue 
+    $sql = "SELECT u.username, s.value 
             FROM Score s
             JOIN User u ON s.userId = u.idUser
             WHERE s.gameMode = 'quizz'
-            ORDER BY s.scoreValue DESC
+            ORDER BY s.value DESC
             LIMIT " . TOP_PLAYER_LIMIT;
 
     $stmt = database::run($sql);
@@ -37,17 +37,33 @@ function getBestQuizzPlayers(): array
 // Cette fonction retourne les 10 joueurs avec le plus de elo dans la categorie casse-tete sous forme de ARRAY
 function getBestBreakerPlayers(): array
 {
-    $sql = "SELECT u.username, s.scoreValue 
+    $sql = "SELECT u.username, s.value 
             FROM Score s
             JOIN User u ON s.userId = u.idUser
             WHERE s.gameMode = 'casse-tete'
-            ORDER BY s.scoreValue DESC
+            ORDER BY s.value DESC
             LIMIT " . TOP_PLAYER_LIMIT;
 
     $stmt = database::run($sql);
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Prend les 10 meilleurs joueurs selon le mode en paramètres
+function getBestPlayersByMode(string $mode): array
+{
+    $sql = "SELECT u.username, s.value 
+            FROM Score s
+            JOIN User u ON s.idUser = u.idUser
+            JOIN GameMode g ON s.idGamemode = g.idGamemode
+            WHERE g.gamemodeName = :mode
+            ORDER BY s.value DESC
+            LIMIT " . TOP_PLAYER_LIMIT;
+
+    $stmt = database::run($sql, [':mode' => $mode]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 function getRandomQuestions(): array
 {

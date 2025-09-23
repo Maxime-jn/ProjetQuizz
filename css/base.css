@@ -19,6 +19,7 @@ main {
   align-items: center;
   overflow: hidden;
   z-index: 0;
+  color: rgb(255, 255, 255);
 }
 
 
@@ -33,10 +34,9 @@ main {
   align-items: center;
   justify-content: center;
   background-color: #000000;
-  color: #00ffea;
-  border-bottom: 4px solid #00ffea;
+  color: #ffffff;
+  border-bottom: 4px solid #ffffff;
   font-size: 1.2em;
-  text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
 }
 
 .insideHeaderContainer {
@@ -62,7 +62,7 @@ main {
 
 .barreDeHeader a {
   text-decoration: none;
-  color: #00ffea;
+  color: #ffffff;
   transition: color 0.3s, text-shadow 0.3s;
   white-space: nowrap;
 }
@@ -84,16 +84,16 @@ main {
   align-items: center;
   justify-content: space-around;
   background-color: #000000;
-  color: #00ffea;
-  border-top: 4px solid #00ffea;
+  color: #ffffff;
+  border-top: 4px solid #ffffff;
   font-size: 1.2em;
   text-align: center;
-  text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff;
   gap: 1rem;
 }
 
 .pageFooter a {
-  color: #00ffea;
+  color: #ffffff;
   text-decoration: none;
   transition: color 0.3s, text-shadow 0.3s;
 }
@@ -122,69 +122,48 @@ main {
 /* ================== ================== ================== */
 /* ================== Arrière Plan ================== */
 /* ================== ================== ================== */
-.conteneurBackground {
-    position: absolute;
-    inset: 0;
 
-  }
   
-  body.conteneurBackground::before {
-    content: "";
-    position: absolute;
-    top: -200%;
-    left: -200%;
-    width: 400%;
-    height: 500%;
-    background: #000000;
-    background-image:
-      /* Traits bleu ciel */
-      radial-gradient(4px 100px at 0px 235px, rgb(135, 206, 250), transparent),
-      radial-gradient(4px 100px at 300px 235px, rgb(100, 149, 237), transparent),
-      radial-gradient(4px 100px at 0px 252px, rgb(70, 130, 180), transparent),
-      /* Traits violets */
-      radial-gradient(4px 100px at 0px 150px, rgb(138, 43, 226), transparent),
-      radial-gradient(4px 100px at 300px 150px, rgb(186, 85, 211), transparent),
-      radial-gradient(4px 100px at 0px 281px, rgb(148, 0, 211), transparent),
-      /* petits éclats lumineux */
-      radial-gradient(1.5px 1.5px at 150px 75px, rgb(173, 216, 230) 100%, transparent 150%),
-      radial-gradient(1.5px 1.5px at 150px 117px, rgb(216, 191, 255) 100%, transparent 150%);
-    background-size:
-      300px 235px,
-      300px 235px,
-      300px 252px,
-      300px 150px,
-      300px 150px,
-      300px 281px,
-      300px 75px,
-      300px 117px;
-    animation: hi 150s linear infinite;
-    transform: rotate(-45deg); 
-    z-index: -1;
+.conteneurBackground {
+  position: fixed; /* pour que le fond reste fixé à la fenêtre */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1; /* pour rester derrière le contenu */
 }
 
+.conteneurBackground {
+  /* Basic dimensions and centering */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  @keyframes hi {
-    0% {
-      background-position:
-        0px 220px,
-        3px 220px,
-        25px 24px,
-        50px 16px,
-        75px 224px,
-        125px 120px,
-        150px 31px,
-        175px 235px;
-    }
-    100% {
-      background-position:
-        0px 6800px,
-        3px 6800px,
-        25px 13632px,
-        50px 5416px,
-        75px 17175px,
-        125px 8428px,
-        150px 9876px,
-        175px 13391px;
-    }
+  /* Dark mode colors and gradient */
+  background: #000000; /* Fallback for browsers that don't support gradients */
+  background: linear-gradient(
+    135deg,
+    #121212 25%,
+    #1a1a1a 25%,
+    #1a1a1a 50%,
+    #121212 50%,
+    #121212 75%,
+    #1a1a1a 75%,
+    #1a1a1a
+  );
+  background-size: 40px 40px;
+
+  /* Animation */
+  animation: move 4s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
   }
-  
+  100% {
+    background-position: 40px 40px;
+  }
+}
