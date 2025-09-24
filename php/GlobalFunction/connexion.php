@@ -1,6 +1,7 @@
 <?php
 require_once '../base/database.php';
 require_once '../base/constants.php';
+require_once 'functions.php';
 
 header('Content-Type: application/json');
 
@@ -17,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($checkUser) {
         // Générer un token unique
-        $token = bin2hex(random_bytes(16));
+        $token = createToken();
         database::run("UPDATE User SET token = ? WHERE idUser = ?", [$token, $checkUser['idUser']]);
 
         // Retourner le token et l'ID utilisateur
