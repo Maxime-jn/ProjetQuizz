@@ -70,8 +70,9 @@ Version :
                     // etc...
                 ];
                 foreach ($mesNiveauxBox as $niveau): ?>
-                <a href="pageCasseTete.php?niveau=<?= $niveau['num'] ?>"
-                    class="tile"><?= htmlspecialchars($niveau['titre']) ?></a>
+                <a href="pageCasseTete.php?niveau=<?= $niveau['num'] ?>" class="tile">
+                    <?= htmlspecialchars($niveau['titre']) ?>
+                </a>
                 <?php endforeach; ?>
             </div>
         </div>

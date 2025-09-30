@@ -28,6 +28,7 @@ Version :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/rejoindreConcours.css">
 </head>
 
 <body class="conteneurBackground">
@@ -47,24 +48,40 @@ Version :
 
     <main id="rejoindreConcour">
         <h2>Rejoindre un Concours</h2>
-        <div id="message-erreur" style="color:red;"></div>
-        <form id="joinConcoursForm">
+        <div id="message-erreur"></div>
+
+        <form id="joinConcoursForm" method="POST" action="joinConcours.php">
             <label for="name">Nom du concours</label>
             <select id="name" name="name" required>
                 <option value="">Choisissez un concours</option>
-                <?php foreach ($concours as $c): 
-                    $placesRestantes = max(0, (int)$c['nbParticipantMax'] - (int)$c['nbInscrits']);
-                ?>
-                <option value="<?= htmlspecialchars($c['nom']) ?>">
+                <?php foreach ($concours as $c):
+                $placesRestantes = max(0, (int)$c['nbParticipantMax'] - (int)$c['nbInscrits']);
+                $full = $placesRestantes === 0;
+            ?>
+                <option value="<?= (int)$c['idConcours'] ?>" <?= $full ? 'disabled' : '' ?>>
                     <?= htmlspecialchars($c['nom']) ?> (<?= $placesRestantes ?>
                     place<?= $placesRestantes > 1 ? 's' : '' ?> restante<?= $placesRestantes > 1 ? 's' : '' ?>)
+                    <?= $full ? ' — COMPLET' : '' ?>
                 </option>
                 <?php endforeach; ?>
             </select>
-            <button type="submit">Rejoindre</button>
+
+
+            <div class="form-buttons">
+                <button type="submit" class="btnJoinConcours">
+                    <span class="btnJoinConcours_lg">
+                        <span class="btnJoinConcours_sl"></span>
+                        <span class="btnJoinConcours_text">Rejoindre</span>
+                    </span>
+                </button>
+            </div>
         </form>
-        <a href="formCreationConcours.php">Créer un concours</a>
+
+
+        <a href="formCreationConcours.php" class="link-alt">Créer un concours</a>
     </main>
+
+
 
 
     <footer class="pageFooter">

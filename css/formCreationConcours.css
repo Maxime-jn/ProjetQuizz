@@ -1,0 +1,244 @@
+/* ====== Wrapper compact ====== */
+#creationConcour {
+  max-width: 420px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+#creationConcour h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #00aab6;
+  text-transform: uppercase;
+}
+
+/* ====== Formulaire ====== */
+#creationConcour form {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.2rem 1rem;
+  background: #0f1923;
+  border: 2px solid #00aab6;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 170, 182, 0.25);
+  margin-bottom: 1rem;
+}
+
+#creationConcour form label {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #cfd4d7;
+}
+
+/* Inputs */
+#creationConcour input[type="text"],
+#creationConcour input[type="number"] {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 6px;
+  border: 1px solid #7D8082;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#creationConcour input[type="text"]:focus,
+#creationConcour input[type="number"]:focus {
+  outline: none;
+  border-color: #00aab6;
+  box-shadow: 0 0 0 3px rgba(0, 170, 182, 0.25);
+}
+
+/* Radios */
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.radio-group input[type="radio"] {
+  display: none;
+}
+
+.radio-group label {
+  flex: 1;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  background: #1a1a1a;
+  border: 1px solid #7D8082;
+  border-radius: 6px;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.radio-group input[type="radio"]:checked + label {
+  background: #004864;
+  border-color: #00aab6;
+  color: #fff;
+}
+
+/* ====== Bouton Créer (style site) ====== */
+#creationConcour .btnCreateConcours {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  color: #0f1923;
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all .15s ease;
+  display: block;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+#creationConcour .btnCreateConcours::before,
+#creationConcour .btnCreateConcours::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #7D8082;
+  transition: all .15s ease;
+}
+#creationConcour .btnCreateConcours::before { top: 0; border-bottom-width: 0; }
+#creationConcour .btnCreateConcours::after { bottom: 0; border-top-width: 0; }
+
+#creationConcour .btnCreateConcours .btn_lg {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+  background: #004864;
+  overflow: hidden;
+  width: 100%;
+}
+#creationConcour .btnCreateConcours .btn_lg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  background: #0f1923;
+}
+#creationConcour .btnCreateConcours .btn_lg::after {
+  content: '';
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 4px; height: 4px;
+  background: #0f1923;
+  transition: all .2s ease;
+}
+
+/* Bande turquoise */
+#creationConcour .btnCreateConcours .btn_sl {
+  position: absolute;
+  top: 0; bottom: -1px; left: -8px;
+  width: 0;
+  background: #00aab6;
+  transform: skew(-15deg);
+  transition: width .2s ease;
+  z-index: 1;
+}
+#creationConcour .btnCreateConcours .btn_text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hover */
+#creationConcour .btnCreateConcours:hover { color: #0f1923; }
+#creationConcour .btnCreateConcours:hover .btn_sl { width: calc(100% + 15px); }
+#creationConcour .btnCreateConcours:hover .btn_lg::after { background: #fff; }
+
+/* ====== Lien Rejoindre un concours ====== */
+#creationConcour > a {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  color: #00aab6;
+  transition: color .2s ease;
+}
+#creationConcour > a:hover { color: #fff; }
+
+/* ====== Responsive ====== */
+@media (max-width: 520px) {
+    /* On s'assure que le texte passe devant */
+.btnJoinConcours_text,
+.btnCreateConcours_text,
+#creationConcour .btnCreateConcours .btn_text {
+  position: relative;
+  z-index: 3; /* plus haut que .btn_sl */
+}
+
+/* La bande turquoise reste derrière */
+.btnJoinConcours_sl,
+.btnCreateConcours_sl,
+#creationConcour .btnCreateConcours .btn_sl {
+  z-index: 1;
+}
+
+
+  #creationConcour {
+    width: 92%;
+    padding: 0 0.5rem;
+  }
+
+  #creationConcour h2 {
+    font-size: 1.2rem;
+  }
+
+  /* Le formulaire occupe bien la largeur */
+  #creationConcour form {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  #creationConcour form label {
+    font-size: 0.9rem;
+    text-align: left; /* plus lisible sur petit écran */
+  }
+
+  /* Champs full-width */
+  #creationConcour input[type="text"],
+  #creationConcour input[type="number"] {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+
+  /* Radios en colonne */
+  .radio-group {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .radio-group label {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  /* Bouton créer */
+  #creationConcour .btnCreateConcours {
+    font-size: 14px;
+    margin-top: 0.8rem;
+  }
+
+  #creationConcour .btnCreateConcours .btn_lg {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  /* Lien rejoindre */
+  #creationConcour > a {
+    font-size: 0.9rem;
+  }
+}
+

@@ -1,0 +1,161 @@
+/* ====== Wrapper compact ====== */
+#rejoindreConcour{
+  max-width: 460px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+  color:#fff;
+  text-align:center;
+}
+
+#rejoindreConcour h2{
+  font-size:1.4rem;
+  margin-bottom:1rem;
+  color:#00aab6;
+  text-transform:uppercase;
+}
+
+#message-erreur{ color:#ff6b6b; font-size:.95rem; margin:.25rem 0 .75rem; }
+
+/* ====== Formulaire ====== */
+#joinConcoursForm {
+  display: grid;
+  gap: .8rem;
+  margin-bottom: 1rem;
+
+  /* Fond + bordure directement sur le formulaire */
+  padding: 2rem 2rem;
+  background: #0f1923;
+  border: 2px solid #00aab6;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,170,182,0.25);
+}
+
+#joinConcoursForm label {
+  text-align: center;
+  font-size: .95rem;
+  color: #cfd4d7;
+}
+
+#joinConcoursForm select {
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #7D8082;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#joinConcoursForm select:hover {
+  border-color: #9aa0a3;
+}
+
+#joinConcoursForm select:focus {
+  outline: none;
+  border-color: #00aab6;
+  box-shadow: 0 0 0 3px rgba(0,170,182,.25);
+}
+
+/* ====== Zone boutons (même largeur) ====== */
+.form-buttons{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-direction: column;
+  width:100%;
+}
+
+/* ——— Base commune (mêmes dimensions) ——— */
+#rejoindreConcour .btnJoinConcours,
+#rejoindreConcour .btnCreateConcours{
+  -webkit-appearance:none; appearance:none;
+  border:none; background:none; color:#0f1923; cursor:pointer;
+  position:relative; padding:10px; text-transform:uppercase; font-weight:700; font-size:16px;
+  transition:all .15s ease; display:block; text-decoration:none; text-align:center; box-sizing:border-box;
+
+  /* mêmes tailles : */
+  flex:1 1 0;      /* prend exactement 50% chacun */
+  width:100%;
+}
+
+/* Bordures top/bottom (comme 1ère page) */
+#rejoindreConcour .btnJoinConcours::before,
+#rejoindreConcour .btnJoinConcours::after,
+#rejoindreConcour .btnCreateConcours::before,
+#rejoindreConcour .btnCreateConcours::after{
+  content:''; position:absolute; right:0; left:0;
+  height:calc(50% - 5px); border:1px solid #7D8082; transition:all .15s ease;
+}
+#rejoindreConcour .btnJoinConcours::before,
+#rejoindreConcour .btnCreateConcours::before{ top:0;    border-bottom-width:0; }
+#rejoindreConcour .btnJoinConcours::after,
+#rejoindreConcour .btnCreateConcours::after{  bottom:0; border-top-width:0; }
+
+/* Contenu interne bleu + coins */
+#rejoindreConcour .btnJoinConcours_lg,
+#rejoindreConcour .btnCreateConcours_lg{
+  position:relative; display:block; padding:10px 20px; color:#fff; background:#004864;
+  overflow:hidden; width:100%;
+}
+#rejoindreConcour .btnJoinConcours_lg::before,
+#rejoindreConcour .btnCreateConcours_lg::before{
+  content:''; position:absolute; top:0; left:0; width:2px; height:2px; background:#0f1923;
+}
+#rejoindreConcour .btnJoinConcours_lg::after,
+#rejoindreConcour .btnCreateConcours_lg::after{
+  content:''; position:absolute; right:0; bottom:0; width:4px; height:4px; background:#0f1923; transition:all .2s ease;
+}
+
+/* Bande turquoise sous le texte */
+#rejoindreConcour .btnJoinConcours_sl,
+#rejoindreConcour .btnCreateConcours_sl{
+  position:absolute; top:0; bottom:-1px; left:-8px;
+  width:0; background:#00aab6; transform:skew(-15deg);
+  transition:width .2s ease; z-index:1;
+}
+#rejoindreConcour .btnJoinConcours_text,
+#rejoindreConcour .btnCreateConcours_text{ position:relative; z-index:2; }
+
+/* Hover / Active / Focus */
+#rejoindreConcour .btnJoinConcours:hover,
+#rejoindreConcour .btnCreateConcours:hover{ color:#0f1923; }
+#rejoindreConcour .btnJoinConcours:hover .btnJoinConcours_sl{ width:calc(100% + 15px); }
+#rejoindreConcour .btnCreateConcours:hover .btnCreateConcours_sl{ width:calc(100% + 15px); }
+#rejoindreConcour .btnJoinConcours:hover .btnJoinConcours_lg::after,
+#rejoindreConcour .btnCreateConcours:hover .btnCreateConcours_lg::after{ background:#fff; }
+
+#rejoindreConcour .btnJoinConcours:active::before,
+#rejoindreConcour .btnCreateConcours:active::before,
+#rejoindreConcour .btnJoinConcours:active::after,
+#rejoindreConcour .btnCreateConcours:active::after{ right:3px; left:3px; }
+#rejoindreConcour .btnJoinConcours:active::before,
+#rejoindreConcour .btnCreateConcours:active::before{ top:3px; }
+#rejoindreConcour .btnJoinConcours:active::after,
+#rejoindreConcour .btnCreateConcours:active::after{ bottom:3px; }
+
+#rejoindreConcour .btnJoinConcours:focus-visible .btnJoinConcours_lg,
+#rejoindreConcour .btnCreateConcours:focus-visible .btnCreateConcours_lg{
+  outline:2px solid #00aab6; outline-offset:2px;
+}
+
+/* Lien secondaire en dehors du form (style identique entre les 2 pages) */
+#rejoindreConcour .link-alt,
+#creationConcour .link-alt {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  color: #00aab6;
+  transition: color .2s ease;
+}
+#rejoindreConcour .link-alt:hover,
+#creationConcour .link-alt:hover {
+  color: #fff;
+}
+
+
+/* Responsive : si trop étroit, on empile */
+@media (max-width:520px){
+  .form-buttons{ flex-direction:column; }
+}

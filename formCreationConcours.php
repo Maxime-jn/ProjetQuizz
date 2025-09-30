@@ -20,6 +20,7 @@ Version :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/formCreationConcours.css">
 </head>
 <style>
 
@@ -58,7 +59,13 @@ Version :
                 <label for="headbreaker">Casse tête</label>
             </div>
 
-            <button type="submit">Créer</button>
+            <button type="submit" class="btnCreateConcours">
+                <span class="btn_lg">
+                    <span class="btn_sl"></span>
+                    <span class="btn_text">Créer</span>
+                </span>
+            </button>
+
         </form>
         <a href="rejoindreConcours.php">Rejoindre un concours</a>
     </main>

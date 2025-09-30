@@ -3,15 +3,37 @@
   align-items: center;
 }
 
+/* ================================
+   LAYOUT PRINCIPAL
+   ================================ */
+#layout-accueil {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  flex-wrap: nowrap; /* Pas de wrap sur desktop */
+}
+
+/* Colonnes */
+.col-classement {
+  flex: 1 1 25%;
+  min-width: 260px;
+}
+
+.col-boutons {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center; /* Boutons centrés */
+  align-items: center;
+}
 /* Container des boutons */
 #buttonNavAcceuil {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  max-width: 800px;
-  margin: 2rem auto;
   flex-wrap: wrap;
-  /* Permet le passage à la ligne sur petits écrans */
+  max-width: 500px; /* réduit pour rester centré */
 }
 
 /* Styles communs aux boutons */
@@ -176,14 +198,123 @@ a.btnIndexConcours {
   background-color: #fff;
 }
 
+
+#classements {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  flex-wrap: wrap; /* Passe en colonne sur petits écrans */
+}
+
+.classement-container {
+  flex: 1 1 45%;
+  background-color: #004864;
+  border: 1px solid #7D8082;
+  border-radius: 8px;
+  padding: 1rem;
+  color: #fff;
+  box-sizing: border-box;
+  min-width: 280px;
+}
+
+.classement-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: #00aab6;
+}
+
+/* ================================
+   LISTE CLASSEMENT
+   ================================ */
+.classement-container {
+  background-color: #004864;
+  border: 1px solid #7D8082;
+  border-radius: 8px;
+  padding: 1rem;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.classement-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  color: #00aab6;
+}
+
+.classement-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.classement-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: .6rem .8rem;
+  margin-bottom: .5rem;
+  border: 1px solid #7D8082;
+  border-radius: 6px;
+  background: #0f1923;
+  font-size: 1rem;
+  transition: background .15s ease;
+}
+
+.classement-list li:hover {
+  background: #00aab6;
+  color: #0f1923;
+  font-weight: bold;
+}
+
+@media (max-width: 992px) {
+  #layout-accueil {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .col-classement, 
+  .col-boutons {
+    width: 90%; /* Largeur uniforme */
+    flex: none;
+  }
+
+  #buttonNavAcceuil {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
 /* Responsive mobile */
 @media (max-width: 480px) {
-
+  /* Boutons en pile */
   #buttonNavAcceuil a.btnIndexSeul,
   #buttonNavAcceuil a.btnIndexConcours {
-    flex: 1 1 100%;
-    /* Prend toute la largeur */
+    flex: 1 1 100%; 
     font-size: 18px;
     padding: 12px 20px;
+  }
+
+  /* Cacher les classements pour gagner de la place */
+  .col-classement {
+    display: none;
+  }
+
+  /* Garder les boutons centrés */
+  .col-boutons {
+    width: 100%;
+  }
+
+  #layout-accueil {
+    flex-direction: column;
+    align-items: center;
   }
 }

@@ -8,11 +8,11 @@ $idConcours = isset($_GET['idConcours']) ? intval($_GET['idConcours']) : 0;
 
 // Récupérer le type du concours
 $typeConcour = null;
+
+
 if ($idConcours > 0) {
-    $sql = "SELECT typeConcour FROM concours WHERE idConcours = :idConcours";
-    $stmt = database::run($sql, ["idConcours" => $idConcours]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $typeConcour = $row ? $row['typeConcour'] : null;
+    $concours = getConcoursById($idConcours);
+    $typeConcour = $concours["typeConcour"];
 }
 ?>
 <!-- 
@@ -37,6 +37,7 @@ Version :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/hubConcours.css">
 </head>
 
 <body class="conteneurBackground">
@@ -55,36 +56,47 @@ Version :
     </header>
 
     <main>
-        <div class="competition-container">
-            <div class="player-list">
+        <div class="hub-competition-container">
+            <h1><?= $concours["nom"] ?></h1>
+
+            <div class="hub-player-list">
                 <h2>Liste des joueurs</h2>
                 <ul id="classement">
                     <?php
-                    if ($idConcours > 0) {
-                        $users = getUsersFromConcours($idConcours);
-                        if ($users && count($users) > 0) {
-                            foreach ($users as $row) {
-                                echo '<li>' . htmlspecialchars($row['username']) . '</li>';
-                            }
-                        } else {
-                            echo "<li>Aucun joueur inscrit pour ce concours.</li>";
-                        }
-                    } else {
-                        echo "<li>Erreur : Concours inconnu.</li>";
-                    }
-                    ?>
+          if ($idConcours > 0) {
+            $users = getUsersFromConcours($idConcours);
+            if ($users && count($users) > 0) {
+              foreach ($users as $row) {
+                echo '<li>' . htmlspecialchars($row['username']) . '</li>';
+              }
+            } else { echo "<li>Aucun joueur inscrit pour ce concours.</li>"; }
+          } else { echo "<li>Erreur : Concours inconnu.</li>"; }
+        ?>
                 </ul>
             </div>
-            <div class="game-launch">
+
+            <div class="hub-game-launch">
                 <?php if ($typeConcour == 1): ?>
-                <button onclick="lancerJeu('quiz')">Lancer un Quiz</button>
+                <button class="hub-btnIndexSeul" onclick="lancerJeu('quiz')">
+                    <span class="hub-btnIndexSeul_sl"></span>
+                    <span class="hub-btnIndexSeul_lg"><span class="hub-btnIndexSeul_text">Lancer un Quiz</span></span>
+                </button>
                 <?php elseif ($typeConcour == 0): ?>
-                <button onclick="lancerJeu('casse_tete')">Lancer un Casse-tête</button>
+                <button class="hub-btnIndexSeul" onclick="lancerJeu('casse_tete')">
+                    <span class="hub-btnIndexSeul_lg">
+                    <span class="hub-btnIndexSeul_sl"></span>
+                    <span class="hub-btnIndexSeul_text">Lancer un Casse-tête</span>
+                    </span>
+                </button>
+
+
                 <?php else: ?>
                 <span>Type de concours inconnu.</span>
                 <?php endif; ?>
             </div>
+
         </div>
+
     </main>
 
 

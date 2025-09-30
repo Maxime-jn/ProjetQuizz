@@ -40,14 +40,22 @@ Version :
 
     <main id="mainSeul">
         <div id="btnMenuSeul">
-            <a href="listeCasseTeteSeul.php"><button class="btnMenuSeul">
-                    <h2>Casse-tête</h2>
-                </button></a>
-            <a href="pageQuiz.php"><button class="btnMenuSeul">
-                    <h2>QUIZ</h2>
-                </button></a>
+            <a href="listeCasseTeteSeul.php" class="btnMenuCasseTete">
+                <span class="btnMenuCasseTete_lg">
+                    <span class="btnMenuCasseTete_sl"></span>
+                    <span class="btnMenuCasseTete_text">Casse-tête</span>
+                </span>
+            </a>
+
+            <a href="pageQuiz.php" class="btnMenuQuiz">
+                <span class="btnMenuQuiz_lg">
+                    <span class="btnMenuQuiz_sl"></span>
+                    <span class="btnMenuQuiz_text">Quiz</span>
+                </span>
+            </a>
         </div>
     </main>
+
 
 
     <footer class="pageFooter">

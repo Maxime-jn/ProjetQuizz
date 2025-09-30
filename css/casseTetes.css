@@ -1,55 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
-
-body {
-    background-color: #121212;
-    color: #ffffff;
-    text-align: center;
+/* Grille */
+.grid-wrapper{
+  display:flex;justify-content:center;align-items:center;min-height:80vh;
+}
+.grid-container{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:700px;padding:20px;
 }
 
-.grid-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-}
+/* Bouton niveau */
+.tile{
+  display:flex;align-items:center;justify-content:center;
+  width:180px;height:70px;
+  text-decoration:none;text-transform:uppercase;
+  font-weight:700;font-size:18px;
+  color:#fff;background-color:#004864;
+  border:1px solid #7D8082;border-radius:8px;overflow:hidden;
 
-.grid-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 20px;
-    background-color: #1a1a1a;
-    border: 5px solid #00ffea;
-    border-radius: 15px;
-    box-shadow: 6px 6px 20px rgba(0, 255, 234, 0.5);
-    max-width: 500px;
+  /* Astuce: animation de fond => texte toujours visible */
+  background-image:linear-gradient(120deg,#00aab6,#00aab6);
+  background-repeat:no-repeat;
+  background-size:0% 100%;
+  transition:background-size .25s ease,color .2s ease,border-color .2s ease,transform .15s ease;
 }
+.tile:hover{ background-size:120% 100%; color:#fff; border-color:#00aab6; }
+.tile:active{ transform:translateY(1px); }
 
-.tile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 140px;
-    height: 70px;
-    background: linear-gradient(135deg, #00ffea, #007f8a);
-    color: white;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 4px 4px 10px rgba(0, 255, 234, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
+/* Responsive */
+@media (max-width:480px){
+  .tile{ width:100%; font-size:16px; }
+  .grid-container{ gap:15px; max-width:95%; }
 }
-
-.tile:hover {
-    transform: scale(1.1);
-    box-shadow: 6px 6px 15px rgba(0, 255, 234, 0.5);
-}
-
-header h1 {
-    font-size: 2.5rem;
-    color: #00ffea;
-    text-shadow: 2px 2px 8px rgba(0, 255, 234, 0.5);
-}
-

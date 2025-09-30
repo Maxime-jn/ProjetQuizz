@@ -1,0 +1,329 @@
+/* ================================
+   Mes Concours — BriseTête
+   Fichier : css/mesConcours.css
+   Inspirations & palette : index/hub + boutons existants
+   ================================ */
+
+@layer mesConcours {
+    :root {
+        --bt-bg: #0f1923;
+        --bt-accent: #00aab6;
+        --bt-primary: #004864;
+        --bt-border: #7D8082;
+        --bt-text: #ffffff;
+    }
+
+    /* ====== Fond global ====== */
+    body.conteneurBackground {
+        min-height: 100dvh;
+        background: radial-gradient(1200px 600px at 10% -10%, rgba(0, 170, 182, .08), transparent 60%),
+            radial-gradient(1200px 600px at 90% 110%, rgba(0, 170, 182, .06), transparent 60%),
+            var(--bt-bg);
+        color: var(--bt-text);
+        font-synthesis-weight: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ====== Header ====== */
+    .barreDeHeader {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(15, 25, 35, .85);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--bt-border);
+    }
+
+    .insideHeaderContainer {
+        width: min(1200px, 92vw);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: .75rem 0;
+    }
+
+    .insideHeaderContainer a {
+        color: var(--bt-text);
+        text-decoration: none;
+    }
+
+    .insideHeaderContainer h1 {
+        font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+        letter-spacing: .5px;
+        margin: 0;
+    }
+
+    #myConcours,
+    #auth-buttons {
+        margin-left: auto;
+        display: flex;
+        gap: .5rem;
+    }
+
+    /* ====== Main ====== */
+    main {
+        width: min(1100px, 92vw);
+        margin: 2rem auto 3rem;
+    }
+
+    main h2 {
+        font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--bt-accent);
+        margin: 0 0 1.25rem 0;
+    }
+
+    /* Carte / liste de concours */
+    .mes-concours-card {
+        background: var(--bt-primary);
+        border: 1px solid var(--bt-border);
+        border-radius: 12px;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, .35), inset 0 0 0 1px rgba(255, 255, 255, .02);
+        padding: 1rem;
+    }
+
+    main>ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: .75rem;
+    }
+
+    main>ul>li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: .75rem;
+        padding: .8rem 1rem;
+        border: 1px solid var(--bt-border);
+        border-radius: 10px;
+        background: rgb(0, 29, 31);
+        transition: background .15s ease, transform .1s ease;
+    }
+
+    main>ul>li:hover {
+        background: rgb(0, 0, 0);
+    }
+
+    /* Nom du concours + type */
+    main>ul>li span {
+        opacity: .85;
+        font-size: .95rem;
+    }
+
+    /* ====== Footer ====== */
+    .pageFooter {
+        border-top: 1px solid var(--bt-border);
+        background: #0f1923;
+        padding: 1rem 0 2rem;
+        color: var(--bt-text);
+    }
+
+    .pageFooter .footerTitre {
+        width: min(1200px, 92vw);
+        margin: 0 auto .5rem;
+        font-weight: 600;
+        letter-spacing: .3px;
+    }
+
+    .pageFooter .footerLinks {
+        width: min(1200px, 92vw);
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .75rem 1.25rem;
+        align-items: center;
+        justify-content: space-between;
+        opacity: .9;
+    }
+
+    .pageFooter .footerLinks ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        gap: .75rem 1.25rem;
+        flex-wrap: wrap;
+    }
+
+    .pageFooter .footerLinks a {
+        color: var(--bt-accent);
+        text-decoration: none;
+    }
+
+    .pageFooter .footerLinks a:hover {
+        text-decoration: underline;
+    }
+
+    /* ================================
+     BOUTONS — reprise IDENTIQUE
+     (copié/collé de ton CSS existant)
+     ================================ */
+    /* Container des boutons (si utilisé) */
+    /* Styles communs aux boutons */
+    /* ================================
+   Boutons "Mes Concours" — uniques
+   ================================ */
+
+    .btnMesConcours,
+    a.btnMesConcours {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        background: none;
+        color: #0f1923;
+        cursor: pointer;
+        position: relative;
+        padding: 10px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+        transition: all .15s ease;
+        display: inline-block;
+        /* garde le même flow que sur la home */
+        text-decoration: none;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* Liserés haut/bas comme sur la home */
+    .btnMesConcours::before,
+    .btnMesConcours::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        left: 0;
+        height: calc(50% - 5px);
+        border: 1px solid #7D8082;
+        transition: all .15s ease;
+    }
+
+    .btnMesConcours::before {
+        top: 0;
+        border-bottom-width: 0;
+    }
+
+    .btnMesConcours::after {
+        bottom: 0;
+        border-top-width: 0;
+    }
+
+    /* Bloc interne bleu */
+    .btnMesConcours_lg {
+        position: relative;
+        display: block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #004864;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    /* Petits coins sombres */
+    .btnMesConcours_lg::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 2px;
+        background-color: #0f1923;
+    }
+
+    .btnMesConcours_lg::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 4px;
+        height: 4px;
+        background-color: #0f1923;
+        transition: all .2s ease;
+    }
+
+    /* Bande turquoise animée */
+    .btnMesConcours_sl {
+        position: absolute;
+        top: 0;
+        bottom: -1px;
+        left: -8px;
+        width: 0;
+        background-color: #00aab6;
+        transform: skew(-15deg);
+        transition: width .2s ease;
+        z-index: 1;
+    }
+
+    /* Texte au dessus de la bande */
+    .btnMesConcours_text {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Hover & active — identiques à la home */
+    .btnMesConcours:hover {
+        color: #0f1923;
+    }
+
+    .btnMesConcours:hover .btnMesConcours_sl {
+        width: calc(100% + 15px);
+    }
+
+    .btnMesConcours:hover .btnMesConcours_lg::after {
+        background-color: #fff;
+    }
+
+    .btnMesConcours:active::before,
+    .btnMesConcours:active::after {
+        right: 3px;
+        left: 3px;
+    }
+
+    .btnMesConcours:active::before {
+        top: 3px;
+    }
+
+    .btnMesConcours:active::after {
+        bottom: 3px;
+    }
+
+    /* Optionnel: pleine largeur sur mobile
+@media (max-width: 480px) {
+  .btnMesConcours { display:block; width:100%; }
+}
+*/
+
+    /* ================================
+     Compatibilité : bouton "Accéder"
+     (HTML actuel: <a><button>Accéder</button></a>)
+     -> Skin visuel proche des boutons ci-dessus,
+        sans changer le markup.
+     ================================ */
+
+
+    /* ====== Responsive ====== */
+    @media (max-width: 768px) {
+        .insideHeaderContainer {
+            width: 94vw;
+        }
+
+        main {
+            width: 94vw;
+        }
+
+        main>ul>li {
+            grid-template-columns: 1fr;
+            align-items: start;
+        }
+
+        main ul li a {
+            justify-self: start;
+        }
+    }
+}

@@ -20,18 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Veuillez remplir tous les champs obligatoires.");
             return;
         }
-
         if (!typeConcour) {
             alert("Veuillez choisir un type de concours.");
             return;
         }
 
-        const params = new URLSearchParams({
-            name,
-            participants,
-            userId,
-            typeConcour
-        });
+        const params = new URLSearchParams({ name, participants, userId, typeConcour });
 
         try {
             const response = await fetch('php/GlobalFunction/creeConcours.php', {
@@ -39,26 +33,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: params.toString(),
             });
-
             const result = await response.json();
 
-            if (result.success) {
-
-                const responsesJoin = await fetch('php/GlobalFunction/joinConcours.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: params.toString()
-                });
-                const resultJoin = await responsesJoin.json();
-                if (resultJoin.success && resultJoin.idConcours) {
-                    alert(result.message);
-                    window.location.href = 'hubConcours.php?idConcours=' + resultJoin.idConcours;
-                }
-
-            } else {
+            if (result.success && result.idConcours) {
                 alert(result.message);
+                // Auto-join est déjà fait côté serveur -> redirection directe
+                window.location.href = 'hubConcours.php?idConcours=' + result.idConcours;
+            } else {
+                alert(result.message || 'Erreur lors de la création.');
             }
-
         } catch (error) {
             console.error(error);
             alert('Erreur de communication avec le serveur.');

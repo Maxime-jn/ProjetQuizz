@@ -96,14 +96,24 @@ function getRandomQuestions(): array
     return array_values($questions);
 }
 
-function listeConcours()
-{
-    $sql = "SELECT c.idConcours, c.nom, c.nbParticipantMax, 
-                   (SELECT COUNT(*) FROM concours_user cu WHERE cu.idConcours = c.idConcours) as nbInscrits
-            FROM concours c";
+function listeConcours() {
+    $sql = "
+        SELECT 
+            c.idConcours,
+            c.nom,
+            c.nbParticipantMax,
+            c.typeConcour,
+            c.idUser,
+            COUNT(cu.idUser) AS nbInscrits
+        FROM concours c
+        LEFT JOIN concours_user cu ON cu.idConcours = c.idConcours
+        GROUP BY c.idConcours, c.nom, c.nbParticipantMax, c.typeConcour, c.idUser
+        ORDER BY c.idConcours DESC
+    ";
     $stmt = database::run($sql);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 function getConcoursByUser($idUser) {
     $sql = "SELECT c.idConcours, c.nom, c.typeConcour
@@ -112,6 +122,15 @@ function getConcoursByUser($idUser) {
             WHERE cu.idUser = :idUser";
     $stmt = database::run($sql, [':idUser' => $idUser]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function getConcoursById($idConcours) {
+    $sql = "SELECT idConcours, nom, typeConcour
+            FROM concours 
+            WHERE idConcours = :idConcours";
+    $stmt = database::run($sql, [':idConcours' => $idConcours]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function getUsersFromConcours($idConcours) {

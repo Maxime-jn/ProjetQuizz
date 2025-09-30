@@ -45,41 +45,57 @@ Version :
     </header>
 
     <main>
-        <div id="classement-quiz">
-            <h2>classement quiz</h2>
-            <ul id="classement">
-                <?php foreach ($bestQuizzPlayers as $player): ?>
-                <li><?= htmlspecialchars($player['username']) ?> <?= htmlspecialchars($player['scoreValue']) ?></li>
-                <?php endforeach; ?>
-            </ul>
+        <div id="layout-accueil">
+            <!-- Colonne gauche -->
+            <div class="col-classement">
+                <div class="classement-container">
+                    <h2>Classement Quiz</h2>
+                    <ul class="classement-list">
+                        <?php foreach ($bestQuizzPlayers as $player): ?>
+                        <li>
+                            <span><?= htmlspecialchars($player['username']) ?></span>
+                            <span><?= htmlspecialchars($player['scoreValue']) ?></span>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Colonne centre (boutons) -->
+            <div class="col-boutons">
+                <div id="buttonNavAcceuil">
+                    <a href="menuSeul.php" class="btnIndexSeul">
+                        <span class="btnIndexSeul_lg">
+                            <span class="btnIndexSeul_sl"></span>
+                            <span class="btnIndexSeul_text">Seul</span>
+                        </span>
+                    </a>
+
+                    <a href="rejoindreConcours.php" class="btnIndexConcours">
+                        <span class="btnIndexConcours_lg">
+                            <span class="btnIndexConcours_sl"></span>
+                            <span class="btnIndexConcours_text">Mode Concours</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="col-classement">
+                <div class="classement-container">
+                    <h2>Classement Casse-tête</h2>
+                    <ul class="classement-list">
+                        <?php foreach ($bestCasseTetePlayers as $player): ?>
+                        <li>
+                            <span><?= htmlspecialchars($player['username']) ?></span>
+                            <span><?= htmlspecialchars($player['scoreValue']) ?></span>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div id="buttonNavAcceuil">
-            <a href="menuSeul.php" class="btnIndexSeul">
-                <span class="btnIndexSeul_lg">
-                    <span class="btnIndexSeul_sl"></span>
-                    <span class="btnIndexSeul_text">Seul</span>
-                </span>
-            </a>
-
-            <a href="rejoindreConcours.php" class="btnIndexConcours">
-                <span class="btnIndexConcours_lg">
-                    <span class="btnIndexConcours_sl"></span>
-                    <span class="btnIndexConcours_text">Mode Concours</span>
-                </span>
-            </a>
-        </div>
-
-
-
-        <div id="classement-casse-tete">
-            <h2>classement casse-tête</h2>
-            <ul id="classement">
-                <?php foreach ($bestCasseTetePlayers as $player): ?>
-                <li><?= htmlspecialchars($player['username']) ?> <?= htmlspecialchars($player['scoreValue'])?></li>
-                <?php endforeach; ?>
-            </ul>   
-        </div>
     </main>
 
 

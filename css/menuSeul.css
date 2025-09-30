@@ -1,93 +1,171 @@
-.btnMenuSeul {
-  --color: rgba(88, 101, 242, 1);
-  padding: 0.8em 1.7em;
-  background-color: transparent;
-  border-radius: .3em;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: .5s;
-  font-weight: 400;
-  width: 50%;
-  font-size: 30px;
-  border: 4px solid;
-  font-family: inherit;
-  text-transform: uppercase;
-  color: var(--color);
-  z-index: 1;
-}
-
-.btnMenuSeul::before, .btnMenuSeul::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 80px;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  border-radius: 50%;
-  z-index: -1;
-  background-color: var(--color);
-  transition: 1s ease;
-}
-
-.btnMenuSeul::before {
-  top: -1em;
-  left: -1em;
-}
-
-.btnMenuSeul::after {
-  left: calc(100% + 1em);
-  top: calc(100% + 1em);
-}
-
-.btnMenuSeul:hover::before, .btnMenuSeul:hover::after {
-  height: 550px;
-  width: 550px;
-}
-
-.btnMenuSeul:hover {
-  color: rgb(10, 25, 30);
-  color: #fff;
-}
-
-.btnMenuSeul:active {
-  filter: brightness(.8);
-}
-
-
+/* Container des boutons du menu "Seul" */
 #btnMenuSeul {
   display: flex;
   gap: 1rem;
   justify-content: center;
   max-width: 800px;
-  margin: 0 auto;
-  flex-wrap: wrap; /* Permet de passer à la ligne sur petits écrans */
+  margin: 2rem auto;
+  flex-wrap: wrap;
 }
 
-#btnMenuSeul a {
-  flex: 1 1 45%; /* Grand écran : les boutons prennent chacun ~45%, flex-grow et flex-shrink activés */
-  display: flex;
+/* Styles communs */
+.btnMenuCasseTete,
+.btnMenuQuiz,
+a.btnMenuCasseTete,
+a.btnMenuQuiz {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  color: #0f1923;
+  cursor: pointer;
+  position: relative;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all .15s ease;
+  display: inline-block;
   text-decoration: none;
-  min-width: 150px; /* Minimum pour garder un bouton lisible */
-}
-
-#btnMenuSeul button.btnMenuSeul {
-  width: 100%;
+  text-align: center;
   box-sizing: border-box;
-  white-space: normal; /* Autorise le retour à la ligne */
-  overflow: hidden; /* Affiche tout le texte */
-  text-overflow: clip; /* Pas de "..." */
-  font-size: clamp(18px, 4vw, 30px);
 }
 
+#btnMenuSeul a.btnMenuCasseTete,
+#btnMenuSeul a.btnMenuQuiz {
+  flex: 1 0 49%;
+  box-sizing: border-box;
+  min-width: 0;
+  font-size: 20px;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-/* Media query pour téléphones (moins de 480px) */
-@media (max-width: 480px) {
-  #btnMenuSeul a {
-    flex: 1 1 100%; /* Prend toute la largeur et s’empile */
-  }
-  
-  #btnMenuSeul button.btnMenuSeul {
-    font-size: 20px; /* Ajuste la taille du texte pour mobile */
-  }
+/* Bordures */
+.btnMenuCasseTete::before,
+.btnMenuQuiz::before,
+.btnMenuCasseTete::after,
+.btnMenuQuiz::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #7D8082;
+  transition: all .15s ease;
+}
+
+.btnMenuCasseTete::before,
+.btnMenuQuiz::before {
+  top: 0;
+  border-bottom-width: 0;
+}
+
+.btnMenuCasseTete::after,
+.btnMenuQuiz::after {
+  bottom: 0;
+  border-top-width: 0;
+}
+
+/* Active / Focus */
+.btnMenuCasseTete:active,
+.btnMenuQuiz:active,
+.btnMenuCasseTete:focus,
+.btnMenuQuiz:focus {
+  outline: none;
+}
+
+.btnMenuCasseTete:active::before,
+.btnMenuQuiz:active::before,
+.btnMenuCasseTete:active::after,
+.btnMenuQuiz:active::after {
+  right: 3px;
+  left: 3px;
+}
+
+.btnMenuCasseTete:active::before,
+.btnMenuQuiz:active::before {
+  top: 3px;
+}
+
+.btnMenuCasseTete:active::after,
+.btnMenuQuiz:active::after {
+  bottom: 3px;
+}
+
+/* Partie interne */
+.btnMenuCasseTete_lg,
+.btnMenuQuiz_lg {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #004864;
+  overflow: hidden;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+  width: 100%;
+}
+
+.btnMenuCasseTete_lg::before,
+.btnMenuQuiz_lg::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background-color: #0f1923;
+}
+
+.btnMenuCasseTete_lg::after,
+.btnMenuQuiz_lg::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  background-color: #0f1923;
+  transition: all .2s ease;
+}
+
+.btnMenuCasseTete_sl,
+.btnMenuQuiz_sl {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: -8px;
+  width: 0;
+  background-color: #00aab6;
+  transform: skew(-15deg);
+  transition: all .2s ease;
+}
+
+.btnMenuCasseTete_text,
+.btnMenuQuiz_text {
+  position: relative;
+}
+
+/* Hover */
+.btnMenuCasseTete:hover,
+.btnMenuQuiz:hover {
+  color: #0f1923;
+}
+
+.btnMenuCasseTete:hover .btnMenuCasseTete_sl,
+.btnMenuQuiz:hover .btnMenuQuiz_sl {
+  width: calc(100% + 15px);
+}
+
+.btnMenuCasseTete:hover .btnMenuCasseTete_lg::after,
+.btnMenuQuiz:hover .btnMenuQuiz_lg::after {
+  background-color: #fff;
 }

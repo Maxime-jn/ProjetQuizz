@@ -1,0 +1,269 @@
+/* ============ Hub Concours (namespacé .hub-) ============ */
+:root {
+  --bt-bg: #0f1923;
+  --bt-accent: #00aab6;
+  --bt-primary: #00486400;
+  --bt-border: #7D8082;
+  --bt-text: #ffffff;
+}
+
+/* Conteneur principal */
+.hub-competition-container {
+  width: min(1200px, 92vw);
+  margin: 2.5rem auto;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: var(--bt-bg);
+  border: 1px solid var(--bt-border);
+  border-radius: 12px;
+  color: var(--bt-text);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .35),
+              inset 0 0 0 1px rgba(255, 255, 255, .02);
+}
+
+.hub-competition-container h1,
+.hub-competition-container h2 {
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.hub-competition-container h1 {
+  font-size: clamp(1.4rem, 3.2vw, 2rem);
+  color: var(--bt-accent);
+  text-shadow: 0 0 6px rgba(0, 170, 182, .35);
+
+  padding-bottom: .75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Option 2 colonnes (si utilisé dans le HTML) */
+.hub-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 360px);
+  gap: 1.25rem;
+}
+
+/* Empilement par défaut (si pas de .hub-grid) */
+.hub-competition-container > .hub-player-list,
+.hub-competition-container > .hub-game-launch {
+  margin-top: 1.25rem;
+}
+
+/* Bloc liste joueurs */
+.hub-player-list {
+  background: var(--bt-primary);
+  border: 1px solid var(--bt-border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.hub-player-list h2 {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  color: var(--bt-accent);
+  text-align: center;
+  margin-bottom: .75rem;
+}
+
+/* Liste classement */
+.hub-player-list #classement {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .6rem;
+}
+
+.hub-player-list #classement li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .65rem .8rem;
+  background: #09121a;
+  border: 1px solid var(--bt-border);
+  border-radius: 8px;
+  transition: background .2s ease, transform .08s ease, color .2s ease;
+  will-change: transform, background-color;
+}
+
+.hub-player-list #classement li:hover {
+  background: var(--bt-accent);
+  color: #0f1923;
+  transform: translateY(-1px);
+  font-weight: 700;
+}
+
+/* Bloc lancement de jeu */
+.hub-game-launch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #09121a;
+
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 120px;
+}
+
+/* ================================
+   BOUTON style "btnIndexSeul"
+   (copié/adapté, fonctionne pour <button> ou <a>)
+   ================================ */
+
+
+
+   
+/* ================================
+   HUB CONCOURS
+   ================================ */
+.hub-competition-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #0f1923;
+  border: 2px solid #00aab6;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,170,182,0.25);
+  text-align: center;
+  color: #fff;
+}
+
+.hub-competition-container h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #00aab6;
+  text-transform: uppercase;
+}
+
+.hub-player-list {
+  margin-bottom: 2rem;
+}
+
+.hub-player-list h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #00aab6;
+}
+
+.hub-player-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hub-player-list li {
+  background: #1a1a1a;
+  border: 1px solid #7D8082;
+  border-radius: 6px;
+  margin-bottom: .5rem;
+  padding: .5rem .8rem;
+  font-size: 1rem;
+  text-align: center;
+  transition: background .15s ease;
+}
+
+.hub-player-list li:hover {
+  background: #00aab6;
+  color: #0f1923;
+  font-weight: bold;
+}
+
+/* ================================
+   BOUTON LANCER (style identique accueil)
+   ================================ */
+.hub-btnIndexSeul {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  color: #0f1923;
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all .15s ease;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Bordures top/bottom */
+.hub-btnIndexSeul::before,
+.hub-btnIndexSeul::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: calc(50% - 5px);
+  border: 1px solid #7D8082;
+  transition: all .15s ease;
+}
+.hub-btnIndexSeul::before { top: 0; border-bottom-width: 0; }
+.hub-btnIndexSeul::after { bottom: 0; border-top-width: 0; }
+
+/* Partie interne */
+.hub-btnIndexSeul_lg {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #004864;
+  overflow: hidden;
+  width: 100%;
+}
+.hub-btnIndexSeul_lg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 2px;
+  background-color: #0f1923;
+}
+.hub-btnIndexSeul_lg::after {
+  content: '';
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 4px; height: 4px;
+  background-color: #0f1923;
+  transition: all .2s ease;
+}
+
+/* Bande turquoise */
+.hub-btnIndexSeul_sl {
+  display: block;
+  position: absolute;
+  top: 0; bottom: -1px; left: -8px;
+  width: 0;
+  background-color: #00aab6;
+  transform: skew(-15deg);
+  transition: all .2s ease;
+  z-index: 1;
+}
+.hub-btnIndexSeul_text {
+  position: relative;
+  z-index: 3; /* toujours visible */
+}
+
+/* Hover */
+.hub-btnIndexSeul:hover { color: #0f1923; }
+.hub-btnIndexSeul:hover .hub-btnIndexSeul_sl { width: calc(100% + 15px); }
+.hub-btnIndexSeul:hover .hub-btnIndexSeul_lg::after { background-color: #fff; }
+
+
+/* ================================
+   Responsive
+   ================================ */
+@media (max-width: 900px) {
+  .hub-grid { grid-template-columns: 1fr; }
+  .hub-game-launch { min-height: 90px; }
+}
+
+@media (max-width: 520px) {
+  .hub-competition-container { width: 92%; padding: 1rem; }
+  .hub-player-list #classement li { padding: .55rem .7rem; }
+}
