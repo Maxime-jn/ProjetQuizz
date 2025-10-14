@@ -20,6 +20,7 @@ Version :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/formConnexion.css">
 </head>
 
 <body class="conteneurBackground">
@@ -45,7 +46,12 @@ Version :
             <form id="login-form">
                 <label for="pseudo">Pseudo</label>
                 <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" required>
-                <button type="submit" class="login-button">Se connecter</button>
+                <button type="submit" class="btnFormConnexion">
+                    <span class="btnFormConnexion_lg">
+                        <span class="btnFormConnexion_sl"></span>
+                        <span class="btnFormConnexion_text">Se connecter</span>
+                    </span>
+                </button>
             </form>
         </div>
     </main>

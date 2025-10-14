@@ -25,6 +25,7 @@ Version :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/pageQuiz.css">
 </head>
 
 <body class="conteneurBackground">
@@ -43,15 +44,25 @@ Version :
     </header>
 
     <main id="mainQuiz">
-        <h1 id="questionTitle">Question à choix multiple</h1>
-        <div id="questionText"></div>
-        <div id="buttonQuestionQuiz"></div>
-        <div>
-            <button id="buttonSoumettreQuiz">Soumettre</button>
-            <div id="quizTimer" style="margin: 1em 0; font-weight: bold;">Temps restant : 2:00</div>
-        </div>
-        <div id="result" style="margin-top: 1em;"></div>
-    </main>
+  <div id="quizFormContainer">
+    <h1 id="questionTitle">Question à choix multiple</h1>
+    <div id="questionText"></div>
+    <div id="buttonQuestionQuiz"></div>
+    <div id="btnSoumettreContainer">
+  <button type="submit" class="btnSoumettre" id="buttonSoumettreQuiz">
+    <span class="btnSoumettre_lg">
+      <span class="btnSoumettre_sl"></span>
+      <span class="btnSoumettre_text">Soumettre</span>
+    </span>
+  </button>
+</div>
+
+    <div>
+        <div id="quizTimer" style="margin: 1em 0; font-weight: bold;">Temps restant : 2:00</div>
+    </div>
+    <div id="result" style="margin-top: 1em;"></div>
+  </div>
+</main>
 
 
     <footer class="pageFooter">

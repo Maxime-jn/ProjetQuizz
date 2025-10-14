@@ -1,31 +1,158 @@
-/* Grille */
-.grid-wrapper{
-  display:flex;justify-content:center;align-items:center;min-height:80vh;
+/* Titre en haut de page */
+.page-title,
+.grid-wrapper>h1,
+.grid-wrapper>h2 {
+  align-self: stretch;
+  margin: 16px 0 12px;
+  text-align: center;
 }
-.grid-container{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:20px;max-width:700px;padding:20px;
+
+main {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Grille */
+.grid-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* empile le titre puis la grille */
+  align-items: center;
+  /* centre horizontalement */
+  justify-content: center;
+  height: 100%;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  gap: 8px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* 3 colonnes fixes */
+  gap: 16px;
+  max-width: 900px;
+  width: 100%;
+  padding: 16px;
+  margin: 0 auto;
 }
 
 /* Bouton niveau */
-.tile{
-  display:flex;align-items:center;justify-content:center;
-  width:180px;height:70px;
-  text-decoration:none;text-transform:uppercase;
-  font-weight:700;font-size:18px;
-  color:#fff;background-color:#004864;
-  border:1px solid #7D8082;border-radius:8px;overflow:hidden;
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* s'étire dans sa colonne */
+  height: 70px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  background-color: #004864;
+  border: 1px solid #7D8082;
+  border-radius: 8px;
+  overflow: hidden;
 
-  /* Astuce: animation de fond => texte toujours visible */
-  background-image:linear-gradient(120deg,#00aab6,#00aab6);
-  background-repeat:no-repeat;
-  background-size:0% 100%;
-  transition:background-size .25s ease,color .2s ease,border-color .2s ease,transform .15s ease;
+  background-image: linear-gradient(120deg, #00aab6, #00aab6);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: background-size .25s ease, color .2s ease, border-color .2s ease, transform .15s ease;
 }
-.tile:hover{ background-size:120% 100%; color:#fff; border-color:#00aab6; }
-.tile:active{ transform:translateY(1px); }
+
+.tile:hover {
+  background-size: 120% 100%;
+  color: #fff;
+  border-color: #00aab6;
+}
+
+.tile:active {
+  transform: translateY(1px);
+}
+
+/* Accessibilité focus clavier */
+.tile:focus-visible {
+  outline: 3px solid #00aab6;
+  outline-offset: 2px;
+}
 
 /* Responsive */
-@media (max-width:480px){
-  .tile{ width:100%; font-size:16px; }
-  .grid-container{ gap:15px; max-width:95%; }
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* 2 colonnes */
+    gap: 14px;
+    padding: 14px;
+  }
+
+  button.tile,
+  a.tile {
+    max-width: none;
+    /* full width en grille */
+    height: 60px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overflow: hidden;
+    /* pas de scroll de page */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+  }
+
+  .grid-wrapper {
+    justify-content: flex-start;
+    align-items: stretch;
+    /* boutons full width */
+    height: 100dvh;
+    /* occupe tout l’écran */
+    min-height: 100%;
+    padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+    gap: 12px;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* une colonne */
+    gap: 12px;
+    padding: 12px;
+    max-width: 520px;
+
+    /* scroll interne */
+    flex: 1 1 auto;
+    /* prend la place restante */
+    min-height: 0;
+    /* autorise l’overflow en flex */
+    overflow-y: auto;
+    /* seul le container scrolle */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tile {
+    width: 100%;
+    min-width: 0;
+    height: 60px;
+    font-size: 16px;
+  }
+
+  .grid-wrapper>h1,
+  .grid-wrapper>h2,
+  .page-title {
+    margin-top: 4px !important;
+  }
 }

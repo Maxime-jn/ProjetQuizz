@@ -1,0 +1,332 @@
+/* ================================
+   Page : Form Connexion — BriseTête
+   Palette : identique à mesConcours.css
+   Auteurs : I.DA.P4A
+   ================================ */
+
+@layer formConnexion {
+    :root {
+        --bt-bg: #0f1923;
+        --bt-accent: #00aab6;
+        --bt-primary: #004864;
+        --bt-border: #7D8082;
+        --bt-text: #ffffff;
+        --bt-muted: rgba(255, 255, 255, 0.75);
+        --bt-card-bg: #002932;
+    }
+
+    /* ====== Fond global ====== */
+    body.conteneurBackground {
+        min-height: 100dvh;
+        background: radial-gradient(1200px 600px at 10% -10%, rgba(0, 170, 182, .08), transparent 60%),
+            radial-gradient(1200px 600px at 90% 110%, rgba(0, 170, 182, .06), transparent 60%),
+            var(--bt-bg);
+        color: var(--bt-text);
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* ====== Header ====== */
+    .barreDeHeader {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(15, 25, 35, .85);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--bt-border);
+    }
+
+    .insideHeaderContainer {
+        width: min(1200px, 92vw);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: .75rem 0;
+    }
+
+    .insideHeaderContainer a {
+        color: var(--bt-text);
+        text-decoration: none;
+    }
+
+    .insideHeaderContainer h1 {
+        font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+        letter-spacing: .5px;
+        margin: 0;
+    }
+
+    #myConcours,
+    #auth-buttons {
+        margin-left: auto;
+        display: flex;
+        gap: .5rem;
+    }
+
+    /* ====== Main ====== */
+    main#mainFormConnexion {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 1rem;
+    }
+
+    main#mainFormConnexion > div {
+        background: var(--bt-card-bg);
+        border: 1px solid var(--bt-border);
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .35);
+        width: min(400px, 90vw);
+        padding: 2rem 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ====== Bouton d'inscription ====== */
+    main#mainFormConnexion a button {
+        appearance: none;
+        border: 1px solid var(--bt-accent);
+        background: var(--bt-primary);
+        color: var(--bt-text);
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: 100%;
+    }
+
+    main#mainFormConnexion a button:hover {
+        background: var(--bt-accent);
+        color: #0f1923;
+        transform: translateY(-1px);
+    }
+
+
+
+    /* ====== Formulaire ====== */
+    #login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: left;
+    }
+
+    #login-form label {
+        font-size: 0.95rem;
+        color: var(--bt-accent);
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+    }
+
+    #login-form input {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--bt-border);
+        border-radius: 8px;
+        background-color: rgb(0, 0, 0);
+        color: var(--bt-text);
+        font-size: 1rem;
+        transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    #login-form input:focus {
+        outline: none;
+        border-color: var(--bt-accent);
+        background-color: rgb(0, 0, 0);
+    }
+
+    /* ====== Bouton de connexion ====== */
+      /* ================================
+     Boutons "Form Connexion"
+     (identiques à ton menu "Seul")
+     ================================ */
+  .btnFormConnexion,
+  a.btnFormConnexion {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    color: #0f1923;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all .15s ease;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .btnFormConnexion::before,
+  .btnFormConnexion::after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: calc(50% - 5px);
+    border: 1px solid #7D8082;
+    transition: all .15s ease;
+  }
+
+  .btnFormConnexion::before {
+    top: 0;
+    border-bottom-width: 0;
+  }
+
+  .btnFormConnexion::after {
+    bottom: 0;
+    border-top-width: 0;
+  }
+
+  .btnFormConnexion_lg {
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #004864;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .btnFormConnexion_lg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background-color: #0f1923;
+  }
+
+  .btnFormConnexion_lg::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    background-color: #0f1923;
+    transition: all .2s ease;
+  }
+
+  .btnFormConnexion_sl {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: -8px;
+    width: 0;
+    background-color: #00aab6;
+    transform: skew(-15deg);
+    transition: width .2s ease;
+  }
+
+  .btnFormConnexion_text {
+    position: relative;
+  }
+
+  .btnFormConnexion:hover {
+    color: #0f1923;
+  }
+
+  .btnFormConnexion:hover .btnFormConnexion_sl {
+    width: calc(100% + 15px);
+  }
+
+  .btnFormConnexion:hover .btnFormConnexion_lg::after {
+    background-color: #fff;
+  }
+
+  .btnFormConnexion:active::before,
+  .btnFormConnexion:active::after {
+    right: 3px;
+    left: 3px;
+  }
+
+  .btnFormConnexion:active::before {
+    top: 3px;
+  }
+
+  .btnFormConnexion:active::after {
+    bottom: 3px;
+  }
+
+    /* ====== Footer ====== */
+    .pageFooter {
+        border-top: 1px solid var(--bt-border);
+        background: #0f1923;
+        padding: 1rem 0 2rem;
+        color: var(--bt-text);
+    }
+
+    .pageFooter .footerTitre {
+        width: min(1200px, 92vw);
+        margin: 0 auto .5rem;
+        font-weight: 600;
+        letter-spacing: .3px;
+    }
+
+    .pageFooter .footerLinks {
+        width: min(1200px, 92vw);
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .75rem 1.25rem;
+        align-items: center;
+        justify-content: space-between;
+        opacity: .9;
+    }
+
+    .pageFooter .footerLinks ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        gap: .75rem 1.25rem;
+        flex-wrap: wrap;
+    }
+
+    .pageFooter .footerLinks a {
+        color: var(--bt-accent);
+        text-decoration: none;
+    }
+
+    .pageFooter .footerLinks a:hover {
+        text-decoration: underline;
+    }
+
+    /* ====== Responsive ====== */
+    @media (max-width: 600px) {
+        main#mainFormConnexion > div {
+            padding: 1.5rem;
+            gap: 1.2rem;
+        }
+
+        main#mainFormConnexion a button {
+            font-size: 0.9rem;
+        }
+    }
+}

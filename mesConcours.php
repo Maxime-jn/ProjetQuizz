@@ -18,7 +18,7 @@ $concours = getConcoursByUser($idUser);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BriseTête — Mes concours</title>
     <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/mesConcours.css" /><!-- contient aussi les styles .btnIndexConcours -->
+    <link rel="stylesheet" href="css/mesConcours.css" />
 </head>
 
 <body class="conteneurBackground">

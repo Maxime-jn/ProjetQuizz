@@ -27,6 +27,7 @@ Version :
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/splashscreen.css">
 </head>
 
 <body>
@@ -115,6 +116,8 @@ Version :
 
     <script src="js/connexion.js"></script>
     <script src="js/toMyConcours.js"></script>
+    <script src="js/splashscreenWelcome.js"></script>
+
 </body>
 
 </html>

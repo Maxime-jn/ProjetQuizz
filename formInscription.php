@@ -1,5 +1,4 @@
 <!-- 
-
 Auteurs :
 Jean Maxime Robin
 Leart Demiri
@@ -10,7 +9,6 @@ BriseTete
 
 Version : 
 0.7 BETA
-
 -->
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,6 +18,7 @@ Version :
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/formInscription.css">
 </head>
 
 <body class="conteneurBackground">
@@ -38,21 +37,29 @@ Version :
     </header>
 
     <main id="mainFormInscription">
-        <div>
-            <a href="formConnexion.php"><button>Connexion</button></a>
+        <div class="inscriptionContainer">
+            <!-- Bouton Connexion -->
+            <div>
+                <a href="formConnexion.php"><button>Connexion</button></a>
+            </div>
+
+            <!-- Formulaire d'inscription -->
+            <form id="login-form" method="post">
+                <label for="pseudo">Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo" required>
+
+                <button type="submit" class="btnFormInscription">
+                    <span class="btnFormInscription_lg">
+                        <span class="btnFormInscription_sl"></span>
+                        <span class="btnFormInscription_text">S'inscrire</span>
+                    </span>
+                </button>
+            </form>
         </div>
-        <form id="login-form" method="post">
-            <label for="pseudo">Pseudo</label>
-            <input type="text" id="pseudo" name="pseudo" placeholder="Entrez votre pseudo">
-
-            <button type="submit" class="login-button">S'inscrire</button>
-        </form>
     </main>
-
 
     <footer class="pageFooter">
         <div class="footerTitre">BriseTête © 2025</div>
-
         <div class="footerLinks">
             <span>Réalisé par : I.DA.P4A</span>
             <ul>
@@ -62,7 +69,6 @@ Version :
             </ul>
         </div>
     </footer>
-
 
     <script src="js/connexion.js"></script>
     <script src="js/toMyConcours.js"></script>

@@ -21,6 +21,7 @@ Version :
     <title>BriseTête</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/casseTetes.css">
+    <link rel="stylesheet" href="css/splashscreen.css">
 </head>
 
 <body class="conteneurBackground">
@@ -39,11 +40,10 @@ Version :
     </header>
 
     <main>
-        <h2>Choisissez un niveau de casse-tête</h2>
         <div class="grid-wrapper">
+            <h2>Choisissez un niveau de casse-tête</h2>
             <div class="grid-container">
                 <?php
-                // Mets ici tes niveaux Move the Box
                 $mesNiveauxBox = [
                     ["num" => 1, "titre" => "Niveau 1"],
                     ["num" => 2, "titre" => "Niveau 2"],
@@ -66,8 +66,6 @@ Version :
                     ["num" => 19, "titre" => "Niveau 19"],
                     ["num" => 20, "titre" => "Niveau 20"],
                     ["num" => 21, "titre" => "Niveau 21"],
-                    // ["num" => 5, "titre" => "Niveau 5 – Ton super niveau"],
-                    // etc...
                 ];
                 foreach ($mesNiveauxBox as $niveau): ?>
                 <a href="pageCasseTete.php?niveau=<?= $niveau['num'] ?>" class="tile">
@@ -103,6 +101,7 @@ Version :
     </script>
     <script src="js/connexion.js"></script>
     <script src="js/toMyConcours.js"></script>
+    <script src="js/splashscreenGuide.js"></script>
 </body>
 
 </html>
