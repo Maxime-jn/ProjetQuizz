@@ -7,7 +7,7 @@
 html,
 body,
 main {
-  
+
   position: relative;
   font-family: "Courier New";
   width: 100%;
@@ -18,7 +18,10 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* overflow-x: hidden; /* empêche le scroll horizontal */
+  /* overflow-y: auto;   /*permet le scroll vertical */
   overflow: hidden;
+
   z-index: 0;
   color: rgb(255, 255, 255);
 }
@@ -79,7 +82,7 @@ main {
 .pageFooter {
   width: 100%;
   min-height: 100px;
-  margin-top: 5em;
+  margin-top: 0em;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -124,14 +127,16 @@ main {
 /* ================== Arrière Plan ================== */
 /* ================== ================== ================== */
 
-  
+
 .conteneurBackground {
-  position: fixed; /* pour que le fond reste fixé à la fenêtre */
+  position: fixed;
+  /* pour que le fond reste fixé à la fenêtre */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1; /* pour rester derrière le contenu */
+  z-index: -1;
+  /* pour rester derrière le contenu */
 }
 
 .conteneurBackground {
@@ -143,17 +148,16 @@ main {
   align-items: center;
 
   /* Dark mode colors and gradient */
-  background: #000000; /* Fallback for browsers that don't support gradients */
-  background: linear-gradient(
-    135deg,
-    #121212 25%,
-    #1a1a1a 25%,
-    #1a1a1a 50%,
-    #121212 50%,
-    #121212 75%,
-    #1a1a1a 75%,
-    #1a1a1a
-  );
+  background: #000000;
+  /* Fallback for browsers that don't support gradients */
+  background: linear-gradient(135deg,
+      #121212 25%,
+      #1a1a1a 25%,
+      #1a1a1a 50%,
+      #121212 50%,
+      #121212 75%,
+      #1a1a1a 75%,
+      #1a1a1a);
   background-size: 40px 40px;
 
   /* Animation */
@@ -164,6 +168,7 @@ main {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 40px 40px;
   }

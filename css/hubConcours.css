@@ -7,6 +7,33 @@
   --bt-text: #ffffff;
 }
 
+/* Autoriser le scroll sur cette page malgré base.css */
+main {
+  display: block;
+  width: 100%;
+  overflow: auto;
+}
+
+.hub-score-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hub-score-list table{
+  width: 100%;
+  border-collapse: collapse;
+  align-items: center;
+}
+
+/* Rendre le tableau scrollable sur mobile */
+.hub-score-list { width: 100%; overflow-x: auto; }
+#table-scores { min-width: 520px; }
+#table-scores th, #table-scores td { padding: .55rem .65rem; text-align: left; }
+#table-scores thead th { position: sticky; top: 0; background: #0b1620; z-index: 1; }
+
+
 /* Conteneur principal */
 .hub-competition-container {
   width: min(1200px, 92vw);
@@ -112,60 +139,7 @@
 
 
    
-/* ================================
-   HUB CONCOURS
-   ================================ */
-.hub-competition-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #0f1923;
-  border: 2px solid #00aab6;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,170,182,0.25);
-  text-align: center;
-  color: #fff;
-}
-
-.hub-competition-container h1 {
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  color: #00aab6;
-  text-transform: uppercase;
-}
-
-.hub-player-list {
-  margin-bottom: 2rem;
-}
-
-.hub-player-list h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #00aab6;
-}
-
-.hub-player-list ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.hub-player-list li {
-  background: #1a1a1a;
-  border: 1px solid #7D8082;
-  border-radius: 6px;
-  margin-bottom: .5rem;
-  padding: .5rem .8rem;
-  font-size: 1rem;
-  text-align: center;
-  transition: background .15s ease;
-}
-
-.hub-player-list li:hover {
-  background: #00aab6;
-  color: #0f1923;
-  font-weight: bold;
-}
+/* (Anciennes règles doublons supprimées pour cohérence) */
 
 /* ================================
    BOUTON LANCER (style identique accueil)
@@ -264,6 +238,13 @@
 }
 
 @media (max-width: 520px) {
-  .hub-competition-container { width: 92%; padding: 1rem; }
+  .hub-competition-container { width: 94%; padding: 1rem; }
   .hub-player-list #classement li { padding: .55rem .7rem; }
+  /* Mettre le bouton de lancement en premier sur mobile */
+  .hub-competition-container { display: flex; flex-direction: column; }
+  .hub-game-launch { order: 1; }
+  .hub-player-list { order: 2; }
+  .hub-score-list { order: 3; }
+  /* Limiter les marges pour gagner de la place */
+  .hub-competition-container h1 { margin-bottom: .75rem; }
 }

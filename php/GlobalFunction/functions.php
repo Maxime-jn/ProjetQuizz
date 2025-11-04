@@ -144,3 +144,26 @@ function getUsersFromConcours($idConcours) {
     $statement = database::run($sql , $param);
     return $statement->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getScoresFromConcours($idConcours, $typeConcour) {
+    // Détermine le mode de jeu selon le typeConcour
+    $mode = ($typeConcour == 1) ? 'quizz' : 'casse-tete';
+
+    $sql = "
+        SELECT 
+            u.username,
+            s.scoreValue
+        FROM concours_user cu
+        JOIN User u ON cu.idUser = u.idUser
+        JOIN Score s ON s.userId = u.idUser
+        WHERE cu.idConcours = :idConcours
+          AND s.gameMode = :mode
+        ORDER BY s.scoreValue DESC
+    ";
+    $params = [
+        ':idConcours' => $idConcours,
+        ':mode' => $mode
+    ];
+    $stmt = database::run($sql, $params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

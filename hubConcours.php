@@ -40,7 +40,8 @@ Version :
     <link rel="stylesheet" href="css/hubConcours.css">
 </head>
 
-<body class="conteneurBackground">
+<body>
+    <div class="conteneurBackground"></div>
 
     <header class="barreDeHeader">
         <div class="insideHeaderContainer">
@@ -73,6 +74,38 @@ Version :
           } else { echo "<li>Erreur : Concours inconnu.</li>"; }
         ?>
                 </ul>
+            </div>
+
+            <div class="hub-score-list">
+                <h2>Classement des scores</h2>
+                <table id="table-scores">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Joueur</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($idConcours > 0) {
+                            $scores = getScoresFromConcours($idConcours, $typeConcour);
+                            if ($scores && count($scores) > 0) {
+                                $rank = 1;
+                                foreach ($scores as $row) {
+                                    echo "<tr>";
+                                    echo "<td>" . $rank++ . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row['scoreValue']) . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>Aucun score enregistré pour ce concours.</td></tr>";
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
 
             <div class="hub-game-launch">

@@ -12,7 +12,8 @@
   gap: 2rem;
   max-width: 1200px;
   margin: 2rem auto;
-  flex-wrap: nowrap; /* Pas de wrap sur desktop */
+  flex-wrap: nowrap;
+  /* Pas de wrap sur desktop */
 }
 
 /* Colonnes */
@@ -24,16 +25,19 @@
 .col-boutons {
   flex: 1 1 40%;
   display: flex;
-  justify-content: center; /* Boutons centrés */
+  justify-content: center;
+  /* Boutons centrés */
   align-items: center;
 }
+
 /* Container des boutons */
 #buttonNavAcceuil {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 500px; /* réduit pour rester centré */
+  max-width: 500px;
+  /* réduit pour rester centré */
 }
 
 /* Styles communs aux boutons */
@@ -205,7 +209,8 @@ a.btnIndexConcours {
   gap: 2rem;
   max-width: 1200px;
   margin: 2rem auto;
-  flex-wrap: wrap; /* Passe en colonne sur petits écrans */
+  flex-wrap: wrap;
+  /* Passe en colonne sur petits écrans */
 }
 
 .classement-container {
@@ -280,9 +285,10 @@ a.btnIndexConcours {
     gap: 1.5rem;
   }
 
-  .col-classement, 
+  .col-classement,
   .col-boutons {
-    width: 90%; /* Largeur uniforme */
+    width: 90%;
+    /* Largeur uniforme */
     flex: none;
   }
 
@@ -294,27 +300,75 @@ a.btnIndexConcours {
 
 
 /* Responsive mobile */
-@media (max-width: 480px) {
-  /* Boutons en pile */
+@media (max-width: 1000px) {
+
+  /* 1) Le conteneur devient un slider horizontal (1 panneau = 100% largeur) */
+  #layout-accueil {
+    display: flex;
+    flex-direction: column;
+    /* panneaux côte à côte */
+    align-items: stretch;
+    gap: 1rem;
+    overflow-x: auto;
+    /* scroll horizontal */
+    scroll-snap-type: x mandatory;
+    /* snap par panneau */
+    -webkit-overflow-scrolling: touch;
+    /* inertie iOS */
+    padding: 0 1rem;
+    /* respirations latérales */
+  }
+
+  /* 2) Ordonnancement: d'abord les boutons, puis les deux classements */
+  #layout-accueil>.col-boutons {
+    order: 0;
+  }
+
+  #layout-accueil>.col-classement {
+    order: 1;
+  }
+
+  /* 3) Chaque panneau occupe toute la largeur visible et "snap" au bord */
+  #layout-accueil>.col-boutons,
+  #layout-accueil>.col-classement {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    max-width: 100%;
+  }
+
+  /* 4) Boutons en pile, touch-friendly */
+  #buttonNavAcceuil {
+    width: 100%;
+    max-width: 480px;
+  }
+
   #buttonNavAcceuil a.btnIndexSeul,
   #buttonNavAcceuil a.btnIndexConcours {
-    flex: 1 1 100%; 
+    flex: 1 1 100%;
     font-size: 18px;
-    padding: 12px 20px;
+    padding: 14px 18px;
   }
 
-  /* Cacher les classements pour gagner de la place */
-  .col-classement {
-    display: none;
+  /* 5) Les cartes de classement respirent sur mobile */
+  .classement-container {
+    min-width: auto;
   }
 
-  /* Garder les boutons centrés */
-  .col-boutons {
-    width: 100%;
+  .classement-list li {
+    font-size: .95rem;
   }
 
+  /* 6) Optionnel: masque une barre de scroll intrusive tout en gardant le scroll */
   #layout-accueil {
-    flex-direction: column;
-    align-items: center;
+    scrollbar-width: thin;
+  }
+
+  #layout-accueil::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  #layout-accueil::-webkit-scrollbar-thumb {
+    background: #00aab6;
+    border-radius: 4px;
   }
 }

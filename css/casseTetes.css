@@ -29,8 +29,7 @@ main {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  /* 3 colonnes fixes */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 16px;
   max-width: 900px;
   width: 100%;

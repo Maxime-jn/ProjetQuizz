@@ -223,7 +223,7 @@ body.conteneurBackground {
 #quizTimer {
   font-size: 1.2rem;
   color: #00aab6;
-  margin-top: 1rem;
+  padding-right: 1rem;
 }
 
 #result {
@@ -242,9 +242,70 @@ body.conteneurBackground {
     padding: 1.5rem;
   }
 
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    /* Laisse le scroll naturel de la page sur mobile/tablette */
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overscroll-behavior: auto;
+    touch-action: manipulation;
+  }
+
+
   #buttonQuestionQuiz {
     gap: 0.8rem;
   }
 
   /* Pas besoin de règle spéciale pour #buttonSoumettreQuiz si on utilise .btnSoumettre */
+}
+
+/* Mode téléphone: slider vertical des choix si l'espace est trop petit */
+@media (max-width: 480px) {
+  #mainQuiz {
+    padding: 1rem;
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  #quizFormContainer {
+    width: 100%;
+    max-width: 520px;
+    padding: 1rem;
+  }
+
+  /* Transforme la liste des réponses en "slides" verticales */
+  #buttonQuestionQuiz {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: min(50vh, 380px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y mandatory;
+    padding-right: 0.25rem;
+    /* Indice visuel de scroll (dégradé en bas) */
+    mask-image: linear-gradient(to bottom, black 85%, transparent);
+  }
+
+  #buttonQuestionQuiz button {
+    scroll-snap-align: start;
+    min-height: 56px;
+    font-size: 0.95rem;
+  }
+
+  /* Message indicatif non bloquant */
+  #buttonQuestionQuiz::after {
+    content: '⬆︎ glissez ⬇︎';
+    align-self: center;
+    color: #9aa0a6;
+    font-size: 0.9rem;
+    padding: 0.25rem 0;
+  }
 }

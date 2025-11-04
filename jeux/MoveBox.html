@@ -10,37 +10,49 @@
       text-align: center;
       margin: 0;
       padding: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     }
 
     canvas {
       background: #111;
       display: block;
-      margin: 20px auto;
+      margin: 0 auto;
       border: 3px solid #555;
       box-shadow: 0 8px 32px #0008, 0 2px 8px #000a;
       border-radius: 18px;
       transition: box-shadow 0.4s;
+      /* facultatif : si tu forces une taille CSS différente, les clics restent justes grâce au scale */
+      max-width: 80%;
+      height: 490px;
     }
 
     #info {
-      margin-top: 10px;
       font-size: 18px;
     }
 
     #message {
-      margin-top: 15px;
-      font-size: 22px;
-      height: 26px;
+
+      font-size: 12px;
+      height: 15px;
       font-weight: bold;
       letter-spacing: 1px;
-      min-height: 28px;
+      min-height: 15px;
       text-shadow: 0 2px 8px #0007;
+      color: #fff;
+    }
+
+    .boutonDiv {
+      display: flex;
+
     }
 
     button {
-      margin-top: 15px;
-      padding: 10px 26px;
-      font-size: 17px;
+      margin-top: 3px;
+      margin-right: 5px;
+      margin-left: 5px;
+      padding: 10px 22px;
+      width: 190px;
+      font-size: 14px;
       cursor: pointer;
       border-radius: 8px;
       border: none;
@@ -60,12 +72,13 @@
     h2,
     p {
       color: white;
-      margin-top: 20px;
+      margin-top: 10px;
       letter-spacing: 1px;
       text-shadow: 0 3px 14px #0008;
-      font-size: 2.1em;
+      font-size: 1.4em;
     }
   </style>
+
 </head>
 
 <body>
@@ -73,7 +86,12 @@
   <canvas id="game" width="400" height="500"></canvas>
   <p id="info">Mouvements restants : <span id="moves">20</span></p>
   <div id="message"></div>
-  <button id="resetBtn">Recommencer</button>
+  <div class="boutonDiv">
+    <button id="resetBtn">Recommencer</button>
+    <button id="rulesBtn">Règles</button>
+  </div>
+
+
   <script>
     // ====== NIVEAUX PRÉDÉFINIS ======
 
@@ -87,14 +105,14 @@
     ];
 
     const COLOR_NAMES = {
-      vert: '#2ecc40',
-      beige: '#f3e6c6',
-      marron: '#8d5524',
-      marronF: '#3d2424',
-      gris: '#b5b5b5',
-      rouge: '#e74c3c'
-
+      vert: '#22c55e', // plus vif
+      beige: '#f5d7a1', // plus chaud
+      marron: '#8b5a2b',
+      marronF: '#4a2b16',
+      gris: '#c1c1c1',
+      rouge: '#ef4444'  // plus vif
     };
+
 
 
     const LEVELS = [
@@ -527,9 +545,58 @@
       });
     }
 
+    // function drawBox(x, y, color, isSelected, isAnim) {
+    //   const BOX_SIZE = 50;
+    //   const px = x * BOX_SIZE + 5;
+    //   const py = canvas.height - (y + 1) * BOX_SIZE + 5;
+    //   const grad = ctx.createLinearGradient(px, py, px + BOX_SIZE, py + BOX_SIZE);
+
+    //   // nuance du bois : teinte + foncé
+    //   grad.addColorStop(0, shadeColor(color, -15));
+    //   grad.addColorStop(0.5, color);
+    //   grad.addColorStop(1, shadeColor(color, 15));
+
+    //   ctx.save();
+    //   ctx.shadowColor = "rgba(0,0,0,0.45)";
+    //   ctx.shadowBlur = 8;
+    //   ctx.shadowOffsetX = 2;
+    //   ctx.shadowOffsetY = 4;
+
+    //   // fond bois avec reflets
+    //   roundRect(ctx, px, py, BOX_SIZE - 10, BOX_SIZE - 10, 10, grad);
+
+    //   // ajout de fines "veines" du bois
+    //   ctx.strokeStyle = shadeColor(color, -25);
+    //   ctx.globalAlpha = 0.15;
+    //   for (let i = 0; i < 4; i++) {
+    //     const waveY = py + 8 + i * 8;
+    //     ctx.beginPath();
+    //     ctx.moveTo(px + 4, waveY);
+    //     for (let j = 0; j < BOX_SIZE - 20; j += 6) {
+    //       ctx.lineTo(px + 4 + j, waveY + Math.sin(j / 3) * 1.2);
+    //     }
+    //     ctx.stroke();
+    //   }
+
+    //   ctx.globalAlpha = 1;
+    //   if (isSelected) {
+    //     ctx.save();
+    //     ctx.strokeStyle = "#fff";
+    //     ctx.lineWidth = 4;
+    //     ctx.shadowBlur = 12;
+    //     ctx.shadowColor = "#fff7";
+    //     ctx.strokeRect(px - 2, py - 2, BOX_SIZE - 6, BOX_SIZE - 6);
+    //     ctx.restore();
+    //   }
+    //   ctx.restore();
+    // }
+
+    // Cache des motifs bois colorés (performant)
+    const COLORED_WOOD_CACHE = new Map();
+    let NEUTRAL_WOOD_TILE = null; // génère une fois un bois "érable" clair
+
     function drawBox(x, y, color, isSelected, isAnim) {
-      const BOX_SIZE = 50;
-      const px = x * BOX_SIZE + 5;
+      const BOX_SIZE = 50; const px = x * BOX_SIZE + 5;
       const py = canvas.height - (y + 1) * BOX_SIZE + 5;
       ctx.save();
       ctx.shadowColor = "rgba(0,0,0,0.45)";
@@ -538,20 +605,30 @@
       ctx.shadowOffsetY = 4;
       ctx.globalAlpha = 1;
       roundRect(ctx, px, py, BOX_SIZE - 10, BOX_SIZE - 10, 12, color);
-      ctx.globalAlpha = 0.34;
-      roundRect(ctx, px + 7, py + 5, BOX_SIZE - 25, (BOX_SIZE - 20) / 2, 7, "white");
-      ctx.globalAlpha = 1;
-      if (isSelected) {
-        ctx.save();
-        ctx.strokeStyle = "#fff";
-        ctx.lineWidth = 5;
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = "#fff7";
-        ctx.strokeRect(px - 2, py - 2, BOX_SIZE - 6, BOX_SIZE - 6);
-        ctx.restore();
-      }
-      ctx.restore();
+      ctx.globalAlpha = 0.34; roundRect(ctx, px + 7, py + 5, BOX_SIZE - 25, (BOX_SIZE - 20) / 2, 7, "white"); ctx.globalAlpha = 1; if (isSelected) { ctx.save(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 5; ctx.shadowBlur = 20; ctx.shadowColor = "#fff7"; ctx.strokeRect(px - 2, py - 2, BOX_SIZE - 6, BOX_SIZE - 6); ctx.restore(); } ctx.restore();
     }
+
+    // petite fonction utilitaire pour assombrir/éclaircir une couleur
+    function shadeColor(color, percent) {
+      let f = parseInt(color.slice(1), 16),
+        t = percent < 0 ? 0 : 255,
+        p = Math.abs(percent) / 100,
+        R = f >> 16,
+        G = (f >> 8) & 0x00FF,
+        B = f & 0x0000FF;
+      return (
+        "#" +
+        (
+          0x1000000 +
+          (Math.round((t - R) * p) + R) * 0x10000 +
+          (Math.round((t - G) * p) + G) * 0x100 +
+          (Math.round((t - B) * p) + B)
+        )
+          .toString(16)
+          .slice(1)
+      );
+    }
+
 
     function roundRect(ctx, x, y, w, h, r, color) {
       ctx.beginPath();
@@ -804,12 +881,45 @@
 
     function checkEnd() {
       if (isWin()) {
-        messageElem.textContent = "Bravo, tu as tout vidé ! 🎉";
+        messageElem.textContent = "Bravo, tu as vidé toutes les cases ! 🎉";
+        sendScoreToServer(1000);
       } else if (movesLeft <= 0) {
         messageElem.textContent = "Plus de mouvements, perdu 😞";
+        // Count remaining colored boxes to estimate a score
+        let cleared = 0;
+        for (let y = 0; y < HEIGHT; y++)
+          for (let x = 0; x < WIDTH; x++)
+            if (!grid[y][x]) cleared++;
+        const total = WIDTH * HEIGHT;
+        const clearedRatio = cleared / total;
+        const finalScore = Math.round(clearedRatio * 10); // scale 0–500
+        sendScoreToServer(finalScore);
       }
     }
 
+    function sendScoreToServer(finalScore) {
+      const userId = localStorage.getItem("user_id");
+      if (!userId) {
+        console.warn("No user logged in, score not saved.");
+        return;
+      }
+
+      fetch("php/pages/save_score.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: parseInt(userId),
+          scoreValue: finalScore,
+          gameMode: "casse-tete"
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (!data.success) console.warn("Score not saved:", data.error);
+          else console.log("Score saved:", finalScore);
+        })
+        .catch(err => console.error("Error saving score:", err));
+    }
 
     function isWin() {
       for (let y = 0; y < HEIGHT; y++)
@@ -822,6 +932,37 @@
       initGrid();
       draw();
     });
+
+    document.getElementById("rulesBtn").addEventListener("click", () => {
+      // remove previous splash if it exists
+      document.getElementById("splashscreen")?.remove();
+
+      const splash = document.createElement("div");
+      splash.id = "splashscreen";
+      splash.innerHTML = `
+    <div class="splash-content">
+      <h3>Règles du jeu</h3>
+      <ol>
+        <li><b>Objectif :</b> Résoudre le casse-tête choisi.</li>
+        <li><b>Déroulement :</b> Chaque casse-tête comporte plusieurs carrés de différentes couleurs.<br>
+        Le but est de faire disparaître tous les carrés en les regroupant en ligne ou en colonne.<br>
+        Cliquez sur un carré pour le déplacer dans une case vide adjacente.<br>
+        Quand au moins 3 carrés de la même couleur sont alignés, ils disparaissent et vous marquez des points.</li>
+        <li><b>Fin de partie :</b> Quand vous avez fait disparaître tous les carrés ou que vous n'avez plus de coup à jouer, la partie s'arrête.<br>
+        Vous pouvez alors recommencer ou changer de casse-tête.</li>
+      </ol>
+      <div class="splash-actions">
+        <button id="closeSplash">C'est parti !</button>
+      </div>
+    </div>
+  `;
+      document.body.appendChild(splash);
+
+      document.getElementById("closeSplash").addEventListener("click", () => {
+        splash.remove(); // gone forever until next click
+      });
+    });
+
 
     // --- INIT ---
     initGrid();
