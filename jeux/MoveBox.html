@@ -10,7 +10,7 @@
       text-align: center;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
     }
 
     canvas {
@@ -41,33 +41,29 @@
       color: #fff;
     }
 
-    .boutonDiv {
-      display: flex;
-
-    }
-
-    button {
-      margin-top: 3px;
-      margin-right: 5px;
-      margin-left: 5px;
+    /* Style commun des boutons du jeu */
+    .btnGame {
       padding: 10px 22px;
-      width: 190px;
-      font-size: 14px;
+      width: 200px;
+      font-size: 15px;
       cursor: pointer;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
-      background: linear-gradient(90deg, #333 60%, #555 100%);
-      color: white;
-      box-shadow: 0 2px 8px #0006;
-      transition: background 0.3s, box-shadow 0.3s, transform 0.13s;
       font-weight: bold;
+      text-align: center;
+      background: linear-gradient(90deg, #1797ffc2 60%, #1797ffc2 100%);
+      color: white;
+      box-shadow: 0 4px 12px #0008;
+      transition: transform 0.15s, box-shadow 0.3s, background 0.3s;
+      margin: 5px;
     }
 
-    button:hover {
-      background: linear-gradient(90deg, #444 50%, #777 100%);
-      transform: scale(1.05);
-      box-shadow: 0 4px 16px #0007;
+    .btnGame:hover {
+      background: linear-gradient(90deg, #1797ffc2 50%, #1797ffc2 100%);
+      transform: scale(1.07);
+      box-shadow: 0 6px 20px #0009;
     }
+
 
     h2,
     p {
@@ -87,9 +83,12 @@
   <p id="info">Mouvements restants : <span id="moves">20</span></p>
   <div id="message"></div>
   <div class="boutonDiv">
-    <button id="resetBtn">Recommencer</button>
-    <button id="rulesBtn">Règles</button>
+    <button id="rulesBtn" class="btnGame">Règles</button>
+    <button id="resetBtn" class="btnGame">Recommencer</button>
+    <button id="btnNext" class="btnGame">Continuer</button>
+    <button id="backBtn" class="btnGame" style="display:none">Retour au concours</button>
   </div>
+
 
 
   <script>
@@ -882,20 +881,30 @@
     function checkEnd() {
       if (isWin()) {
         messageElem.textContent = "Bravo, tu as vidé toutes les cases ! 🎉";
-        sendScoreToServer(1000);
+        sendScoreToServer(25);
+
       } else if (movesLeft <= 0) {
         messageElem.textContent = "Plus de mouvements, perdu 😞";
-        // Count remaining colored boxes to estimate a score
+
+        // Compter combien de cases sont vides
         let cleared = 0;
-        for (let y = 0; y < HEIGHT; y++)
-          for (let x = 0; x < WIDTH; x++)
+        for (let y = 0; y < HEIGHT; y++) {
+          for (let x = 0; x < WIDTH; x++) {
             if (!grid[y][x]) cleared++;
+          }
+        }
+
+        // Pourcentage de cases vidées
         const total = WIDTH * HEIGHT;
         const clearedRatio = cleared / total;
-        const finalScore = Math.round(clearedRatio * 10); // scale 0–500
+
+        // Score final entre 0 et 10
+        const finalScore = Math.round(clearedRatio * 10);
+
         sendScoreToServer(finalScore);
       }
     }
+
 
     function sendScoreToServer(finalScore) {
       const userId = localStorage.getItem("user_id");
@@ -962,6 +971,35 @@
         splash.remove(); // gone forever until next click
       });
     });
+
+    const nextBtn = document.getElementById("btnNext");
+
+    nextBtn.addEventListener("click", () => {
+      const currentUrl = window.location.href;
+      const params = new URLSearchParams(window.location.search);
+
+      let niveau = parseInt(params.get("niveau") || "1");
+
+      // Empêche de dépasser le dernier niveau
+      if (niveau >= 21) {
+        alert("Tu as fini tous les niveaux !");
+        return;
+      }
+
+      const nextLevel = niveau + 1;
+
+      let idConcours = null;
+      if (currentUrl.includes("idConcours=")) {
+        idConcours = currentUrl.split("idConcours=")[1].split("&")[0].split("?")[0];
+      }
+
+      // Reconstruire l'URL vers le niveau suivant
+      let newUrl = `pageCasseTete.php?niveau=${nextLevel}`;
+      if (idConcours) newUrl += `&idConcours=${idConcours}`;
+
+      window.location.href = newUrl;
+    });
+
 
 
     // --- INIT ---

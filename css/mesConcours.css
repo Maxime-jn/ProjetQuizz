@@ -36,7 +36,7 @@
         border-bottom: 1px solid var(--bt-border);
     }
 
-    .insideHeaderContainer {
+    /* .insideHeaderContainer {
         width: min(1200px, 92vw);
         margin: 0 auto;
         display: flex;
@@ -54,7 +54,7 @@
         font-size: clamp(1.2rem, 2.2vw, 1.6rem);
         letter-spacing: .5px;
         margin: 0;
-    }
+    } */
 
     #myConcours,
     #auth-buttons {
@@ -134,49 +134,7 @@
         border: 1px solid var(--bt-border);
     }
 
-    /* ====== Footer ====== */
-    .pageFooter {
-        border-top: 1px solid var(--bt-border);
-        background: #0f1923;
-        padding: 1rem 0 2rem;
-        color: var(--bt-text);
-    }
-
-    .pageFooter .footerTitre {
-        width: min(1200px, 92vw);
-        margin: 0 auto .5rem;
-        font-weight: 600;
-        letter-spacing: .3px;
-    }
-
-    .pageFooter .footerLinks {
-        width: min(1200px, 92vw);
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        gap: .75rem 1.25rem;
-        align-items: center;
-        justify-content: space-between;
-        opacity: .9;
-    }
-
-    .pageFooter .footerLinks ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        gap: .75rem 1.25rem;
-        flex-wrap: wrap;
-    }
-
-    .pageFooter .footerLinks a {
-        color: var(--bt-accent);
-        text-decoration: none;
-    }
-
-    .pageFooter .footerLinks a:hover {
-        text-decoration: underline;
-    }
+  
 
     /* ================================
        Boutons "Mes Concours"

@@ -64,6 +64,7 @@ $concours = getConcoursByUser($idUser);
 
     <footer class="pageFooter">
         <div class="footerTitre">BriseTête © 2025</div>
+
         <div class="footerLinks">
             <span>Réalisé par : I.DA.P4A</span>
             <ul>

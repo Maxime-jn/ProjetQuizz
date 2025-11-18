@@ -7,3 +7,4 @@ document.addEventListener('DOMContentLoaded', function () {
         if (userId) link.href = 'mesConcours.php?user_id=' + encodeURIComponent(userId);
     });
 });
+
