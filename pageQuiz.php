@@ -75,6 +75,7 @@ Version :
                 <li><a href="https://edu.ge.ch/site/cfpt/secretariats-2">Contact</a></li>
             </ul>
         </div>
+        <img class="logoCFPT" src="./img/CFPT--L.png" alt="logoCFPT">
     </footer>
 
     <script>

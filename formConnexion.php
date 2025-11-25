@@ -65,9 +65,11 @@ Version :
             <ul>
                 <li><a href="https://edu.ge.ch/site/cfpt">CFPT</a></li>
                 <li><a href="https://www.ge.ch/conditions-generales">Conditions générales</a></li>
-                <li><a href="https://edu.ge.ch/site/cfpt/secretariats-2">Contact</a></li>
+                <li><a href="https://edu.ge.ch/site/cfpt/secretariats-2">Contact</a></li>\
+                <img src="" alt="">
             </ul>
         </div>
+        <img class="logoCFPT" src="./img/CFPT--L.png" alt="logoCFPT">
     </footer>
 
 

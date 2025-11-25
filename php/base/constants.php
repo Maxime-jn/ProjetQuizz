@@ -2,8 +2,8 @@
 // Database
 const DB_HOST = "localhost";
 const DB_NAME = "QuizGame";
-const DB_USER = "adminQuiz";
-const DB_PASS = "SuperQuiz";
+const DB_USER = "root";
+const DB_PASS = "Super";
 
 const TOP_PLAYER_LIMIT = 5;
 const TOKEN_BYTE_LENGTH = 16;

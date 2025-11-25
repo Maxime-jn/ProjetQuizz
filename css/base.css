@@ -164,6 +164,14 @@ main {
   animation: move 4s linear infinite;
 }
 
+
+.logoCFPT {
+  max-width: 120px;
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+}
+
 @keyframes move {
   0% {
     background-position: 0 0;
